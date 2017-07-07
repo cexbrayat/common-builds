@@ -1,6 +1,6 @@
 import { HttpHeaders } from './headers';
 /**
- * Type enumeration for the different kinds of {@link HttpEvent}.
+ * Type enumeration for the different kinds of `HttpEvent`.
  *
  * @experimental
  */
@@ -114,35 +114,7 @@ export interface HttpJsonParseError {
  */
 export declare type HttpEvent<T> = HttpSentEvent | HttpHeaderResponse | HttpResponse<T> | HttpProgressEvent | HttpUserEvent<T>;
 /**
- * Initialization hash for only those fields of the response which are available
- * before the body downloads.
- *
- * @experimental
- */
-export interface HttpResponseHeaderInit {
-    headers?: HttpHeaders;
-    status?: number;
-    statusText?: string;
-    url?: string;
-}
-/**
- * Initialization hash for the full response, including a typed body.
- *
- * @experimental
- */
-export interface HttpResponseInit<T> extends HttpResponseHeaderInit {
-    body?: T;
-}
-/**
- * Initialization hash for an error response, including an untyped error.
- *
- * @experimental
- */
-export interface HttpErrorResponseInit extends HttpResponseHeaderInit {
-    error?: any;
-}
-/**
- * Base class for both {@link HttpResponse} and {@link HttpHeaderResponse}.
+ * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
  * @experimental
  */
@@ -179,34 +151,49 @@ export declare abstract class HttpResponseBase {
      * The single parameter accepted is an initialization hash. Any properties
      * of the response passed there will override the default values.
      */
-    constructor(init: HttpResponseHeaderInit, defaultStatus?: number, defaultStatusText?: string);
+    constructor(init: {
+        headers?: HttpHeaders;
+        status?: number;
+        statusText?: string;
+        url?: string;
+    }, defaultStatus?: number, defaultStatusText?: string);
 }
 /**
  * A partial HTTP response which only includes the status and header data,
  * but no response body.
  *
- * {@link HttpHeaderResponse} is a {@link HttpEvent} available on the response
+ * `HttpHeaderResponse` is a `HttpEvent` available on the response
  * event stream, only when progress events are requested.
  *
  * @experimental
  */
 export declare class HttpHeaderResponse extends HttpResponseBase {
     /**
-     * Create a new {@link HttpHeaderResponse} with the given parameters.
+     * Create a new `HttpHeaderResponse` with the given parameters.
      */
-    constructor(init?: HttpResponseHeaderInit);
+    constructor(init?: {
+        headers?: HttpHeaders;
+        status?: number;
+        statusText?: string;
+        url?: string;
+    });
     readonly type: HttpEventType.ResponseHeader;
     /**
-     * Copy this {@link HttpHeaderResponse}, overriding its contents with the
+     * Copy this `HttpHeaderResponse`, overriding its contents with the
      * given parameter hash.
      */
-    clone(update?: HttpResponseHeaderInit): HttpHeaderResponse;
+    clone(update?: {
+        headers?: HttpHeaders;
+        status?: number;
+        statusText?: string;
+        url?: string;
+    }): HttpHeaderResponse;
 }
 /**
  * A full HTTP response, including a typed response body (which may be `null`
  * if one was not returned).
  *
- * {@link HttpResponse} is a {@link HttpEvent} available on the response event
+ * `HttpResponse` is a `HttpEvent` available on the response event
  * stream.
  *
  * @experimental
@@ -217,21 +204,38 @@ export declare class HttpResponse<T> extends HttpResponseBase {
      */
     readonly body: T | null;
     /**
-     * Construct a new {@link HttpResponse}.
+     * Construct a new `HttpResponse`.
      */
-    constructor(init?: HttpResponseInit<T>);
+    constructor(init?: {
+        body?: T | null;
+        headers?: HttpHeaders;
+        status?: number;
+        statusText?: string;
+        url?: string;
+    });
     readonly type: HttpEventType.Response;
     clone(): HttpResponse<T>;
-    clone(update: HttpResponseHeaderInit): HttpResponse<T>;
-    clone<V>(update: HttpResponseInit<V>): HttpResponse<V>;
+    clone(update: {
+        headers?: HttpHeaders;
+        status?: number;
+        statusText?: string;
+        url?: string;
+    }): HttpResponse<T>;
+    clone<V>(update: {
+        body?: V | null;
+        headers?: HttpHeaders;
+        status?: number;
+        statusText?: string;
+        url?: string;
+    }): HttpResponse<V>;
 }
 /**
  * A response that represents an error or failure, either from a
  * non-successful HTTP status, an error while executing the request,
  * or some other failure which occurred during the parsing of the response.
  *
- * Any error returned on the {@link Observable} response stream will be
- * wrapped in an {@link HttpErrorResponse} to provide additional context about
+ * Any error returned on the `Observable` response stream will be
+ * wrapped in an `HttpErrorResponse` to provide additional context about
  * the state of the HTTP layer when the error occurred. The error property
  * will contain either a wrapped Error object or the error response returned
  * from the server.
@@ -246,5 +250,11 @@ export declare class HttpErrorResponse extends HttpResponseBase implements Error
      * Errors are never okay, even when the status code is in the 2xx success range.
      */
     readonly ok: boolean;
-    constructor(init: HttpErrorResponseInit);
+    constructor(init: {
+        error?: any;
+        headers?: HttpHeaders;
+        status?: number;
+        statusText?: string;
+        url?: string;
+    });
 }

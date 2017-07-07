@@ -10,8 +10,8 @@ import { Observer } from 'rxjs/Observer';
 /**
  * A mock requests that was received and is ready to be answered.
  *
- * This interface allows access to the underlying {@link HttpRequest}, and allows
- * responding with {@link HttpEvent}s or {@link HttpErrorResponse}s.
+ * This interface allows access to the underlying `HttpRequest`, and allows
+ * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
  * @experimental
  */

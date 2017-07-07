@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-7cf4e7c0a5
+ * @license Angular v4.3.0-beta.1-63fe8f94bf
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_common_http,_angular_core,rxjs_Observable) { 'use strict';
 
 /**
- * @license Angular v4.3.0-beta.1-7cf4e7c0a5
+ * @license Angular v4.3.0-beta.1-63fe8f94bf
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -104,8 +104,8 @@ var HttpTestingController = (function () {
 /**
  * A mock requests that was received and is ready to be answered.
  *
- * This interface allows access to the underlying {\@link HttpRequest}, and allows
- * responding with {\@link HttpEvent}s or {\@link HttpErrorResponse}s.
+ * This interface allows access to the underlying `HttpRequest`, and allows
+ * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
  * \@experimental
  */
@@ -309,10 +309,10 @@ function _maybeConvertBody(responseType, body) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * A testing backend for {\@link HttpClient} which both acts as an {\@link HttpBackend}
- * and as the {\@link HttpTestingController}.
+ * A testing backend for `HttpClient` which both acts as an `HttpBackend`
+ * and as the `HttpTestingController`.
  *
- * {\@link HttpClientTestingBackend} works by keeping a list of all open requests.
+ * `HttpClientTestingBackend` works by keeping a list of all open requests.
  * As requests come in, they're added to the list. Users can assert that specific
  * requests were made and then flush them. In the end, a verify() method asserts
  * that no unexpected requests were made.
@@ -454,6 +454,9 @@ var HttpClientTestingModule = (function () {
 }());
 HttpClientTestingModule.decorators = [
     { type: _angular_core.NgModule, args: [{
+                imports: [
+                    _angular_common_http.HttpClientModule,
+                ],
                 providers: [
                     HttpClientTestingBackend,
                     { provide: _angular_common_http.HttpBackend, useExisting: HttpClientTestingBackend },

@@ -11,7 +11,7 @@ import { HttpHandler } from './backend';
 import { HttpRequest } from './request';
 import { HttpEvent } from './response';
 /**
- * Intercepts {@link HttpRequest}s and handles them.
+ * Intercepts `HttpRequest` and handles them.
  *
  * Most interceptors will transform the outgoing request before passing it to the
  * next interceptor in the chain, by calling `next.handle(transformedReq)`.
@@ -23,7 +23,7 @@ import { HttpEvent } from './response';
  */
 export interface HttpInterceptor {
     /**
-     * Intercept an outgoing {@link HttpRequest} and optionally transform it or the
+     * Intercept an outgoing `HttpRequest` and optionally transform it or the
      * response.
      *
      * Typically an interceptor will transform the outgoing request before returning
@@ -41,7 +41,7 @@ export interface HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
 }
 /**
- * {@link HttpHandler} which applies an {@link HttpInterceptor} to an {@link HttpRequest}.
+ * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
  * @experimental
  */
@@ -52,7 +52,7 @@ export declare class HttpInterceptorHandler implements HttpHandler {
     handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
 }
 /**
- * A multi-provider token which represents the array of {@link HttpInterceptor}s that
+ * A multi-provider token which represents the array of `HttpInterceptor`s that
  * are registered.
  *
  * @experimental

@@ -3,5 +3,5 @@
  */
 export * from './public_api';
 export { JsonpCallbackContext as ɵa } from './src/jsonp';
-export { interceptingHandler as ɵb, jsonpCallbackContext as ɵc } from './src/module';
-export { BrowserXhr as ɵd } from './src/xhr';
+export { jsonpCallbackContext as ɵb } from './src/module';
+export { BrowserXhr as ɵc } from './src/xhr';

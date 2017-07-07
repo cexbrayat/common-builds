@@ -20,7 +20,7 @@ export declare class BrowserXhr implements XhrFactory {
     build(): any;
 }
 /**
- * An {@link HttpBackend} which uses the XMLHttpRequest API to send
+ * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
  * @experimental

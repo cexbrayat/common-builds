@@ -1,10 +1,10 @@
 import { HttpBackend, HttpHandler } from './backend';
 import { HttpInterceptor } from './interceptor';
 /**
- * Constructs a {@link HttpHandler} that applies a bunch of {@link HttpInterceptor}s
- * to a request before passing it to the given {@link HttpBackend}.
+ * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
+ * to a request before passing it to the given `HttpBackend`.
  *
- * Meant to be used as a factory function within {@link HttpClientModule}.
+ * Meant to be used as a factory function within `HttpClientModule`.
  *
  * @experimental
  */
@@ -19,19 +19,19 @@ export declare function interceptingHandler(backend: HttpBackend, interceptors?:
  */
 export declare function jsonpCallbackContext(): Object;
 /**
- * {@link NgModule} which provides the {@link HttpClient} and associated services.
+ * `NgModule` which provides the `HttpClient` and associated services.
  *
- * Interceptors can be added to the chain behind {@link HttpClient} by binding them
- * to the multiprovider for {@link HTTP_INTERCEPTORS}.
+ * Interceptors can be added to the chain behind `HttpClient` by binding them
+ * to the multiprovider for `HTTP_INTERCEPTORS`.
  *
  * @experimental
  */
 export declare class HttpClientModule {
 }
 /**
- * {@link NgModule} which enables JSONP support in {@link HttpClient}.
+ * `NgModule` which enables JSONP support in `HttpClient`.
  *
- * Without this module, {@link HttpClient#jsonp} requests will reach the backend
+ * Without this module, Jsonp requests will reach the backend
  * with method JSONP, where they'll be rejected.
  *
  * @experimental

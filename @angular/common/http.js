@@ -1,5 +1,5 @@
 /**
- * @license Angular v4.3.0-beta.1-7cf4e7c0a5
+ * @license Angular v4.3.0-beta.1-63fe8f94bf
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -338,9 +338,9 @@ function isUrlEncodedBody(value) {
 /**
  * An outgoing HTTP request with an optional typed body.
  *
- * {\@link HttpRequest} represents an outgoing request, including URL, method,
+ * `HttpRequest` represents an outgoing request, including URL, method,
  * headers, body, and other request configuration options. Instances should be
- * assumed to be immutable. To modify a {\@link HttpRequest}, the {\@link HttpRequest#clone}
+ * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
  * \@experimental
@@ -473,6 +473,8 @@ class HttpRequest {
         if (typeof this.body === 'string') {
             return 'text/plain';
         }
+        // `HttpUrlEncodedBody` is detected specially so as to allow it to be
+        // tree-shaken.
         if (isUrlEncodedBody(this.body)) {
             return 'application/x-www-form-urlencoded;charset=UTF-8';
         }
@@ -541,7 +543,7 @@ HttpEventType[HttpEventType.DownloadProgress] = "DownloadProgress";
 HttpEventType[HttpEventType.Response] = "Response";
 HttpEventType[HttpEventType.User] = "User";
 /**
- * Base class for both {\@link HttpResponse} and {\@link HttpHeaderResponse}.
+ * Base class for both `HttpResponse` and `HttpHeaderResponse`.
  *
  * \@experimental
  * @abstract
@@ -571,14 +573,14 @@ class HttpResponseBase {
  * A partial HTTP response which only includes the status and header data,
  * but no response body.
  *
- * {\@link HttpHeaderResponse} is a {\@link HttpEvent} available on the response
+ * `HttpHeaderResponse` is a `HttpEvent` available on the response
  * event stream, only when progress events are requested.
  *
  * \@experimental
  */
 class HttpHeaderResponse extends HttpResponseBase {
     /**
-     * Create a new {\@link HttpHeaderResponse} with the given parameters.
+     * Create a new `HttpHeaderResponse` with the given parameters.
      * @param {?=} init
      */
     constructor(init = {}) {
@@ -586,7 +588,7 @@ class HttpHeaderResponse extends HttpResponseBase {
         this.type = HttpEventType.ResponseHeader;
     }
     /**
-     * Copy this {\@link HttpHeaderResponse}, overriding its contents with the
+     * Copy this `HttpHeaderResponse`, overriding its contents with the
      * given parameter hash.
      * @param {?=} update
      * @return {?}
@@ -606,14 +608,14 @@ class HttpHeaderResponse extends HttpResponseBase {
  * A full HTTP response, including a typed response body (which may be `null`
  * if one was not returned).
  *
- * {\@link HttpResponse} is a {\@link HttpEvent} available on the response event
+ * `HttpResponse` is a `HttpEvent` available on the response event
  * stream.
  *
  * \@experimental
  */
 class HttpResponse extends HttpResponseBase {
     /**
-     * Construct a new {\@link HttpResponse}.
+     * Construct a new `HttpResponse`.
      * @param {?=} init
      */
     constructor(init = {}) {
@@ -640,8 +642,8 @@ class HttpResponse extends HttpResponseBase {
  * non-successful HTTP status, an error while executing the request,
  * or some other failure which occurred during the parsing of the response.
  *
- * Any error returned on the {\@link Observable} response stream will be
- * wrapped in an {\@link HttpErrorResponse} to provide additional context about
+ * Any error returned on the `Observable` response stream will be
+ * wrapped in an `HttpErrorResponse` to provide additional context about
  * the state of the HTTP layer when the error occurred. The error property
  * will contain either a wrapped Error object or the error response returned
  * from the server.
@@ -715,13 +717,13 @@ class HttpClient {
      * fires the request through the chain of registered interceptors and on to the
      * server.
      *
-     * This method can be called in one of two ways. Either a {\@link HttpRequest}
-     * instance can be passed directly as the only parameter, or a string URL can be
-     * passed as the first parameter, a method optionally as the second, and an
+     * This method can be called in one of two ways. Either an `HttpRequest`
+     * instance can be passed directly as the only parameter, or a method can be
+     * passed as the first parameter, a string URL as the second, and an
      * options hash as the third.
      *
-     * If a {\@link HttpRequest} object is passed directly, an `Observable` of the
-     * raw {\@link HttpEvent} stream will be returned.
+     * If a `HttpRequest` object is passed directly, an `Observable` of the
+     * raw `HttpEvent` stream will be returned.
      *
      * If a request is instead built by providing a URL, the options object
      * determines the return type of `request()`. In addition to configuring
@@ -735,9 +737,9 @@ class HttpClient {
      *
      * The `observe` value determines the return type of `request()`, based on what
      * the consumer is interested in observing. A value of `events` will return an
-     * `Observable<HttpEvent>` representing the raw {\@link HttpEvent} stream,
+     * `Observable<HttpEvent>` representing the raw `HttpEvent` stream,
      * including progress events by default. A value of `response` will return an
-     * `Observable<HttpResponse<T>>` where the `T` parameter of `{\@link HttpResponse}
+     * `Observable<HttpResponse<T>>` where the `T` parameter of `HttpResponse`
      * depends on the `responseType` and any optionally provided type parameter.
      * A value of `body` will return an `Observable<T>` with the same `T` body type.
      * @param {?} first
@@ -941,7 +943,7 @@ HttpClient.ctorParameters = () => [
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * {\@link HttpHandler} which applies an {\@link HttpInterceptor} to an {\@link HttpRequest}.
+ * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
  *
  * \@experimental
  */
@@ -963,7 +965,7 @@ class HttpInterceptorHandler {
     }
 }
 /**
- * A multi-provider token which represents the array of {\@link HttpInterceptor}s that
+ * A multi-provider token which represents the array of `HttpInterceptor`s that
  * are registered.
  *
  * \@experimental
@@ -982,8 +984,6 @@ const HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
 // from that. The next id to be assigned is tracked in a global variable here that
 // is shared among all applications on the page.
 let nextRequestId = 0;
-// All callbacks are namespaced to this property on `window`.
-
 // Error text given when a JSONP script is injected, but doesn't invoke the callback
 // passed in its URL.
 const JSONP_ERR_NO_CALLBACK = 'JSONP injected script did not invoke callback.';
@@ -1002,7 +1002,7 @@ const JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests must use Json response typ
 class JsonpCallbackContext {
 }
 /**
- * {\@link HttpBackend} that only processes {\@link HttpRequest} with the JSONP method,
+ * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
  * by performing JSONP style requests.
  *
  * \@experimental
@@ -1160,8 +1160,8 @@ JsonpClientBackend.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
 ];
 /**
- * An {\@Link HttpInterceptor} which identifies requests with the method JSONP and
- * shifts them to the {\@link JsonpClientBackend}.
+ * An `HttpInterceptor` which identifies requests with the method JSONP and
+ * shifts them to the `JsonpClientBackend`.
  *
  * \@experimental
  */
@@ -1251,7 +1251,7 @@ BrowserXhr.decorators = [
  */
 BrowserXhr.ctorParameters = () => [];
 /**
- * An {\@link HttpBackend} which uses the XMLHttpRequest API to send
+ * An `HttpBackend` which uses the XMLHttpRequest API to send
  * requests to a backend server.
  *
  * \@experimental
@@ -1503,10 +1503,10 @@ HttpXhrBackend.ctorParameters = () => [
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Constructs a {\@link HttpHandler} that applies a bunch of {\@link HttpInterceptor}s
- * to a request before passing it to the given {\@link HttpBackend}.
+ * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
+ * to a request before passing it to the given `HttpBackend`.
  *
- * Meant to be used as a factory function within {\@link HttpClientModule}.
+ * Meant to be used as a factory function within `HttpClientModule`.
  *
  * \@experimental
  * @param {?} backend
@@ -1535,10 +1535,10 @@ function jsonpCallbackContext() {
     return {};
 }
 /**
- * {\@link NgModule} which provides the {\@link HttpClient} and associated services.
+ * `NgModule` which provides the `HttpClient` and associated services.
  *
- * Interceptors can be added to the chain behind {\@link HttpClient} by binding them
- * to the multiprovider for {\@link HTTP_INTERCEPTORS}.
+ * Interceptors can be added to the chain behind `HttpClient` by binding them
+ * to the multiprovider for `HTTP_INTERCEPTORS`.
  *
  * \@experimental
  */
@@ -1567,9 +1567,9 @@ HttpClientModule.decorators = [
  */
 HttpClientModule.ctorParameters = () => [];
 /**
- * {\@link NgModule} which enables JSONP support in {\@link HttpClient}.
+ * `NgModule` which enables JSONP support in `HttpClient`.
  *
- * Without this module, {\@link HttpClient#jsonp} requests will reach the backend
+ * Without this module, Jsonp requests will reach the backend
  * with method JSONP, where they'll be rejected.
  *
  * \@experimental
@@ -1826,5 +1826,5 @@ class HttpUrlEncodedBody {
  * Generated bundle index. Do not edit.
  */
 
-export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpStandardUrlParameterCodec, HttpUrlEncodedBody, HttpXhrBackend, XhrFactory, JsonpCallbackContext as ɵa, interceptingHandler as ɵb, jsonpCallbackContext as ɵc, BrowserXhr as ɵd };
+export { HttpBackend, HttpHandler, HttpClient, HttpHeaders, HTTP_INTERCEPTORS, JsonpClientBackend, JsonpInterceptor, HttpClientJsonpModule, HttpClientModule, interceptingHandler as ɵinterceptingHandler, HttpRequest, HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase, HttpStandardUrlParameterCodec, HttpUrlEncodedBody, HttpXhrBackend, XhrFactory, JsonpCallbackContext as ɵa, jsonpCallbackContext as ɵb, BrowserXhr as ɵc };
 //# sourceMappingURL=http.js.map

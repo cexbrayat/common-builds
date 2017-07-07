@@ -7,59 +7,11 @@
  */
 import { HttpHeaders } from './headers';
 /**
- * Represents an HTTP request body when serialized for the server.
- *
- * @experimental
- */
-export declare type HttpSerializedBody = ArrayBuffer | Blob | FormData | string;
-/**
- * A subset of the allowed values for `XMLHttpRequest.responseType` supported by
- * {@link HttpClient}.
- *
- * @experimental
- */
-export declare type HttpResponseType = 'arraybuffer' | 'blob' | 'json' | 'text';
-/**
- * A type representing all (known) HTTP methods.
- *
- * @experimental
- */
-export declare type HttpMethod = 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'GET' | 'HEAD' | 'JSONP' | 'OPTIONS';
-/**
- * Construction interface for {@link HttpRequest}s.
- *
- * All values are optional and will override default values if provided.
- *
- * @experimental
- */
-export interface HttpRequestInit {
-    headers?: HttpHeaders;
-    reportProgress?: boolean;
-    responseType?: HttpResponseType;
-    withCredentials?: boolean;
-}
-/**
- * Cloning interface for {@link HttpRequestClone}.
- *
- * All values are optional and will be cloned from the base request if not
- * provided.
- *
- * @experimental
- */
-export interface HttpRequestClone<T> extends HttpRequestInit {
-    body?: T | null;
-    method?: HttpMethod | string;
-    url?: string;
-    setHeaders?: {
-        [name: string]: string | string[];
-    };
-}
-/**
  * An outgoing HTTP request with an optional typed body.
  *
- * {@link HttpRequest} represents an outgoing request, including URL, method,
+ * `HttpRequest` represents an outgoing request, including URL, method,
  * headers, body, and other request configuration options. Instances should be
- * assumed to be immutable. To modify a {@link HttpRequest}, the {@link HttpRequest#clone}
+ * assumed to be immutable. To modify a `HttpRequest`, the `clone`
  * method should be used.
  *
  * @experimental
@@ -95,19 +47,34 @@ export declare class HttpRequest<T> {
      * This is used to parse the response appropriately before returning it to
      * the requestee.
      */
-    readonly responseType: HttpResponseType;
+    readonly responseType: 'arraybuffer' | 'blob' | 'json' | 'text';
     /**
      * The outgoing HTTP request method.
      */
     readonly method: string;
-    constructor(method: 'DELETE' | 'GET' | 'HEAD' | 'JSONP' | 'OPTIONS', url: string, init?: HttpRequestInit);
-    constructor(method: 'POST' | 'PUT' | 'PATCH', url: string, body: T | null, init?: HttpRequestInit);
-    constructor(method: HttpMethod | string, url: string, body: T | null, init?: HttpRequestInit);
+    constructor(method: 'DELETE' | 'GET' | 'HEAD' | 'JSONP' | 'OPTIONS', url: string, init?: {
+        headers?: HttpHeaders;
+        reportProgress?: boolean;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        withCredentials?: boolean;
+    });
+    constructor(method: 'POST' | 'PUT' | 'PATCH', url: string, body: T | null, init?: {
+        headers?: HttpHeaders;
+        reportProgress?: boolean;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        withCredentials?: boolean;
+    });
+    constructor(method: string, url: string, body: T | null, init?: {
+        headers?: HttpHeaders;
+        reportProgress?: boolean;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        withCredentials?: boolean;
+    });
     /**
      * Transform the free-form body into a serialized format suitable for
      * transmission to the server.
      */
-    serializeBody(): HttpSerializedBody | null;
+    serializeBody(): ArrayBuffer | Blob | FormData | string | null;
     /**
      * Examine the body and attempt to infer an appropriate MIME type
      * for it.
@@ -116,6 +83,22 @@ export declare class HttpRequest<T> {
      */
     detectContentTypeHeader(): string | null;
     clone(): HttpRequest<T>;
-    clone(update: HttpRequestInit): HttpRequest<T>;
-    clone<V>(update: HttpRequestClone<V>): HttpRequest<V>;
+    clone(update: {
+        headers?: HttpHeaders;
+        reportProgress?: boolean;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        withCredentials?: boolean;
+    }): HttpRequest<T>;
+    clone<V>(update: {
+        headers?: HttpHeaders;
+        reportProgress?: boolean;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+        withCredentials?: boolean;
+        body?: V | null;
+        method?: string;
+        url?: string;
+        setHeaders?: {
+            [name: string]: string | string[];
+        };
+    }): HttpRequest<V>;
 }

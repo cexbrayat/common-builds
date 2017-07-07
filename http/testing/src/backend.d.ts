@@ -10,10 +10,10 @@ import { Observable } from 'rxjs/Observable';
 import { HttpTestingController, RequestMatch } from './api';
 import { TestRequest } from './request';
 /**
- * A testing backend for {@link HttpClient} which both acts as an {@link HttpBackend}
- * and as the {@link HttpTestingController}.
+ * A testing backend for `HttpClient` which both acts as an `HttpBackend`
+ * and as the `HttpTestingController`.
  *
- * {@link HttpClientTestingBackend} works by keeping a list of all open requests.
+ * `HttpClientTestingBackend` works by keeping a list of all open requests.
  * As requests come in, they're added to the list. Users can assert that specific
  * requests were made and then flush them. In the end, a verify() method asserts
  * that no unexpected requests were made.

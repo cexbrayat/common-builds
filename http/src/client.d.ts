@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { HttpHandler } from './backend';
 import { HttpHeaders } from './headers';
-import { HttpMethod, HttpRequest, HttpResponseType } from './request';
+import { HttpRequest } from './request';
 import { HttpEvent, HttpResponse } from './response';
 /**
  * @experimental
@@ -16,102 +16,102 @@ export declare class HttpClient {
     private handler;
     constructor(handler: HttpHandler);
     request<R>(req: HttpRequest<any>): Observable<HttpEvent<R>>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe?: 'body';
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<ArrayBuffer>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe?: 'body';
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<Blob>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe?: 'body';
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<string>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe: 'events';
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpEvent<ArrayBuffer>>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe: 'events';
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpEvent<Blob>>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe: 'events';
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpEvent<string>>;
-    request<R>(method: HttpMethod | string, url: string, options: {
+    request<R>(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe: 'events';
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpEvent<R>>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe: 'response';
         responseType: 'arraybuffer';
         withCredentials?: boolean;
     }): Observable<HttpResponse<ArrayBuffer>>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe: 'response';
         responseType: 'blob';
         withCredentials?: boolean;
     }): Observable<HttpResponse<Blob>>;
-    request(method: HttpMethod | string, url: string, options: {
+    request(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe: 'response';
         responseType: 'text';
         withCredentials?: boolean;
     }): Observable<HttpResponse<string>>;
-    request<R>(method: HttpMethod | string, url: string, options: {
+    request<R>(method: string, url: string, options: {
         body?: any;
         headers?: HttpHeaders;
         observe: 'response';
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<HttpResponse<R>>;
-    request(method: HttpMethod | string, url: string, options?: {
+    request(method: string, url: string, options?: {
         body?: any;
         headers?: HttpHeaders;
         observe?: 'body';
         responseType?: 'json';
         withCredentials?: boolean;
-    }): Observable<object>;
-    request<R>(method: HttpMethod | string, url: string, options?: {
+    }): Observable<Object>;
+    request<R>(method: string, url: string, options?: {
         body?: any;
         headers?: HttpHeaders;
         observe?: 'body';
         responseType?: 'json';
         withCredentials?: boolean;
     }): Observable<R>;
-    request(method: HttpMethod | string, url: string, options?: {
+    request(method: string, url: string, options?: {
         body?: any;
         headers?: HttpHeaders;
         observe?: HttpObserve;
-        responseType?: HttpResponseType;
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
         withCredentials?: boolean;
     }): Observable<any>;
     delete(url: string, options: {
