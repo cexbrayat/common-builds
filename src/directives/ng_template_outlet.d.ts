@@ -28,7 +28,7 @@ import { OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angula
  *
  * {@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * @experimental
+ * @stable
  */
 export declare class NgTemplateOutlet implements OnChanges {
     private _viewContainerRef;
@@ -41,4 +41,17 @@ export declare class NgTemplateOutlet implements OnChanges {
      */
     ngOutletContext: Object;
     ngOnChanges(changes: SimpleChanges): void;
+    /**
+     * We need to re-create existing embedded view if:
+     * - templateRef has changed
+     * - context has changes
+     *
+     * We mark context object as changed when the corresponding object
+     * shape changes (new properties are added or existing properties are removed).
+     * In other words we consider context with the same properties as "the same" even
+     * if object reference changes (see https://github.com/angular/angular/issues/13407).
+     */
+    private _shouldRecreateView(changes);
+    private _hasContextShapeChanged(ctxChange);
+    private _updateExistingContext(ctx);
 }

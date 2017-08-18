@@ -45,9 +45,6 @@ export declare class HttpParams {
     private cloneFrom;
     constructor(options?: {
         fromString?: string;
-        fromObject?: {
-            [param: string]: string | string[];
-        };
         encoder?: HttpParameterCodec;
     });
     /**
