@@ -52,7 +52,7 @@ export declare class DecimalPipe implements PipeTransform {
  *
  * ### Example
  *
- * {@example common/pipes/ts/number_pipe.ts region='PercentPipe'}
+ * {@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
  *
  * @stable
  */
@@ -75,6 +75,7 @@ export declare class PercentPipe implements PipeTransform {
  *   - `code`(default): use code (e.g. `USD`).
  *   - `symbol`: use symbol (e.g. `$`).
  *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
+ *   - boolean (deprecated from v5): `true` for symbol and false for `code`
  *   narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
  *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
  * - `digitInfo` See {@link DecimalPipe} for detailed description.
@@ -83,12 +84,12 @@ export declare class PercentPipe implements PipeTransform {
  *
  * ### Example
  *
- * {@example common/pipes/ts/number_pipe.ts region='CurrencyPipe'}
+ * {@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
  *
  * @stable
  */
 export declare class CurrencyPipe implements PipeTransform {
     private _locale;
     constructor(_locale: string);
-    transform(value: any, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow', digits?: string, locale?: string): string | null;
+    transform(value: any, currencyCode?: string, display?: 'code' | 'symbol' | 'symbol-narrow' | boolean, digits?: string, locale?: string): string | null;
 }
