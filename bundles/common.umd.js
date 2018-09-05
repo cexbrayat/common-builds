@@ -1,6 +1,6 @@
 /**
- * @license Angular v5.1.0-beta.0-21bfaf226
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v7.0.0-beta.4-a2418a9037
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
@@ -25,9 +25,12 @@ and limitations under the License.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
-var extendStatics = Object.setPrototypeOf ||
-    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
 
 function __extends(d, b) {
     extendStatics(d, b);
@@ -35,22 +38,25 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-var __assign = Object.assign || function __assign(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-    }
-    return t;
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 
 /**
- * @license Angular v5.1.0-beta.0-21bfaf226
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v7.0.0-beta.4-a2418a9037
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -79,21 +85,22 @@ var __assign = Object.assign || function __assign(t) {
  * {\@link Location} / {\@link LocationStrategy} and DOM apis flow through the `PlatformLocation`
  * class they are all platform independent.
  *
- * \@stable
+ *
  * @abstract
  */
-var PlatformLocation = (function () {
+var PlatformLocation = /** @class */ (function () {
     function PlatformLocation() {
     }
     return PlatformLocation;
 }());
-/**
- * \@whatItDoes indicates when a location is initialized
+/** *
+ * \@description Indicates when a location is initialized.
  * \@experimental
- */
+  @type {?} */
 var LOCATION_INITIALIZED = new _angular_core.InjectionToken('Location Initialized');
 /**
- * A serializable version of the event from onPopState or onHashChange
+ * \@description
+ * A serializable version of the event from `onPopState` or `onHashChange`
  *
  * \@experimental
  * @record
@@ -106,7 +113,7 @@ var LOCATION_INITIALIZED = new _angular_core.InjectionToken('Location Initialize
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -131,21 +138,23 @@ var LOCATION_INITIALIZED = new _angular_core.InjectionToken('Location Initialize
  *
  * See these two classes for more.
  *
- * \@stable
+ *
  * @abstract
  */
-var LocationStrategy = (function () {
+var LocationStrategy = /** @class */ (function () {
     function LocationStrategy() {
     }
     return LocationStrategy;
 }());
-/**
+/** *
  * The `APP_BASE_HREF` token represents the base href to be used with the
  * {\@link PathLocationStrategy}.
  *
  * If you're using {\@link PathLocationStrategy}, you must provide a provider to a string
  * representing the URL prefix that should be preserved when generating and recognizing
  * URLs.
+ *
+ * \@usageNotes
  *
  * ### Example
  *
@@ -159,13 +168,13 @@ var LocationStrategy = (function () {
  * class AppModule {}
  * ```
  *
- * \@stable
- */
+ *
+  @type {?} */
 var APP_BASE_HREF = new _angular_core.InjectionToken('appBaseHref');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -180,12 +189,16 @@ var APP_BASE_HREF = new _angular_core.InjectionToken('appBaseHref');
  */
 
 /**
- * \@whatItDoes `Location` is a service that applications can use to interact with a browser's URL.
  * \@description
+ *
+ * A service that applications can use to interact with a browser's URL.
+ *
  * Depending on which {\@link LocationStrategy} is used, `Location` will either persist
  * to the URL's path or the URL's hash segment.
  *
- * Note: it's better to use {\@link Router#navigate} service to trigger route changes. Use
+ * \@usageNotes
+ *
+ * It's better to use {\@link Router#navigate} service to trigger route changes. Use
  * `Location` only if you need to interact with or create normalized URLs outside of
  * routing.
  *
@@ -197,10 +210,11 @@ var APP_BASE_HREF = new _angular_core.InjectionToken('appBaseHref');
  * - `/my/app/user/123/` **is not** normalized
  *
  * ### Example
+ *
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
- * \@stable
+ *
  */
-var Location = (function () {
+var Location = /** @class */ (function () {
     function Location(platformStrategy) {
         var _this = this;
         /**
@@ -208,12 +222,14 @@ var Location = (function () {
          */
         this._subject = new _angular_core.EventEmitter();
         this._platformStrategy = platformStrategy;
-        var /** @type {?} */ browserBaseHref = this._platformStrategy.getBaseHref();
+        /** @type {?} */
+        var browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
         this._platformStrategy.onPopState(function (ev) {
             _this._subject.emit({
                 'url': _this.path(true),
                 'pop': true,
+                'state': ev.state,
                 'type': ev.type,
             });
         });
@@ -313,6 +329,7 @@ var Location = (function () {
      * new item onto the platform's history.
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
     Location.prototype.go = /**
@@ -320,11 +337,13 @@ var Location = (function () {
      * new item onto the platform's history.
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    function (path, query) {
+    function (path, query, state) {
         if (query === void 0) { query = ''; }
-        this._platformStrategy.pushState(null, '', path, query);
+        if (state === void 0) { state = null; }
+        this._platformStrategy.pushState(state, '', path, query);
     };
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
@@ -335,6 +354,7 @@ var Location = (function () {
      * the top item on the platform's history stack.
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
     Location.prototype.replaceState = /**
@@ -342,11 +362,13 @@ var Location = (function () {
      * the top item on the platform's history stack.
      * @param {?} path
      * @param {?=} query
+     * @param {?=} state
      * @return {?}
      */
-    function (path, query) {
+    function (path, query, state) {
         if (query === void 0) { query = ''; }
-        this._platformStrategy.replaceState(null, '', path, query);
+        if (state === void 0) { state = null; }
+        this._platformStrategy.replaceState(state, '', path, query);
     };
     /**
      * Navigates forward in the platform's history.
@@ -426,7 +448,8 @@ var Location = (function () {
         if (end.length == 0) {
             return start;
         }
-        var /** @type {?} */ slashes = 0;
+        /** @type {?} */
+        var slashes = 0;
         if (start.endsWith('/')) {
             slashes++;
         }
@@ -443,22 +466,25 @@ var Location = (function () {
     };
     /**
      * If url has a trailing slash, remove it, otherwise return url as is. This
-     * method looks for the first occurence of either #, ?, or the end of the
+     * method looks for the first occurrence of either #, ?, or the end of the
      * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
      */
     Location.stripTrailingSlash = /**
      * If url has a trailing slash, remove it, otherwise return url as is. This
-     * method looks for the first occurence of either #, ?, or the end of the
+     * method looks for the first occurrence of either #, ?, or the end of the
      * line as `/` characters after any of these should not be replaced.
      * @param {?} url
      * @return {?}
      */
     function (url) {
-        var /** @type {?} */ match = url.match(/#|\?|$/);
-        var /** @type {?} */ pathEndIdx = match && match.index || url.length;
-        var /** @type {?} */ droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
+        /** @type {?} */
+        var match = url.match(/#|\?|$/);
+        /** @type {?} */
+        var pathEndIdx = match && match.index || url.length;
+        /** @type {?} */
+        var droppedSlashIdx = pathEndIdx - (url[pathEndIdx - 1] === '/' ? 1 : 0);
         return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
     };
     Location.decorators = [
@@ -466,7 +492,7 @@ var Location = (function () {
     ];
     /** @nocollapse */
     Location.ctorParameters = function () { return [
-        { type: LocationStrategy, },
+        { type: LocationStrategy }
     ]; };
     return Location;
 }());
@@ -488,7 +514,7 @@ function _stripIndexHtml(url) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -498,23 +524,24 @@ function _stripIndexHtml(url) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@whatItDoes Use URL hash for storing application location data.
  * \@description
- * `HashLocationStrategy` is a {\@link LocationStrategy} used to configure the
- * {\@link Location} service to represent its state in the
+ * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+ * represent its state in the
  * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
  * of the browser's URL.
  *
  * For instance, if you call `location.go('/foo')`, the browser's URL will become
  * `example.com#/foo`.
  *
+ * \@usageNotes
+ *
  * ### Example
  *
  * {\@example common/location/ts/hash_location_component.ts region='LocationComponent'}
  *
- * \@stable
+ *
  */
-var HashLocationStrategy = (function (_super) {
+var HashLocationStrategy = /** @class */ (function (_super) {
     __extends(HashLocationStrategy, _super);
     function HashLocationStrategy(_platformLocation, _baseHref) {
         var _this = _super.call(this) || this;
@@ -554,9 +581,8 @@ var HashLocationStrategy = (function (_super) {
      */
     function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
-        // the hash value is always prefixed with a `#`
-        // and if it is empty then it will stay empty
-        var /** @type {?} */ path = this._platformLocation.hash;
+        /** @type {?} */
+        var path = this._platformLocation.hash;
         if (path == null)
             path = '#';
         return path.length > 0 ? path.substring(1) : path;
@@ -570,7 +596,8 @@ var HashLocationStrategy = (function (_super) {
      * @return {?}
      */
     function (internal) {
-        var /** @type {?} */ url = Location.joinWithSlash(this._baseHref, internal);
+        /** @type {?} */
+        var url = Location.joinWithSlash(this._baseHref, internal);
         return url.length > 0 ? ('#' + url) : url;
     };
     /**
@@ -588,7 +615,8 @@ var HashLocationStrategy = (function (_super) {
      * @return {?}
      */
     function (state, title, path, queryParams) {
-        var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+        /** @type {?} */
+        var url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
@@ -609,7 +637,8 @@ var HashLocationStrategy = (function (_super) {
      * @return {?}
      */
     function (state, title, path, queryParams) {
-        var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
+        /** @type {?} */
+        var url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
@@ -634,15 +663,15 @@ var HashLocationStrategy = (function (_super) {
     ];
     /** @nocollapse */
     HashLocationStrategy.ctorParameters = function () { return [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] }] }
     ]; };
     return HashLocationStrategy;
 }(LocationStrategy));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -652,10 +681,9 @@ var HashLocationStrategy = (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@whatItDoes Use URL for storing application location data.
  * \@description
- * `PathLocationStrategy` is a {\@link LocationStrategy} used to configure the
- * {\@link Location} service to represent its state in the
+ * A {\@link LocationStrategy} used to configure the {\@link Location} service to
+ * represent its state in the
  * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
  * browser's URL.
  *
@@ -671,13 +699,15 @@ var HashLocationStrategy = (function (_super) {
  * `location.go('/foo')`, the browser's URL will become
  * `example.com/my/app/foo`.
  *
+ * \@usageNotes
+ *
  * ### Example
  *
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  *
- * \@stable
+ *
  */
-var PathLocationStrategy = (function (_super) {
+var PathLocationStrategy = /** @class */ (function (_super) {
     __extends(PathLocationStrategy, _super);
     function PathLocationStrategy(_platformLocation, href) {
         var _this = _super.call(this) || this;
@@ -731,9 +761,11 @@ var PathLocationStrategy = (function (_super) {
      */
     function (includeHash) {
         if (includeHash === void 0) { includeHash = false; }
-        var /** @type {?} */ pathname = this._platformLocation.pathname +
+        /** @type {?} */
+        var pathname = this._platformLocation.pathname +
             Location.normalizeQueryParams(this._platformLocation.search);
-        var /** @type {?} */ hash = this._platformLocation.hash;
+        /** @type {?} */
+        var hash = this._platformLocation.hash;
         return hash && includeHash ? "" + pathname + hash : pathname;
     };
     /**
@@ -751,7 +783,8 @@ var PathLocationStrategy = (function (_super) {
      * @return {?}
      */
     function (state, title, url, queryParams) {
-        var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
+        /** @type {?} */
+        var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
         this._platformLocation.pushState(state, title, externalUrl);
     };
     /**
@@ -769,7 +802,8 @@ var PathLocationStrategy = (function (_super) {
      * @return {?}
      */
     function (state, title, url, queryParams) {
-        var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
+        /** @type {?} */
+        var externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
         this._platformLocation.replaceState(state, title, externalUrl);
     };
     /**
@@ -791,15 +825,15 @@ var PathLocationStrategy = (function (_super) {
     ];
     /** @nocollapse */
     PathLocationStrategy.ctorParameters = function () { return [
-        { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] },] },
+        { type: PlatformLocation },
+        { type: String, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [APP_BASE_HREF,] }] }
     ]; };
     return PathLocationStrategy;
 }(LocationStrategy));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -811,118 +845,7 @@ var PathLocationStrategy = (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * \@experimental
- */
-var CURRENCIES = {
-    'AOA': [, 'Kz'],
-    'ARS': [, '$'],
-    'AUD': ['A$', '$'],
-    'BAM': [, 'KM'],
-    'BBD': [, '$'],
-    'BDT': [, '৳'],
-    'BMD': [, '$'],
-    'BND': [, '$'],
-    'BOB': [, 'Bs'],
-    'BRL': ['R$'],
-    'BSD': [, '$'],
-    'BWP': [, 'P'],
-    'BYN': [, 'р.'],
-    'BZD': [, '$'],
-    'CAD': ['CA$', '$'],
-    'CLP': [, '$'],
-    'CNY': ['CN¥', '¥'],
-    'COP': [, '$'],
-    'CRC': [, '₡'],
-    'CUC': [, '$'],
-    'CUP': [, '$'],
-    'CZK': [, 'Kč'],
-    'DKK': [, 'kr'],
-    'DOP': [, '$'],
-    'EGP': [, 'E£'],
-    'ESP': [, '₧'],
-    'EUR': ['€'],
-    'FJD': [, '$'],
-    'FKP': [, '£'],
-    'GBP': ['£'],
-    'GEL': [, '₾'],
-    'GIP': [, '£'],
-    'GNF': [, 'FG'],
-    'GTQ': [, 'Q'],
-    'GYD': [, '$'],
-    'HKD': ['HK$', '$'],
-    'HNL': [, 'L'],
-    'HRK': [, 'kn'],
-    'HUF': [, 'Ft'],
-    'IDR': [, 'Rp'],
-    'ILS': ['₪'],
-    'INR': ['₹'],
-    'ISK': [, 'kr'],
-    'JMD': [, '$'],
-    'JPY': ['¥'],
-    'KHR': [, '៛'],
-    'KMF': [, 'CF'],
-    'KPW': [, '₩'],
-    'KRW': ['₩'],
-    'KYD': [, '$'],
-    'KZT': [, '₸'],
-    'LAK': [, '₭'],
-    'LBP': [, 'L£'],
-    'LKR': [, 'Rs'],
-    'LRD': [, '$'],
-    'LTL': [, 'Lt'],
-    'LVL': [, 'Ls'],
-    'MGA': [, 'Ar'],
-    'MMK': [, 'K'],
-    'MNT': [, '₮'],
-    'MUR': [, 'Rs'],
-    'MXN': ['MX$', '$'],
-    'MYR': [, 'RM'],
-    'NAD': [, '$'],
-    'NGN': [, '₦'],
-    'NIO': [, 'C$'],
-    'NOK': [, 'kr'],
-    'NPR': [, 'Rs'],
-    'NZD': ['NZ$', '$'],
-    'PHP': [, '₱'],
-    'PKR': [, 'Rs'],
-    'PLN': [, 'zł'],
-    'PYG': [, '₲'],
-    'RON': [, 'lei'],
-    'RUB': [, '₽'],
-    'RUR': [, 'р.'],
-    'RWF': [, 'RF'],
-    'SBD': [, '$'],
-    'SEK': [, 'kr'],
-    'SGD': [, '$'],
-    'SHP': [, '£'],
-    'SRD': [, '$'],
-    'SSP': [, '£'],
-    'STD': [, 'Db'],
-    'SYP': [, '£'],
-    'THB': [, '฿'],
-    'TOP': [, 'T$'],
-    'TRY': [, '₺'],
-    'TTD': [, '$'],
-    'TWD': ['NT$', '$'],
-    'UAH': [, '₴'],
-    'USD': ['$'],
-    'UYU': [, '$'],
-    'VEF': [, 'Bs'],
-    'VND': ['₫'],
-    'XAF': ['FCFA'],
-    'XCD': ['EC$', '$'],
-    'XOF': ['CFA'],
-    'XPF': ['CFPF'],
-    'ZAR': [, 'R'],
-    'ZMW': [, 'ZK'],
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -933,22 +856,29 @@ var CURRENCIES = {
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+/** @type {?} */
+var u = undefined;
+/**
+ * @param {?} n
+ * @return {?}
+ */
+function plural(n) {
+    /** @type {?} */
+    var i = Math.floor(Math.abs(n));
+    /** @type {?} */
+    var v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    return 5;
+}
 var localeEn = [
-    'en',
-    [
-        ['a', 'p'],
-        ['AM', 'PM'],
-    ],
-    [
-        ['AM', 'PM'],
-        ,
-    ],
+    'en', [['a', 'p'], ['AM', 'PM'], u], [['AM', 'PM'], u, u],
     [
         ['S', 'M', 'T', 'W', 'T', 'F', 'S'], ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
     ],
-    ,
+    u,
     [
         ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -957,53 +887,207 @@ var localeEn = [
             'October', 'November', 'December'
         ]
     ],
-    ,
-    [['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']], 0, [6, 0],
+    u, [['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']], 0, [6, 0],
     ['M/d/yy', 'MMM d, y', 'MMMM d, y', 'EEEE, MMMM d, y'],
-    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-    [
-        '{1}, {0}',
-        ,
-        '{1} \'at\' {0}',
-    ],
+    ['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'], ['{1}, {0}', u, '{1} \'at\' {0}', u],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar',
-    function (n) {
-        var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', {}, plural
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
- * \@experimental i18n support is experimental.
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
+/** *
+ * \@experimental i18n support is experimental.
+  @type {?} */
 var LOCALE_DATA = {};
 /**
  * Register global data to be used internally by Angular. See the
- * {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale data.
+ * ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale data.
  *
  * \@experimental i18n support is experimental.
  * @param {?} data
+ * @param {?=} localeId
  * @param {?=} extraData
  * @return {?}
  */
-function registerLocaleData(data, extraData) {
-    var /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase().replace(/_/g, '-');
+function registerLocaleData(data, localeId, extraData) {
+    if (typeof localeId !== 'string') {
+        extraData = localeId;
+        localeId = data[0 /* LocaleId */];
+    }
+    localeId = localeId.toLowerCase().replace(/_/g, '-');
     LOCALE_DATA[localeId] = data;
     if (extraData) {
-        LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
+        LOCALE_DATA[localeId][19 /* ExtraData */] = extraData;
     }
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/** @typedef {?} */
+/** *
+ * \@internal
+  @type {?} */
+var CURRENCIES_EN = {
+    'ADP': [undefined, undefined, 0],
+    'AFN': [undefined, undefined, 0],
+    'ALL': [undefined, undefined, 0],
+    'AMD': [undefined, undefined, 0],
+    'AOA': [undefined, 'Kz'],
+    'ARS': [undefined, '$'],
+    'AUD': ['A$', '$'],
+    'BAM': [undefined, 'KM'],
+    'BBD': [undefined, '$'],
+    'BDT': [undefined, '৳'],
+    'BHD': [undefined, undefined, 3],
+    'BIF': [undefined, undefined, 0],
+    'BMD': [undefined, '$'],
+    'BND': [undefined, '$'],
+    'BOB': [undefined, 'Bs'],
+    'BRL': ['R$'],
+    'BSD': [undefined, '$'],
+    'BWP': [undefined, 'P'],
+    'BYN': [undefined, 'р.', 2],
+    'BYR': [undefined, undefined, 0],
+    'BZD': [undefined, '$'],
+    'CAD': ['CA$', '$', 2],
+    'CHF': [undefined, undefined, 2],
+    'CLF': [undefined, undefined, 4],
+    'CLP': [undefined, '$', 0],
+    'CNY': ['CN¥', '¥'],
+    'COP': [undefined, '$', 0],
+    'CRC': [undefined, '₡', 2],
+    'CUC': [undefined, '$'],
+    'CUP': [undefined, '$'],
+    'CZK': [undefined, 'Kč', 2],
+    'DJF': [undefined, undefined, 0],
+    'DKK': [undefined, 'kr', 2],
+    'DOP': [undefined, '$'],
+    'EGP': [undefined, 'E£'],
+    'ESP': [undefined, '₧', 0],
+    'EUR': ['€'],
+    'FJD': [undefined, '$'],
+    'FKP': [undefined, '£'],
+    'GBP': ['£'],
+    'GEL': [undefined, '₾'],
+    'GIP': [undefined, '£'],
+    'GNF': [undefined, 'FG', 0],
+    'GTQ': [undefined, 'Q'],
+    'GYD': [undefined, '$', 0],
+    'HKD': ['HK$', '$'],
+    'HNL': [undefined, 'L'],
+    'HRK': [undefined, 'kn'],
+    'HUF': [undefined, 'Ft', 2],
+    'IDR': [undefined, 'Rp', 0],
+    'ILS': ['₪'],
+    'INR': ['₹'],
+    'IQD': [undefined, undefined, 0],
+    'IRR': [undefined, undefined, 0],
+    'ISK': [undefined, 'kr', 0],
+    'ITL': [undefined, undefined, 0],
+    'JMD': [undefined, '$'],
+    'JOD': [undefined, undefined, 3],
+    'JPY': ['¥', undefined, 0],
+    'KHR': [undefined, '៛'],
+    'KMF': [undefined, 'CF', 0],
+    'KPW': [undefined, '₩', 0],
+    'KRW': ['₩', undefined, 0],
+    'KWD': [undefined, undefined, 3],
+    'KYD': [undefined, '$'],
+    'KZT': [undefined, '₸'],
+    'LAK': [undefined, '₭', 0],
+    'LBP': [undefined, 'L£', 0],
+    'LKR': [undefined, 'Rs'],
+    'LRD': [undefined, '$'],
+    'LTL': [undefined, 'Lt'],
+    'LUF': [undefined, undefined, 0],
+    'LVL': [undefined, 'Ls'],
+    'LYD': [undefined, undefined, 3],
+    'MGA': [undefined, 'Ar', 0],
+    'MGF': [undefined, undefined, 0],
+    'MMK': [undefined, 'K', 0],
+    'MNT': [undefined, '₮', 0],
+    'MRO': [undefined, undefined, 0],
+    'MUR': [undefined, 'Rs', 0],
+    'MXN': ['MX$', '$'],
+    'MYR': [undefined, 'RM'],
+    'NAD': [undefined, '$'],
+    'NGN': [undefined, '₦'],
+    'NIO': [undefined, 'C$'],
+    'NOK': [undefined, 'kr', 2],
+    'NPR': [undefined, 'Rs'],
+    'NZD': ['NZ$', '$'],
+    'OMR': [undefined, undefined, 3],
+    'PHP': [undefined, '₱'],
+    'PKR': [undefined, 'Rs', 0],
+    'PLN': [undefined, 'zł'],
+    'PYG': [undefined, '₲', 0],
+    'RON': [undefined, 'lei'],
+    'RSD': [undefined, undefined, 0],
+    'RUB': [undefined, '₽'],
+    'RUR': [undefined, 'р.'],
+    'RWF': [undefined, 'RF', 0],
+    'SBD': [undefined, '$'],
+    'SEK': [undefined, 'kr', 2],
+    'SGD': [undefined, '$'],
+    'SHP': [undefined, '£'],
+    'SLL': [undefined, undefined, 0],
+    'SOS': [undefined, undefined, 0],
+    'SRD': [undefined, '$'],
+    'SSP': [undefined, '£'],
+    'STD': [undefined, undefined, 0],
+    'STN': [undefined, 'Db'],
+    'SYP': [undefined, '£', 0],
+    'THB': [undefined, '฿'],
+    'TMM': [undefined, undefined, 0],
+    'TND': [undefined, undefined, 3],
+    'TOP': [undefined, 'T$'],
+    'TRL': [undefined, undefined, 0],
+    'TRY': [undefined, '₺'],
+    'TTD': [undefined, '$'],
+    'TWD': ['NT$', '$', 2],
+    'TZS': [undefined, undefined, 0],
+    'UAH': [undefined, '₴'],
+    'UGX': [undefined, undefined, 0],
+    'USD': ['$'],
+    'UYI': [undefined, undefined, 0],
+    'UYU': [undefined, '$'],
+    'UZS': [undefined, undefined, 0],
+    'VEF': [undefined, 'Bs'],
+    'VND': ['₫', undefined, 0],
+    'VUV': [undefined, undefined, 0],
+    'XAF': ['FCFA', undefined, 0],
+    'XCD': ['EC$', '$'],
+    'XOF': ['CFA', undefined, 0],
+    'XPF': ['CFPF', undefined, 0],
+    'YER': [undefined, undefined, 0],
+    'ZAR': [undefined, 'R'],
+    'ZMK': [undefined, undefined, 0],
+    'ZMW': [undefined, 'ZK'],
+    'ZWD': [undefined, undefined, 0]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1019,10 +1103,10 @@ var NumberFormatStyle = {
     Currency: 2,
     Scientific: 3,
 };
-NumberFormatStyle[NumberFormatStyle.Decimal] = "Decimal";
-NumberFormatStyle[NumberFormatStyle.Percent] = "Percent";
-NumberFormatStyle[NumberFormatStyle.Currency] = "Currency";
-NumberFormatStyle[NumberFormatStyle.Scientific] = "Scientific";
+NumberFormatStyle[NumberFormatStyle.Decimal] = 'Decimal';
+NumberFormatStyle[NumberFormatStyle.Percent] = 'Percent';
+NumberFormatStyle[NumberFormatStyle.Currency] = 'Currency';
+NumberFormatStyle[NumberFormatStyle.Scientific] = 'Scientific';
 /** @enum {number} */
 var Plural = {
     Zero: 0,
@@ -1032,19 +1116,19 @@ var Plural = {
     Many: 4,
     Other: 5,
 };
-Plural[Plural.Zero] = "Zero";
-Plural[Plural.One] = "One";
-Plural[Plural.Two] = "Two";
-Plural[Plural.Few] = "Few";
-Plural[Plural.Many] = "Many";
-Plural[Plural.Other] = "Other";
+Plural[Plural.Zero] = 'Zero';
+Plural[Plural.One] = 'One';
+Plural[Plural.Two] = 'Two';
+Plural[Plural.Few] = 'Few';
+Plural[Plural.Many] = 'Many';
+Plural[Plural.Other] = 'Other';
 /** @enum {number} */
 var FormStyle = {
     Format: 0,
     Standalone: 1,
 };
-FormStyle[FormStyle.Format] = "Format";
-FormStyle[FormStyle.Standalone] = "Standalone";
+FormStyle[FormStyle.Format] = 'Format';
+FormStyle[FormStyle.Standalone] = 'Standalone';
 /** @enum {number} */
 var TranslationWidth = {
     Narrow: 0,
@@ -1052,10 +1136,10 @@ var TranslationWidth = {
     Wide: 2,
     Short: 3,
 };
-TranslationWidth[TranslationWidth.Narrow] = "Narrow";
-TranslationWidth[TranslationWidth.Abbreviated] = "Abbreviated";
-TranslationWidth[TranslationWidth.Wide] = "Wide";
-TranslationWidth[TranslationWidth.Short] = "Short";
+TranslationWidth[TranslationWidth.Narrow] = 'Narrow';
+TranslationWidth[TranslationWidth.Abbreviated] = 'Abbreviated';
+TranslationWidth[TranslationWidth.Wide] = 'Wide';
+TranslationWidth[TranslationWidth.Short] = 'Short';
 /** @enum {number} */
 var FormatWidth = {
     Short: 0,
@@ -1063,10 +1147,10 @@ var FormatWidth = {
     Long: 2,
     Full: 3,
 };
-FormatWidth[FormatWidth.Short] = "Short";
-FormatWidth[FormatWidth.Medium] = "Medium";
-FormatWidth[FormatWidth.Long] = "Long";
-FormatWidth[FormatWidth.Full] = "Full";
+FormatWidth[FormatWidth.Short] = 'Short';
+FormatWidth[FormatWidth.Medium] = 'Medium';
+FormatWidth[FormatWidth.Long] = 'Long';
+FormatWidth[FormatWidth.Full] = 'Full';
 /** @enum {number} */
 var NumberSymbol = {
     Decimal: 0,
@@ -1084,20 +1168,20 @@ var NumberSymbol = {
     CurrencyDecimal: 12,
     CurrencyGroup: 13,
 };
-NumberSymbol[NumberSymbol.Decimal] = "Decimal";
-NumberSymbol[NumberSymbol.Group] = "Group";
-NumberSymbol[NumberSymbol.List] = "List";
-NumberSymbol[NumberSymbol.PercentSign] = "PercentSign";
-NumberSymbol[NumberSymbol.PlusSign] = "PlusSign";
-NumberSymbol[NumberSymbol.MinusSign] = "MinusSign";
-NumberSymbol[NumberSymbol.Exponential] = "Exponential";
-NumberSymbol[NumberSymbol.SuperscriptingExponent] = "SuperscriptingExponent";
-NumberSymbol[NumberSymbol.PerMille] = "PerMille";
-NumberSymbol[NumberSymbol.Infinity] = "Infinity";
-NumberSymbol[NumberSymbol.NaN] = "NaN";
-NumberSymbol[NumberSymbol.TimeSeparator] = "TimeSeparator";
-NumberSymbol[NumberSymbol.CurrencyDecimal] = "CurrencyDecimal";
-NumberSymbol[NumberSymbol.CurrencyGroup] = "CurrencyGroup";
+NumberSymbol[NumberSymbol.Decimal] = 'Decimal';
+NumberSymbol[NumberSymbol.Group] = 'Group';
+NumberSymbol[NumberSymbol.List] = 'List';
+NumberSymbol[NumberSymbol.PercentSign] = 'PercentSign';
+NumberSymbol[NumberSymbol.PlusSign] = 'PlusSign';
+NumberSymbol[NumberSymbol.MinusSign] = 'MinusSign';
+NumberSymbol[NumberSymbol.Exponential] = 'Exponential';
+NumberSymbol[NumberSymbol.SuperscriptingExponent] = 'SuperscriptingExponent';
+NumberSymbol[NumberSymbol.PerMille] = 'PerMille';
+NumberSymbol[NumberSymbol.Infinity] = 'Infinity';
+NumberSymbol[NumberSymbol.NaN] = 'NaN';
+NumberSymbol[NumberSymbol.TimeSeparator] = 'TimeSeparator';
+NumberSymbol[NumberSymbol.CurrencyDecimal] = 'CurrencyDecimal';
+NumberSymbol[NumberSymbol.CurrencyGroup] = 'CurrencyGroup';
 /** @enum {number} */
 var WeekDay = {
     Sunday: 0,
@@ -1108,13 +1192,13 @@ var WeekDay = {
     Friday: 5,
     Saturday: 6,
 };
-WeekDay[WeekDay.Sunday] = "Sunday";
-WeekDay[WeekDay.Monday] = "Monday";
-WeekDay[WeekDay.Tuesday] = "Tuesday";
-WeekDay[WeekDay.Wednesday] = "Wednesday";
-WeekDay[WeekDay.Thursday] = "Thursday";
-WeekDay[WeekDay.Friday] = "Friday";
-WeekDay[WeekDay.Saturday] = "Saturday";
+WeekDay[WeekDay.Sunday] = 'Sunday';
+WeekDay[WeekDay.Monday] = 'Monday';
+WeekDay[WeekDay.Tuesday] = 'Tuesday';
+WeekDay[WeekDay.Wednesday] = 'Wednesday';
+WeekDay[WeekDay.Thursday] = 'Thursday';
+WeekDay[WeekDay.Friday] = 'Friday';
+WeekDay[WeekDay.Saturday] = 'Saturday';
 /**
  * The locale id for the chosen locale (e.g `en-GB`).
  *
@@ -1135,9 +1219,12 @@ function getLocaleId(locale) {
  * @return {?}
  */
 function getLocaleDayPeriods(locale, formStyle, width) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ amPmData = /** @type {?} */ ([data[1 /* DayPeriodsFormat */], data[2 /* DayPeriodsStandalone */]]);
-    var /** @type {?} */ amPm = getLastDefinedValue(amPmData, formStyle);
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    /** @type {?} */
+    var amPmData = /** @type {?} */ ([data[1 /* DayPeriodsFormat */], data[2 /* DayPeriodsStandalone */]]);
+    /** @type {?} */
+    var amPm = getLastDefinedValue(amPmData, formStyle);
     return getLastDefinedValue(amPm, width);
 }
 /**
@@ -1150,9 +1237,12 @@ function getLocaleDayPeriods(locale, formStyle, width) {
  * @return {?}
  */
 function getLocaleDayNames(locale, formStyle, width) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ daysData = /** @type {?} */ ([data[3 /* DaysFormat */], data[4 /* DaysStandalone */]]);
-    var /** @type {?} */ days = getLastDefinedValue(daysData, formStyle);
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    /** @type {?} */
+    var daysData = /** @type {?} */ ([data[3 /* DaysFormat */], data[4 /* DaysStandalone */]]);
+    /** @type {?} */
+    var days = getLastDefinedValue(daysData, formStyle);
     return getLastDefinedValue(days, width);
 }
 /**
@@ -1165,9 +1255,12 @@ function getLocaleDayNames(locale, formStyle, width) {
  * @return {?}
  */
 function getLocaleMonthNames(locale, formStyle, width) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ monthsData = /** @type {?} */ ([data[5 /* MonthsFormat */], data[6 /* MonthsStandalone */]]);
-    var /** @type {?} */ months = getLastDefinedValue(monthsData, formStyle);
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    /** @type {?} */
+    var monthsData = /** @type {?} */ ([data[5 /* MonthsFormat */], data[6 /* MonthsStandalone */]]);
+    /** @type {?} */
+    var months = getLastDefinedValue(monthsData, formStyle);
     return getLastDefinedValue(months, width);
 }
 /**
@@ -1179,8 +1272,10 @@ function getLocaleMonthNames(locale, formStyle, width) {
  * @return {?}
  */
 function getLocaleEraNames(locale, width) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ erasData = /** @type {?} */ (data[7 /* Eras */]);
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    /** @type {?} */
+    var erasData = /** @type {?} */ (data[7 /* Eras */]);
     return getLastDefinedValue(erasData, width);
 }
 /**
@@ -1192,7 +1287,8 @@ function getLocaleEraNames(locale, width) {
  * @return {?}
  */
 function getLocaleFirstDayOfWeek(locale) {
-    var /** @type {?} */ data = findLocaleData(locale);
+    /** @type {?} */
+    var data = findLocaleData(locale);
     return data[8 /* FirstDayOfWeek */];
 }
 /**
@@ -1205,7 +1301,8 @@ function getLocaleFirstDayOfWeek(locale) {
  * @return {?}
  */
 function getLocaleWeekEndRange(locale) {
-    var /** @type {?} */ data = findLocaleData(locale);
+    /** @type {?} */
+    var data = findLocaleData(locale);
     return data[9 /* WeekendRange */];
 }
 /**
@@ -1237,8 +1334,9 @@ function getLocaleWeekEndRange(locale) {
  * @return {?}
  */
 function getLocaleDateFormat(locale, width) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    return data[10 /* DateFormat */][width];
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    return getLastDefinedValue(data[10 /* DateFormat */], width);
 }
 /**
  * Time format that depends on the locale.
@@ -1264,8 +1362,9 @@ function getLocaleDateFormat(locale, width) {
  * @return {?}
  */
 function getLocaleTimeFormat(locale, width) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    return data[11 /* TimeFormat */][width];
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    return getLastDefinedValue(data[11 /* TimeFormat */], width);
 }
 /**
  * Date-time format that depends on the locale.
@@ -1296,8 +1395,10 @@ function getLocaleTimeFormat(locale, width) {
  * @return {?}
  */
 function getLocaleDateTimeFormat(locale, width) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ dateTimeFormatData = /** @type {?} */ (data[12 /* DateTimeFormat */]);
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    /** @type {?} */
+    var dateTimeFormatData = /** @type {?} */ (data[12 /* DateTimeFormat */]);
     return getLastDefinedValue(dateTimeFormatData, width);
 }
 /**
@@ -1310,8 +1411,10 @@ function getLocaleDateTimeFormat(locale, width) {
  * @return {?}
  */
 function getLocaleNumberSymbol(locale, symbol) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    var /** @type {?} */ res = data[13 /* NumberSymbols */][symbol];
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    /** @type {?} */
+    var res = data[13 /* NumberSymbols */][symbol];
     if (typeof res === 'undefined') {
         if (symbol === NumberSymbol.CurrencyDecimal) {
             return data[13 /* NumberSymbols */][NumberSymbol.Decimal];
@@ -1357,7 +1460,8 @@ function getLocaleNumberSymbol(locale, symbol) {
  * @return {?}
  */
 function getLocaleNumberFormat(locale, type) {
-    var /** @type {?} */ data = findLocaleData(locale);
+    /** @type {?} */
+    var data = findLocaleData(locale);
     return data[14 /* NumberFormats */][type];
 }
 /**
@@ -1370,7 +1474,8 @@ function getLocaleNumberFormat(locale, type) {
  * @return {?}
  */
 function getLocaleCurrencySymbol(locale) {
-    var /** @type {?} */ data = findLocaleData(locale);
+    /** @type {?} */
+    var data = findLocaleData(locale);
     return data[15 /* CurrencySymbol */] || null;
 }
 /**
@@ -1383,8 +1488,19 @@ function getLocaleCurrencySymbol(locale) {
  * @return {?}
  */
 function getLocaleCurrencyName(locale) {
-    var /** @type {?} */ data = findLocaleData(locale);
+    /** @type {?} */
+    var data = findLocaleData(locale);
     return data[16 /* CurrencyName */] || null;
+}
+/**
+ * Returns the currency values for the locale
+ * @param {?} locale
+ * @return {?}
+ */
+function getLocaleCurrencies(locale) {
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    return data[17 /* Currencies */];
 }
 /**
  * The locale plural function used by ICU expressions to determine the plural case to use.
@@ -1395,15 +1511,16 @@ function getLocaleCurrencyName(locale) {
  * @return {?}
  */
 function getLocalePluralCase(locale) {
-    var /** @type {?} */ data = findLocaleData(locale);
-    return data[17 /* PluralCase */];
+    /** @type {?} */
+    var data = findLocaleData(locale);
+    return data[18 /* PluralCase */];
 }
 /**
  * @param {?} data
  * @return {?}
  */
 function checkFullData(data) {
-    if (!data[18 /* ExtraData */]) {
+    if (!data[19 /* ExtraData */]) {
         throw new Error("Missing extra locale data for the locale \"" + data[0 /* LocaleId */] + "\". Use \"registerLocaleData\" to load new data. See the \"I18n guide\" on angular.io to know more.");
     }
 }
@@ -1417,7 +1534,7 @@ function checkFullData(data) {
  * You should fallback to AM/PM when there are no rules available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * \@experimental i18n support is experimental.
@@ -1425,9 +1542,11 @@ function checkFullData(data) {
  * @return {?}
  */
 function getLocaleExtraDayPeriodRules(locale) {
-    var /** @type {?} */ data = findLocaleData(locale);
+    /** @type {?} */
+    var data = findLocaleData(locale);
     checkFullData(data);
-    var /** @type {?} */ rules = data[18 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
+    /** @type {?} */
+    var rules = data[19 /* ExtraData */][2 /* ExtraDayPeriodsRules */] || [];
     return rules.map(function (rule) {
         if (typeof rule === 'string') {
             return extractTime(rule);
@@ -1443,7 +1562,7 @@ function getLocaleExtraDayPeriodRules(locale) {
  * You should fallback to AM/PM when there are no day periods available.
  *
  * Note: this is only available if you load the full locale data.
- * See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
+ * See the ["I18n guide"](guide/i18n#i18n-pipes) to know how to import additional locale
  * data.
  *
  * \@experimental i18n support is experimental.
@@ -1453,13 +1572,16 @@ function getLocaleExtraDayPeriodRules(locale) {
  * @return {?}
  */
 function getLocaleExtraDayPeriods(locale, formStyle, width) {
-    var /** @type {?} */ data = findLocaleData(locale);
+    /** @type {?} */
+    var data = findLocaleData(locale);
     checkFullData(data);
-    var /** @type {?} */ dayPeriodsData = /** @type {?} */ ([
-        data[18 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
-        data[18 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
+    /** @type {?} */
+    var dayPeriodsData = /** @type {?} */ ([
+        data[19 /* ExtraData */][0 /* ExtraDayPeriodFormats */],
+        data[19 /* ExtraData */][1 /* ExtraDayPeriodStandalone */]
     ]);
-    var /** @type {?} */ dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
+    /** @type {?} */
+    var dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
     return getLastDefinedValue(dayPeriods, width) || [];
 }
 /**
@@ -1476,7 +1598,7 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
  * @return {?}
  */
 function getLastDefinedValue(data, index) {
-    for (var /** @type {?} */ i = index; i > -1; i--) {
+    for (var i = index; i > -1; i--) {
         if (typeof data[i] !== 'undefined') {
             return data[i];
         }
@@ -1500,13 +1622,15 @@ function extractTime(time) {
  * @return {?}
  */
 function findLocaleData(locale) {
-    var /** @type {?} */ normalizedLocale = locale.toLowerCase().replace(/_/g, '-');
-    var /** @type {?} */ match = LOCALE_DATA[normalizedLocale];
+    /** @type {?} */
+    var normalizedLocale = locale.toLowerCase().replace(/_/g, '-');
+    /** @type {?} */
+    var match = LOCALE_DATA[normalizedLocale];
     if (match) {
         return match;
     }
-    // let's try to find a parent locale
-    var /** @type {?} */ parentLocale = normalizedLocale.split('-')[0];
+    /** @type {?} */
+    var parentLocale = normalizedLocale.split('-')[0];
     match = LOCALE_DATA[parentLocale];
     if (match) {
         return match;
@@ -1517,23 +1641,51 @@ function findLocaleData(locale) {
     throw new Error("Missing locale data for the locale \"" + locale + "\".");
 }
 /**
- * Return the currency symbol for a given currency code, or the code if no symbol available
- * (e.g.: $, US$, or USD)
+ * Returns the currency symbol for a given currency code, or the code if no symbol available
+ * (e.g.: format narrow = $, format wide = US$, code = USD)
+ * If no locale is provided, it uses the locale "en" by default
  *
- * \@internal
+ * \@experimental i18n support is experimental.
  * @param {?} code
  * @param {?} format
+ * @param {?=} locale
  * @return {?}
  */
-function findCurrencySymbol(code, format) {
-    var /** @type {?} */ currency = CURRENCIES[code] || {};
-    var /** @type {?} */ symbol = currency[0] || code;
-    return format === 'wide' ? symbol : currency[1] || symbol;
+function getCurrencySymbol(code, format, locale) {
+    if (locale === void 0) { locale = 'en'; }
+    /** @type {?} */
+    var currency = getLocaleCurrencies(locale)[code] || CURRENCIES_EN[code] || [];
+    /** @type {?} */
+    var symbolNarrow = currency[1 /* SymbolNarrow */];
+    if (format === 'narrow' && typeof symbolNarrow === 'string') {
+        return symbolNarrow;
+    }
+    return currency[0 /* Symbol */] || code;
+}
+/** @type {?} */
+var DEFAULT_NB_OF_CURRENCY_DIGITS = 2;
+/**
+ * Returns the number of decimal digits for the given currency.
+ * Its value depends upon the presence of cents in that particular currency.
+ *
+ * \@experimental i18n support is experimental.
+ * @param {?} code
+ * @return {?}
+ */
+function getNumberOfCurrencyDigits(code) {
+    /** @type {?} */
+    var digits;
+    /** @type {?} */
+    var currency = CURRENCIES_EN[code];
+    if (currency) {
+        digits = currency[2 /* NbOfDigits */];
+    }
+    return typeof digits === 'number' ? digits : DEFAULT_NB_OF_CURRENCY_DIGITS;
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -1542,15 +1694,1309 @@ function findCurrencySymbol(code, format) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/** @type {?} */
+var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+/** @type {?} */
+var NAMED_FORMATS = {};
+/** @type {?} */
+var DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
+/** @enum {number} */
+var ZoneWidth = {
+    Short: 0,
+    ShortGMT: 1,
+    Long: 2,
+    Extended: 3,
+};
+ZoneWidth[ZoneWidth.Short] = 'Short';
+ZoneWidth[ZoneWidth.ShortGMT] = 'ShortGMT';
+ZoneWidth[ZoneWidth.Long] = 'Long';
+ZoneWidth[ZoneWidth.Extended] = 'Extended';
+/** @enum {number} */
+var DateType = {
+    FullYear: 0,
+    Month: 1,
+    Date: 2,
+    Hours: 3,
+    Minutes: 4,
+    Seconds: 5,
+    FractionalSeconds: 6,
+    Day: 7,
+};
+DateType[DateType.FullYear] = 'FullYear';
+DateType[DateType.Month] = 'Month';
+DateType[DateType.Date] = 'Date';
+DateType[DateType.Hours] = 'Hours';
+DateType[DateType.Minutes] = 'Minutes';
+DateType[DateType.Seconds] = 'Seconds';
+DateType[DateType.FractionalSeconds] = 'FractionalSeconds';
+DateType[DateType.Day] = 'Day';
+/** @enum {number} */
+var TranslationType = {
+    DayPeriods: 0,
+    Days: 1,
+    Months: 2,
+    Eras: 3,
+};
+TranslationType[TranslationType.DayPeriods] = 'DayPeriods';
+TranslationType[TranslationType.Days] = 'Days';
+TranslationType[TranslationType.Months] = 'Months';
+TranslationType[TranslationType.Eras] = 'Eras';
 /**
- * @deprecated from v5
+ * \@ngModule CommonModule
+ * \@description
+ *
+ * Formats a date according to locale rules.
+ *
+ * Where:
+ * - `value` is a Date, a number (milliseconds since UTC epoch) or an ISO string
+ *   (https://www.w3.org/TR/NOTE-datetime).
+ * - `format` indicates which date/time components to include. See {\@link DatePipe} for more
+ *   details.
+ * - `locale` is a `string` defining the locale to use.
+ * - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
+ *   abbreviations, but for general use, use a time zone offset (e.g. `'+0430'`).
+ *   If not specified, host system settings are used.
+ *
+ * See {\@link DatePipe} for more details.
+ * @param {?} value
+ * @param {?} format
+ * @param {?} locale
+ * @param {?=} timezone
+ * @return {?}
  */
+function formatDate(value, format, locale, timezone) {
+    /** @type {?} */
+    var date = toDate(value);
+    /** @type {?} */
+    var namedFormat = getNamedFormat(locale, format);
+    format = namedFormat || format;
+    /** @type {?} */
+    var parts = [];
+    /** @type {?} */
+    var match;
+    while (format) {
+        match = DATE_FORMATS_SPLIT.exec(format);
+        if (match) {
+            parts = parts.concat(match.slice(1));
+            /** @type {?} */
+            var part = parts.pop();
+            if (!part) {
+                break;
+            }
+            format = part;
+        }
+        else {
+            parts.push(format);
+            break;
+        }
+    }
+    /** @type {?} */
+    var dateTimezoneOffset = date.getTimezoneOffset();
+    if (timezone) {
+        dateTimezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+        date = convertTimezoneToLocal(date, timezone, true);
+    }
+    /** @type {?} */
+    var text = '';
+    parts.forEach(function (value) {
+        /** @type {?} */
+        var dateFormatter = getDateFormatter(value);
+        text += dateFormatter ?
+            dateFormatter(date, locale, dateTimezoneOffset) :
+            value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
+    });
+    return text;
+}
+/**
+ * @param {?} locale
+ * @param {?} format
+ * @return {?}
+ */
+function getNamedFormat(locale, format) {
+    /** @type {?} */
+    var localeId = getLocaleId(locale);
+    NAMED_FORMATS[localeId] = NAMED_FORMATS[localeId] || {};
+    if (NAMED_FORMATS[localeId][format]) {
+        return NAMED_FORMATS[localeId][format];
+    }
+    /** @type {?} */
+    var formatValue = '';
+    switch (format) {
+        case 'shortDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Short);
+            break;
+        case 'mediumDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Medium);
+            break;
+        case 'longDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Long);
+            break;
+        case 'fullDate':
+            formatValue = getLocaleDateFormat(locale, FormatWidth.Full);
+            break;
+        case 'shortTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Short);
+            break;
+        case 'mediumTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Medium);
+            break;
+        case 'longTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Long);
+            break;
+        case 'fullTime':
+            formatValue = getLocaleTimeFormat(locale, FormatWidth.Full);
+            break;
+        case 'short':
+            /** @type {?} */
+            var shortTime = getNamedFormat(locale, 'shortTime');
+            /** @type {?} */
+            var shortDate = getNamedFormat(locale, 'shortDate');
+            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Short), [shortTime, shortDate]);
+            break;
+        case 'medium':
+            /** @type {?} */
+            var mediumTime = getNamedFormat(locale, 'mediumTime');
+            /** @type {?} */
+            var mediumDate = getNamedFormat(locale, 'mediumDate');
+            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Medium), [mediumTime, mediumDate]);
+            break;
+        case 'long':
+            /** @type {?} */
+            var longTime = getNamedFormat(locale, 'longTime');
+            /** @type {?} */
+            var longDate = getNamedFormat(locale, 'longDate');
+            formatValue =
+                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Long), [longTime, longDate]);
+            break;
+        case 'full':
+            /** @type {?} */
+            var fullTime = getNamedFormat(locale, 'fullTime');
+            /** @type {?} */
+            var fullDate = getNamedFormat(locale, 'fullDate');
+            formatValue =
+                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Full), [fullTime, fullDate]);
+            break;
+    }
+    if (formatValue) {
+        NAMED_FORMATS[localeId][format] = formatValue;
+    }
+    return formatValue;
+}
+/**
+ * @param {?} str
+ * @param {?} opt_values
+ * @return {?}
+ */
+function formatDateTime(str, opt_values) {
+    if (opt_values) {
+        str = str.replace(/\{([^}]+)}/g, function (match, key) {
+            return (opt_values != null && key in opt_values) ? opt_values[key] : match;
+        });
+    }
+    return str;
+}
+/**
+ * @param {?} num
+ * @param {?} digits
+ * @param {?=} minusSign
+ * @param {?=} trim
+ * @param {?=} negWrap
+ * @return {?}
+ */
+function padNumber(num, digits, minusSign, trim, negWrap) {
+    if (minusSign === void 0) { minusSign = '-'; }
+    /** @type {?} */
+    var neg = '';
+    if (num < 0 || (negWrap && num <= 0)) {
+        if (negWrap) {
+            num = -num + 1;
+        }
+        else {
+            num = -num;
+            neg = minusSign;
+        }
+    }
+    /** @type {?} */
+    var strNum = String(num);
+    while (strNum.length < digits) {
+        strNum = '0' + strNum;
+    }
+    if (trim) {
+        strNum = strNum.substr(strNum.length - digits);
+    }
+    return neg + strNum;
+}
+/**
+ * @param {?} milliseconds
+ * @param {?} digits
+ * @return {?}
+ */
+function formatFractionalSeconds(milliseconds, digits) {
+    /** @type {?} */
+    var strMs = padNumber(milliseconds, 3);
+    return strMs.substr(0, digits);
+}
+/**
+ * Returns a date formatter that transforms a date into its locale digit representation
+ * @param {?} name
+ * @param {?} size
+ * @param {?=} offset
+ * @param {?=} trim
+ * @param {?=} negWrap
+ * @return {?}
+ */
+function dateGetter(name, size, offset, trim, negWrap) {
+    if (offset === void 0) { offset = 0; }
+    if (trim === void 0) { trim = false; }
+    if (negWrap === void 0) { negWrap = false; }
+    return function (date, locale) {
+        /** @type {?} */
+        var part = getDatePart(name, date);
+        if (offset > 0 || part > -offset) {
+            part += offset;
+        }
+        if (name === DateType.Hours) {
+            if (part === 0 && offset === -12) {
+                part = 12;
+            }
+        }
+        else if (name === DateType.FractionalSeconds) {
+            return formatFractionalSeconds(part, size);
+        }
+        /** @type {?} */
+        var localeMinus = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
+        return padNumber(part, size, localeMinus, trim, negWrap);
+    };
+}
+/**
+ * @param {?} part
+ * @param {?} date
+ * @return {?}
+ */
+function getDatePart(part, date) {
+    switch (part) {
+        case DateType.FullYear:
+            return date.getFullYear();
+        case DateType.Month:
+            return date.getMonth();
+        case DateType.Date:
+            return date.getDate();
+        case DateType.Hours:
+            return date.getHours();
+        case DateType.Minutes:
+            return date.getMinutes();
+        case DateType.Seconds:
+            return date.getSeconds();
+        case DateType.FractionalSeconds:
+            return date.getMilliseconds();
+        case DateType.Day:
+            return date.getDay();
+        default:
+            throw new Error("Unknown DateType value \"" + part + "\".");
+    }
+}
+/**
+ * Returns a date formatter that transforms a date into its locale string representation
+ * @param {?} name
+ * @param {?} width
+ * @param {?=} form
+ * @param {?=} extended
+ * @return {?}
+ */
+function dateStrGetter(name, width, form, extended) {
+    if (form === void 0) { form = FormStyle.Format; }
+    if (extended === void 0) { extended = false; }
+    return function (date, locale) {
+        return getDateTranslation(date, locale, name, width, form, extended);
+    };
+}
+/**
+ * Returns the locale translation of a date for a given form, type and width
+ * @param {?} date
+ * @param {?} locale
+ * @param {?} name
+ * @param {?} width
+ * @param {?} form
+ * @param {?} extended
+ * @return {?}
+ */
+function getDateTranslation(date, locale, name, width, form, extended) {
+    switch (name) {
+        case TranslationType.Months:
+            return getLocaleMonthNames(locale, form, width)[date.getMonth()];
+        case TranslationType.Days:
+            return getLocaleDayNames(locale, form, width)[date.getDay()];
+        case TranslationType.DayPeriods:
+            /** @type {?} */
+            var currentHours_1 = date.getHours();
+            /** @type {?} */
+            var currentMinutes_1 = date.getMinutes();
+            if (extended) {
+                /** @type {?} */
+                var rules = getLocaleExtraDayPeriodRules(locale);
+                /** @type {?} */
+                var dayPeriods_1 = getLocaleExtraDayPeriods(locale, form, width);
+                /** @type {?} */
+                var result_1 = void 0;
+                rules.forEach(function (rule, index) {
+                    if (Array.isArray(rule)) {
+                        var _a = rule[0], hoursFrom = _a.hours, minutesFrom = _a.minutes;
+                        var _b = rule[1], hoursTo = _b.hours, minutesTo = _b.minutes;
+                        if (currentHours_1 >= hoursFrom && currentMinutes_1 >= minutesFrom &&
+                            (currentHours_1 < hoursTo ||
+                                (currentHours_1 === hoursTo && currentMinutes_1 < minutesTo))) {
+                            result_1 = dayPeriods_1[index];
+                        }
+                    }
+                    else { // noon or midnight
+                        var hours = rule.hours, minutes = rule.minutes;
+                        if (hours === currentHours_1 && minutes === currentMinutes_1) {
+                            result_1 = dayPeriods_1[index];
+                        }
+                    }
+                });
+                if (result_1) {
+                    return result_1;
+                }
+            }
+            // if no rules for the day periods, we use am/pm by default
+            return getLocaleDayPeriods(locale, form, /** @type {?} */ (width))[currentHours_1 < 12 ? 0 : 1];
+        case TranslationType.Eras:
+            return getLocaleEraNames(locale, /** @type {?} */ (width))[date.getFullYear() <= 0 ? 0 : 1];
+        default:
+            /** @type {?} */
+            var unexpected = name;
+            throw new Error("unexpected translation type " + unexpected);
+    }
+}
+/**
+ * Returns a date formatter that transforms a date and an offset into a timezone with ISO8601 or
+ * GMT format depending on the width (eg: short = +0430, short:GMT = GMT+4, long = GMT+04:30,
+ * extended = +04:30)
+ * @param {?} width
+ * @return {?}
+ */
+function timeZoneGetter(width) {
+    return function (date, locale, offset) {
+        /** @type {?} */
+        var zone = -1 * offset;
+        /** @type {?} */
+        var minusSign = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
+        /** @type {?} */
+        var hours = zone > 0 ? Math.floor(zone / 60) : Math.ceil(zone / 60);
+        switch (width) {
+            case ZoneWidth.Short:
+                return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) +
+                    padNumber(Math.abs(zone % 60), 2, minusSign);
+            case ZoneWidth.ShortGMT:
+                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 1, minusSign);
+            case ZoneWidth.Long:
+                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
+                    padNumber(Math.abs(zone % 60), 2, minusSign);
+            case ZoneWidth.Extended:
+                if (offset === 0) {
+                    return 'Z';
+                }
+                else {
+                    return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
+                        padNumber(Math.abs(zone % 60), 2, minusSign);
+                }
+            default:
+                throw new Error("Unknown zone width \"" + width + "\"");
+        }
+    };
+}
+/** @type {?} */
+var JANUARY = 0;
+/** @type {?} */
+var THURSDAY = 4;
+/**
+ * @param {?} year
+ * @return {?}
+ */
+function getFirstThursdayOfYear(year) {
+    /** @type {?} */
+    var firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
+    return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
+}
+/**
+ * @param {?} datetime
+ * @return {?}
+ */
+function getThursdayThisWeek(datetime) {
+    return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
+}
+/**
+ * @param {?} size
+ * @param {?=} monthBased
+ * @return {?}
+ */
+function weekGetter(size, monthBased) {
+    if (monthBased === void 0) { monthBased = false; }
+    return function (date, locale) {
+        /** @type {?} */
+        var result;
+        if (monthBased) {
+            /** @type {?} */
+            var nbDaysBefore1stDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay() - 1;
+            /** @type {?} */
+            var today = date.getDate();
+            result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
+        }
+        else {
+            /** @type {?} */
+            var firstThurs = getFirstThursdayOfYear(date.getFullYear());
+            /** @type {?} */
+            var thisThurs = getThursdayThisWeek(date);
+            /** @type {?} */
+            var diff = thisThurs.getTime() - firstThurs.getTime();
+            result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
+        }
+        return padNumber(result, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    };
+}
+/** @type {?} */
+var DATE_FORMATS = {};
+/**
+ * @param {?} format
+ * @return {?}
+ */
+function getDateFormatter(format) {
+    if (DATE_FORMATS[format]) {
+        return DATE_FORMATS[format];
+    }
+    /** @type {?} */
+    var formatter;
+    switch (format) {
+        // Era name (AD/BC)
+        case 'G':
+        case 'GG':
+        case 'GGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Abbreviated);
+            break;
+        case 'GGGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Wide);
+            break;
+        case 'GGGGG':
+            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Narrow);
+            break;
+        // 1 digit representation of the year, e.g. (AD 1 => 1, AD 199 => 199)
+        case 'y':
+            formatter = dateGetter(DateType.FullYear, 1, 0, false, true);
+            break;
+        // 2 digit representation of the year, padded (00-99). (e.g. AD 2001 => 01, AD 2010 => 10)
+        case 'yy':
+            formatter = dateGetter(DateType.FullYear, 2, 0, true, true);
+            break;
+        // 3 digit representation of the year, padded (000-999). (e.g. AD 2001 => 01, AD 2010 => 10)
+        case 'yyy':
+            formatter = dateGetter(DateType.FullYear, 3, 0, false, true);
+            break;
+        // 4 digit representation of the year (e.g. AD 1 => 0001, AD 2010 => 2010)
+        case 'yyyy':
+            formatter = dateGetter(DateType.FullYear, 4, 0, false, true);
+            break;
+        // Month of the year (1-12), numeric
+        case 'M':
+        case 'L':
+            formatter = dateGetter(DateType.Month, 1, 1);
+            break;
+        case 'MM':
+        case 'LL':
+            formatter = dateGetter(DateType.Month, 2, 1);
+            break;
+        // Month of the year (January, ...), string, format
+        case 'MMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated);
+            break;
+        case 'MMMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Wide);
+            break;
+        case 'MMMMM':
+            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Narrow);
+            break;
+        // Month of the year (January, ...), string, standalone
+        case 'LLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated, FormStyle.Standalone);
+            break;
+        case 'LLLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Wide, FormStyle.Standalone);
+            break;
+        case 'LLLLL':
+            formatter =
+                dateStrGetter(TranslationType.Months, TranslationWidth.Narrow, FormStyle.Standalone);
+            break;
+        // Week of the year (1, ... 52)
+        case 'w':
+            formatter = weekGetter(1);
+            break;
+        case 'ww':
+            formatter = weekGetter(2);
+            break;
+        // Week of the month (1, ...)
+        case 'W':
+            formatter = weekGetter(1, true);
+            break;
+        // Day of the month (1-31)
+        case 'd':
+            formatter = dateGetter(DateType.Date, 1);
+            break;
+        case 'dd':
+            formatter = dateGetter(DateType.Date, 2);
+            break;
+        // Day of the Week
+        case 'E':
+        case 'EE':
+        case 'EEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Abbreviated);
+            break;
+        case 'EEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Wide);
+            break;
+        case 'EEEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Narrow);
+            break;
+        case 'EEEEEE':
+            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Short);
+            break;
+        // Generic period of the day (am-pm)
+        case 'a':
+        case 'aa':
+        case 'aaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated);
+            break;
+        case 'aaaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide);
+            break;
+        case 'aaaaa':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow);
+            break;
+        // Extended period of the day (midnight, at night, ...), standalone
+        case 'b':
+        case 'bb':
+        case 'bbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Standalone, true);
+            break;
+        case 'bbbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Standalone, true);
+            break;
+        case 'bbbbb':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Standalone, true);
+            break;
+        // Extended period of the day (midnight, night, ...), standalone
+        case 'B':
+        case 'BB':
+        case 'BBB':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Format, true);
+            break;
+        case 'BBBB':
+            formatter =
+                dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Format, true);
+            break;
+        case 'BBBBB':
+            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Format, true);
+            break;
+        // Hour in AM/PM, (1-12)
+        case 'h':
+            formatter = dateGetter(DateType.Hours, 1, -12);
+            break;
+        case 'hh':
+            formatter = dateGetter(DateType.Hours, 2, -12);
+            break;
+        // Hour of the day (0-23)
+        case 'H':
+            formatter = dateGetter(DateType.Hours, 1);
+            break;
+        // Hour in day, padded (00-23)
+        case 'HH':
+            formatter = dateGetter(DateType.Hours, 2);
+            break;
+        // Minute of the hour (0-59)
+        case 'm':
+            formatter = dateGetter(DateType.Minutes, 1);
+            break;
+        case 'mm':
+            formatter = dateGetter(DateType.Minutes, 2);
+            break;
+        // Second of the minute (0-59)
+        case 's':
+            formatter = dateGetter(DateType.Seconds, 1);
+            break;
+        case 'ss':
+            formatter = dateGetter(DateType.Seconds, 2);
+            break;
+        // Fractional second
+        case 'S':
+            formatter = dateGetter(DateType.FractionalSeconds, 1);
+            break;
+        case 'SS':
+            formatter = dateGetter(DateType.FractionalSeconds, 2);
+            break;
+        case 'SSS':
+            formatter = dateGetter(DateType.FractionalSeconds, 3);
+            break;
+        // Timezone ISO8601 short format (-0430)
+        case 'Z':
+        case 'ZZ':
+        case 'ZZZ':
+            formatter = timeZoneGetter(ZoneWidth.Short);
+            break;
+        // Timezone ISO8601 extended format (-04:30)
+        case 'ZZZZZ':
+            formatter = timeZoneGetter(ZoneWidth.Extended);
+            break;
+        // Timezone GMT short format (GMT+4)
+        case 'O':
+        case 'OO':
+        case 'OOO':
+        // Should be location, but fallback to format O instead because we don't have the data yet
+        case 'z':
+        case 'zz':
+        case 'zzz':
+            formatter = timeZoneGetter(ZoneWidth.ShortGMT);
+            break;
+        // Timezone GMT long format (GMT+0430)
+        case 'OOOO':
+        case 'ZZZZ':
+        // Should be location, but fallback to format O instead because we don't have the data yet
+        case 'zzzz':
+            formatter = timeZoneGetter(ZoneWidth.Long);
+            break;
+        default:
+            return null;
+    }
+    DATE_FORMATS[format] = formatter;
+    return formatter;
+}
+/**
+ * @param {?} timezone
+ * @param {?} fallback
+ * @return {?}
+ */
+function timezoneToOffset(timezone, fallback) {
+    // Support: IE 9-11 only, Edge 13-15+
+    // IE/Edge do not "understand" colon (`:`) in timezone
+    timezone = timezone.replace(/:/g, '');
+    /** @type {?} */
+    var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
+    return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
+}
+/**
+ * @param {?} date
+ * @param {?} minutes
+ * @return {?}
+ */
+function addDateMinutes(date, minutes) {
+    date = new Date(date.getTime());
+    date.setMinutes(date.getMinutes() + minutes);
+    return date;
+}
+/**
+ * @param {?} date
+ * @param {?} timezone
+ * @param {?} reverse
+ * @return {?}
+ */
+function convertTimezoneToLocal(date, timezone, reverse) {
+    /** @type {?} */
+    var reverseValue = reverse ? -1 : 1;
+    /** @type {?} */
+    var dateTimezoneOffset = date.getTimezoneOffset();
+    /** @type {?} */
+    var timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+    return addDateMinutes(date, reverseValue * (timezoneOffset - dateTimezoneOffset));
+}
+/**
+ * Converts a value to date.
+ *
+ * Supported input formats:
+ * - `Date`
+ * - number: timestamp
+ * - string: numeric (e.g. "1234"), ISO and date strings in a format supported by
+ *   [Date.parse()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse).
+ *   Note: ISO strings without time return a date without timeoffset.
+ *
+ * Throws if unable to convert to a date.
+ * @param {?} value
+ * @return {?}
+ */
+function toDate(value) {
+    if (isDate(value)) {
+        return value;
+    }
+    if (typeof value === 'number' && !isNaN(value)) {
+        return new Date(value);
+    }
+    if (typeof value === 'string') {
+        value = value.trim();
+        /** @type {?} */
+        var parsedNb = parseFloat(value);
+        // any string that only contains numbers, like "1234" but not like "1234hello"
+        if (!isNaN(/** @type {?} */ (value) - parsedNb)) {
+            return new Date(parsedNb);
+        }
+        if (/^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
+            var _a = value.split('-').map(function (val) { return +val; }), y = _a[0], m = _a[1], d = _a[2];
+            return new Date(y, m - 1, d);
+        }
+        /** @type {?} */
+        var match = void 0;
+        if (match = value.match(ISO8601_DATE_REGEX)) {
+            return isoStringToDate(match);
+        }
+    }
+    /** @type {?} */
+    var date = new Date(/** @type {?} */ (value));
+    if (!isDate(date)) {
+        throw new Error("Unable to convert \"" + value + "\" into a date");
+    }
+    return date;
+}
+/**
+ * Converts a date in ISO8601 to a Date.
+ * Used instead of `Date.parse` because of browser discrepancies.
+ * @param {?} match
+ * @return {?}
+ */
+function isoStringToDate(match) {
+    /** @type {?} */
+    var date = new Date(0);
+    /** @type {?} */
+    var tzHour = 0;
+    /** @type {?} */
+    var tzMin = 0;
+    /** @type {?} */
+    var dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
+    /** @type {?} */
+    var timeSetter = match[8] ? date.setUTCHours : date.setHours;
+    // if there is a timezone defined like "+01:00" or "+0100"
+    if (match[9]) {
+        tzHour = Number(match[9] + match[10]);
+        tzMin = Number(match[9] + match[11]);
+    }
+    dateSetter.call(date, Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+    /** @type {?} */
+    var h = Number(match[4] || 0) - tzHour;
+    /** @type {?} */
+    var m = Number(match[5] || 0) - tzMin;
+    /** @type {?} */
+    var s = Number(match[6] || 0);
+    /** @type {?} */
+    var ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
+    timeSetter.call(date, h, m, s, ms);
+    return date;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isDate(value) {
+    return value instanceof Date && !isNaN(value.valueOf());
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/** @type {?} */
+var NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
+/** @type {?} */
+var MAX_DIGITS = 22;
+/** @type {?} */
+var DECIMAL_SEP = '.';
+/** @type {?} */
+var ZERO_CHAR = '0';
+/** @type {?} */
+var PATTERN_SEP = ';';
+/** @type {?} */
+var GROUP_SEP = ',';
+/** @type {?} */
+var DIGIT_CHAR = '#';
+/** @type {?} */
+var CURRENCY_CHAR = '¤';
+/** @type {?} */
+var PERCENT_CHAR = '%';
+/**
+ * Transforms a number to a locale string based on a style and a format
+ * @param {?} value
+ * @param {?} pattern
+ * @param {?} locale
+ * @param {?} groupSymbol
+ * @param {?} decimalSymbol
+ * @param {?=} digitsInfo
+ * @param {?=} isPercent
+ * @return {?}
+ */
+function formatNumberToLocaleString(value, pattern, locale, groupSymbol, decimalSymbol, digitsInfo, isPercent) {
+    if (isPercent === void 0) { isPercent = false; }
+    /** @type {?} */
+    var formattedText = '';
+    /** @type {?} */
+    var isZero = false;
+    if (!isFinite(value)) {
+        formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
+    }
+    else {
+        /** @type {?} */
+        var parsedNumber = parseNumber(value);
+        if (isPercent) {
+            parsedNumber = toPercent(parsedNumber);
+        }
+        /** @type {?} */
+        var minInt = pattern.minInt;
+        /** @type {?} */
+        var minFraction = pattern.minFrac;
+        /** @type {?} */
+        var maxFraction = pattern.maxFrac;
+        if (digitsInfo) {
+            /** @type {?} */
+            var parts = digitsInfo.match(NUMBER_FORMAT_REGEXP);
+            if (parts === null) {
+                throw new Error(digitsInfo + " is not a valid digit info");
+            }
+            /** @type {?} */
+            var minIntPart = parts[1];
+            /** @type {?} */
+            var minFractionPart = parts[3];
+            /** @type {?} */
+            var maxFractionPart = parts[5];
+            if (minIntPart != null) {
+                minInt = parseIntAutoRadix(minIntPart);
+            }
+            if (minFractionPart != null) {
+                minFraction = parseIntAutoRadix(minFractionPart);
+            }
+            if (maxFractionPart != null) {
+                maxFraction = parseIntAutoRadix(maxFractionPart);
+            }
+            else if (minFractionPart != null && minFraction > maxFraction) {
+                maxFraction = minFraction;
+            }
+        }
+        roundNumber(parsedNumber, minFraction, maxFraction);
+        /** @type {?} */
+        var digits = parsedNumber.digits;
+        /** @type {?} */
+        var integerLen = parsedNumber.integerLen;
+        /** @type {?} */
+        var exponent = parsedNumber.exponent;
+        /** @type {?} */
+        var decimals = [];
+        isZero = digits.every(function (d) { return !d; });
+        // pad zeros for small numbers
+        for (; integerLen < minInt; integerLen++) {
+            digits.unshift(0);
+        }
+        // pad zeros for small numbers
+        for (; integerLen < 0; integerLen++) {
+            digits.unshift(0);
+        }
+        // extract decimals digits
+        if (integerLen > 0) {
+            decimals = digits.splice(integerLen, digits.length);
+        }
+        else {
+            decimals = digits;
+            digits = [0];
+        }
+        /** @type {?} */
+        var groups = [];
+        if (digits.length >= pattern.lgSize) {
+            groups.unshift(digits.splice(-pattern.lgSize, digits.length).join(''));
+        }
+        while (digits.length > pattern.gSize) {
+            groups.unshift(digits.splice(-pattern.gSize, digits.length).join(''));
+        }
+        if (digits.length) {
+            groups.unshift(digits.join(''));
+        }
+        formattedText = groups.join(getLocaleNumberSymbol(locale, groupSymbol));
+        // append the decimal digits
+        if (decimals.length) {
+            formattedText += getLocaleNumberSymbol(locale, decimalSymbol) + decimals.join('');
+        }
+        if (exponent) {
+            formattedText += getLocaleNumberSymbol(locale, NumberSymbol.Exponential) + '+' + exponent;
+        }
+    }
+    if (value < 0 && !isZero) {
+        formattedText = pattern.negPre + formattedText + pattern.negSuf;
+    }
+    else {
+        formattedText = pattern.posPre + formattedText + pattern.posSuf;
+    }
+    return formattedText;
+}
+/**
+ * \@ngModule CommonModule
+ * \@description
+ *
+ * Formats a number as currency using locale rules.
+ *
+ * Use `currency` to format a number as currency.
+ *
+ * Where:
+ * - `value` is a number.
+ * - `locale` is a `string` defining the locale to use.
+ * - `currency` is the string that represents the currency, it can be its symbol or its name.
+ * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
+ *    as `USD` for the US dollar and `EUR` for the euro.
+ * - `digitInfo` See {\@link DecimalPipe} for more details.
+ *
+ *
+ * @param {?} value
+ * @param {?} locale
+ * @param {?} currency
+ * @param {?=} currencyCode
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatCurrency(value, locale, currency, currencyCode, digitsInfo) {
+    /** @type {?} */
+    var format = getLocaleNumberFormat(locale, NumberFormatStyle.Currency);
+    /** @type {?} */
+    var pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    pattern.minFrac = getNumberOfCurrencyDigits(/** @type {?} */ ((currencyCode)));
+    pattern.maxFrac = pattern.minFrac;
+    /** @type {?} */
+    var res = formatNumberToLocaleString(value, pattern, locale, NumberSymbol.CurrencyGroup, NumberSymbol.CurrencyDecimal, digitsInfo);
+    return res
+        .replace(CURRENCY_CHAR, currency)
+        // if we have 2 time the currency character, the second one is ignored
+        .replace(CURRENCY_CHAR, '');
+}
+/**
+ * \@ngModule CommonModule
+ * \@description
+ *
+ * Formats a number as a percentage according to locale rules.
+ *
+ * Where:
+ * - `value` is a number.
+ * - `locale` is a `string` defining the locale to use.
+ * - `digitInfo` See {\@link DecimalPipe} for more details.
+ *
+ *
+ * @param {?} value
+ * @param {?} locale
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatPercent(value, locale, digitsInfo) {
+    /** @type {?} */
+    var format = getLocaleNumberFormat(locale, NumberFormatStyle.Percent);
+    /** @type {?} */
+    var pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    /** @type {?} */
+    var res = formatNumberToLocaleString(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo, true);
+    return res.replace(new RegExp(PERCENT_CHAR, 'g'), getLocaleNumberSymbol(locale, NumberSymbol.PercentSign));
+}
+/**
+ * \@ngModule CommonModule
+ * \@description
+ *
+ * Formats a number as text. Group sizing and separator and other locale-specific
+ * configurations are based on the locale.
+ *
+ * Where:
+ * - `value` is a number.
+ * - `locale` is a `string` defining the locale to use.
+ * - `digitInfo` See {\@link DecimalPipe} for more details.
+ *
+ *
+ * @param {?} value
+ * @param {?} locale
+ * @param {?=} digitsInfo
+ * @return {?}
+ */
+function formatNumber(value, locale, digitsInfo) {
+    /** @type {?} */
+    var format = getLocaleNumberFormat(locale, NumberFormatStyle.Decimal);
+    /** @type {?} */
+    var pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
+    return formatNumberToLocaleString(value, pattern, locale, NumberSymbol.Group, NumberSymbol.Decimal, digitsInfo);
+}
+/**
+ * @param {?} format
+ * @param {?=} minusSign
+ * @return {?}
+ */
+function parseNumberFormat(format, minusSign) {
+    if (minusSign === void 0) { minusSign = '-'; }
+    /** @type {?} */
+    var p = {
+        minInt: 1,
+        minFrac: 0,
+        maxFrac: 0,
+        posPre: '',
+        posSuf: '',
+        negPre: '',
+        negSuf: '',
+        gSize: 0,
+        lgSize: 0
+    };
+    /** @type {?} */
+    var patternParts = format.split(PATTERN_SEP);
+    /** @type {?} */
+    var positive = patternParts[0];
+    /** @type {?} */
+    var negative = patternParts[1];
+    /** @type {?} */
+    var positiveParts = positive.indexOf(DECIMAL_SEP) !== -1 ?
+        positive.split(DECIMAL_SEP) :
+        [
+            positive.substring(0, positive.lastIndexOf(ZERO_CHAR) + 1),
+            positive.substring(positive.lastIndexOf(ZERO_CHAR) + 1)
+        ];
+    /** @type {?} */
+    var integer = positiveParts[0];
+    /** @type {?} */
+    var fraction = positiveParts[1] || '';
+    p.posPre = integer.substr(0, integer.indexOf(DIGIT_CHAR));
+    for (var i = 0; i < fraction.length; i++) {
+        /** @type {?} */
+        var ch = fraction.charAt(i);
+        if (ch === ZERO_CHAR) {
+            p.minFrac = p.maxFrac = i + 1;
+        }
+        else if (ch === DIGIT_CHAR) {
+            p.maxFrac = i + 1;
+        }
+        else {
+            p.posSuf += ch;
+        }
+    }
+    /** @type {?} */
+    var groups = integer.split(GROUP_SEP);
+    p.gSize = groups[1] ? groups[1].length : 0;
+    p.lgSize = (groups[2] || groups[1]) ? (groups[2] || groups[1]).length : 0;
+    if (negative) {
+        /** @type {?} */
+        var trunkLen = positive.length - p.posPre.length - p.posSuf.length;
+        /** @type {?} */
+        var pos = negative.indexOf(DIGIT_CHAR);
+        p.negPre = negative.substr(0, pos).replace(/'/g, '');
+        p.negSuf = negative.substr(pos + trunkLen).replace(/'/g, '');
+    }
+    else {
+        p.negPre = minusSign + p.posPre;
+        p.negSuf = p.posSuf;
+    }
+    return p;
+}
+/**
+ * @param {?} parsedNumber
+ * @return {?}
+ */
+function toPercent(parsedNumber) {
+    // if the number is 0, don't do anything
+    if (parsedNumber.digits[0] === 0) {
+        return parsedNumber;
+    }
+    /** @type {?} */
+    var fractionLen = parsedNumber.digits.length - parsedNumber.integerLen;
+    if (parsedNumber.exponent) {
+        parsedNumber.exponent += 2;
+    }
+    else {
+        if (fractionLen === 0) {
+            parsedNumber.digits.push(0, 0);
+        }
+        else if (fractionLen === 1) {
+            parsedNumber.digits.push(0);
+        }
+        parsedNumber.integerLen += 2;
+    }
+    return parsedNumber;
+}
+/**
+ * Parses a number.
+ * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
+ * @param {?} num
+ * @return {?}
+ */
+function parseNumber(num) {
+    /** @type {?} */
+    var numStr = Math.abs(num) + '';
+    /** @type {?} */
+    var exponent = 0;
+    /** @type {?} */
+    var digits;
+    /** @type {?} */
+    var integerLen;
+    /** @type {?} */
+    var i;
+    /** @type {?} */
+    var j;
+    /** @type {?} */
+    var zeros;
+    // Decimal point?
+    if ((integerLen = numStr.indexOf(DECIMAL_SEP)) > -1) {
+        numStr = numStr.replace(DECIMAL_SEP, '');
+    }
+    // Exponential form?
+    if ((i = numStr.search(/e/i)) > 0) {
+        // Work out the exponent.
+        if (integerLen < 0)
+            integerLen = i;
+        integerLen += +numStr.slice(i + 1);
+        numStr = numStr.substring(0, i);
+    }
+    else if (integerLen < 0) {
+        // There was no decimal point or exponent so it is an integer.
+        integerLen = numStr.length;
+    }
+    // Count the number of leading zeros.
+    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) { /* empty */
+        /* empty */
+    }
+    if (i === (zeros = numStr.length)) {
+        // The digits are all zero.
+        digits = [0];
+        integerLen = 1;
+    }
+    else {
+        // Count the number of trailing zeros
+        zeros--;
+        while (numStr.charAt(zeros) === ZERO_CHAR)
+            zeros--;
+        // Trailing zeros are insignificant so ignore them
+        integerLen -= i;
+        digits = [];
+        // Convert string to array of digits without leading/trailing zeros.
+        for (j = 0; i <= zeros; i++, j++) {
+            digits[j] = Number(numStr.charAt(i));
+        }
+    }
+    // If the number overflows the maximum allowed digits then use an exponent.
+    if (integerLen > MAX_DIGITS) {
+        digits = digits.splice(0, MAX_DIGITS - 1);
+        exponent = integerLen - 1;
+        integerLen = 1;
+    }
+    return { digits: digits, exponent: exponent, integerLen: integerLen };
+}
+/**
+ * Round the parsed number to the specified number of decimal places
+ * This function changes the parsedNumber in-place
+ * @param {?} parsedNumber
+ * @param {?} minFrac
+ * @param {?} maxFrac
+ * @return {?}
+ */
+function roundNumber(parsedNumber, minFrac, maxFrac) {
+    if (minFrac > maxFrac) {
+        throw new Error("The minimum number of digits after fraction (" + minFrac + ") is higher than the maximum (" + maxFrac + ").");
+    }
+    /** @type {?} */
+    var digits = parsedNumber.digits;
+    /** @type {?} */
+    var fractionLen = digits.length - parsedNumber.integerLen;
+    /** @type {?} */
+    var fractionSize = Math.min(Math.max(minFrac, fractionLen), maxFrac);
+    /** @type {?} */
+    var roundAt = fractionSize + parsedNumber.integerLen;
+    /** @type {?} */
+    var digit = digits[roundAt];
+    if (roundAt > 0) {
+        // Drop fractional digits beyond `roundAt`
+        digits.splice(Math.max(parsedNumber.integerLen, roundAt));
+        // Set non-fractional digits beyond `roundAt` to 0
+        for (var j = roundAt; j < digits.length; j++) {
+            digits[j] = 0;
+        }
+    }
+    else {
+        // We rounded to zero so reset the parsedNumber
+        fractionLen = Math.max(0, fractionLen);
+        parsedNumber.integerLen = 1;
+        digits.length = Math.max(1, roundAt = fractionSize + 1);
+        digits[0] = 0;
+        for (var i = 1; i < roundAt; i++)
+            digits[i] = 0;
+    }
+    if (digit >= 5) {
+        if (roundAt - 1 < 0) {
+            for (var k = 0; k > roundAt; k--) {
+                digits.unshift(0);
+                parsedNumber.integerLen++;
+            }
+            digits.unshift(1);
+            parsedNumber.integerLen++;
+        }
+        else {
+            digits[roundAt - 1]++;
+        }
+    }
+    // Pad out with zeros to get the required fraction length
+    for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
+        digits.push(0);
+    /** @type {?} */
+    var dropTrailingZeros = fractionSize !== 0;
+    /** @type {?} */
+    var minLen = minFrac + parsedNumber.integerLen;
+    /** @type {?} */
+    var carry = digits.reduceRight(function (carry, d, i, digits) {
+        d = d + carry;
+        digits[i] = d < 10 ? d : d - 10; // d % 10
+        if (dropTrailingZeros) {
+            // Do not keep meaningless fractional trailing zeros (e.g. 15.52000 --> 15.52)
+            if (digits[i] === 0 && i >= minLen) {
+                digits.pop();
+            }
+            else {
+                dropTrailingZeros = false;
+            }
+        }
+        return d >= 10 ? 1 : 0; // Math.floor(d / 10);
+    }, 0);
+    if (carry) {
+        digits.unshift(carry);
+        parsedNumber.integerLen++;
+    }
+}
+/**
+ * @param {?} text
+ * @return {?}
+ */
+function parseIntAutoRadix(text) {
+    /** @type {?} */
+    var result = parseInt(text);
+    if (isNaN(result)) {
+        throw new Error('Invalid integer literal when parsing ' + text);
+    }
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/** *
+ * @deprecated from v5
+  @type {?} */
 var DEPRECATED_PLURAL_FN = new _angular_core.InjectionToken('UseV4Plurals');
 /**
  * \@experimental
  * @abstract
  */
-var NgLocalization = (function () {
+var NgLocalization = /** @class */ (function () {
     function NgLocalization() {
     }
     return NgLocalization;
@@ -1559,8 +3005,6 @@ var NgLocalization = (function () {
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
  * - the plural category otherwise
- *
- * \@internal
  * @param {?} value
  * @param {?} cases
  * @param {?} ngLocalization
@@ -1568,7 +3012,8 @@ var NgLocalization = (function () {
  * @return {?}
  */
 function getPluralCategory(value, cases, ngLocalization, locale) {
-    var /** @type {?} */ key = "=" + value;
+    /** @type {?} */
+    var key = "=" + value;
     if (cases.indexOf(key) > -1) {
         return key;
     }
@@ -1586,10 +3031,10 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  *
  * \@experimental
  */
-var NgLocaleLocalization = (function (_super) {
+var NgLocaleLocalization = /** @class */ (function (_super) {
     __extends(NgLocaleLocalization, _super);
     function NgLocaleLocalization(locale, /** @deprecated from v5 */
-        deprecatedPluralFn) {
+    deprecatedPluralFn) {
         var _this = _super.call(this) || this;
         _this.locale = locale;
         _this.deprecatedPluralFn = deprecatedPluralFn;
@@ -1606,7 +3051,8 @@ var NgLocaleLocalization = (function (_super) {
      * @return {?}
      */
     function (value, locale) {
-        var /** @type {?} */ plural = this.deprecatedPluralFn ? this.deprecatedPluralFn(locale || this.locale, value) :
+        /** @type {?} */
+        var plural = this.deprecatedPluralFn ? this.deprecatedPluralFn(locale || this.locale, value) :
             getLocalePluralCase(locale || this.locale)(value);
         switch (plural) {
             case Plural.Zero:
@@ -1628,8 +3074,8 @@ var NgLocaleLocalization = (function (_super) {
     ];
     /** @nocollapse */
     NgLocaleLocalization.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [DEPRECATED_PLURAL_FN,] },] },
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] },
+        { type: undefined, decorators: [{ type: _angular_core.Optional }, { type: _angular_core.Inject, args: [DEPRECATED_PLURAL_FN,] }] }
     ]; };
     return NgLocaleLocalization;
 }(NgLocalization));
@@ -1647,13 +3093,20 @@ function getPluralCase(locale, nLike) {
     if (typeof nLike === 'string') {
         nLike = parseInt(/** @type {?} */ (nLike), 10);
     }
-    var /** @type {?} */ n = /** @type {?} */ (nLike);
-    var /** @type {?} */ nDecimal = n.toString().replace(/^[^.]*\.?/, '');
-    var /** @type {?} */ i = Math.floor(Math.abs(n));
-    var /** @type {?} */ v = nDecimal.length;
-    var /** @type {?} */ f = parseInt(nDecimal, 10);
-    var /** @type {?} */ t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
-    var /** @type {?} */ lang = locale.split('-')[0].toLowerCase();
+    /** @type {?} */
+    var n = /** @type {?} */ (nLike);
+    /** @type {?} */
+    var nDecimal = n.toString().replace(/^[^.]*\.?/, '');
+    /** @type {?} */
+    var i = Math.floor(Math.abs(n));
+    /** @type {?} */
+    var v = nDecimal.length;
+    /** @type {?} */
+    var f = parseInt(nDecimal, 10);
+    /** @type {?} */
+    var t = parseInt(n.toString().replace(/^[^.]*\.?|0+$/g, ''), 10) || 0;
+    /** @type {?} */
+    var lang = locale.split('-')[0].toLowerCase();
     switch (lang) {
         case 'af':
         case 'asa':
@@ -2012,7 +3465,14 @@ function getPluralCase(locale, nLike) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} cookieStr
@@ -2023,7 +3483,8 @@ function parseCookieValue(cookieStr, name) {
     name = encodeURIComponent(name);
     for (var _i = 0, _a = cookieStr.split(';'); _i < _a.length; _i++) {
         var cookie = _a[_i];
-        var /** @type {?} */ eqIndex = cookie.indexOf('=');
+        /** @type {?} */
+        var eqIndex = cookie.indexOf('=');
         var _b = eqIndex == -1 ? [cookie, ''] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)], cookieName = _b[0], cookieValue = _b[1];
         if (cookieName.trim() === name) {
             return decodeURIComponent(cookieValue);
@@ -2034,7 +3495,7 @@ function parseCookieValue(cookieStr, name) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -2046,9 +3507,7 @@ function parseCookieValue(cookieStr, name) {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Adds and removes CSS classes on an HTML element.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  *     <some-element [ngClass]="'first second'">...</some-element>
  *
@@ -2063,15 +3522,17 @@ function parseCookieValue(cookieStr, name) {
  *
  * \@description
  *
+ * Adds and removes CSS classes on an HTML element.
+ *
  * The CSS classes are updated as follows, depending on the type of the expression evaluation:
  * - `string` - the CSS classes listed in the string (space delimited) are added,
  * - `Array` - the CSS classes declared as Array elements are added,
  * - `Object` - keys are CSS classes that get added when the expression given in the value
  *              evaluates to a truthy value, otherwise they are removed.
  *
- * \@stable
+ *
  */
-var NgClass = (function () {
+var NgClass = /** @class */ (function () {
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
         this._iterableDiffers = _iterableDiffers;
         this._keyValueDiffers = _keyValueDiffers;
@@ -2081,28 +3542,29 @@ var NgClass = (function () {
     }
     Object.defineProperty(NgClass.prototype, "klass", {
         set: /**
-         * @param {?} v
+         * @param {?} value
          * @return {?}
          */
-        function (v) {
-            this._applyInitialClasses(true);
-            this._initialClasses = typeof v === 'string' ? v.split(/\s+/) : [];
-            this._applyInitialClasses(false);
-            this._applyClasses(this._rawClass, false);
+        function (value) {
+            this._removeClasses(this._initialClasses);
+            this._initialClasses = typeof value === 'string' ? value.split(/\s+/) : [];
+            this._applyClasses(this._initialClasses);
+            this._applyClasses(this._rawClass);
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgClass.prototype, "ngClass", {
         set: /**
-         * @param {?} v
+         * @param {?} value
          * @return {?}
          */
-        function (v) {
-            this._cleanupClasses(this._rawClass);
+        function (value) {
+            this._removeClasses(this._rawClass);
+            this._applyClasses(this._initialClasses);
             this._iterableDiffer = null;
             this._keyValueDiffer = null;
-            this._rawClass = typeof v === 'string' ? v.split(/\s+/) : v;
+            this._rawClass = typeof value === 'string' ? value.split(/\s+/) : value;
             if (this._rawClass) {
                 if (_angular_core.ɵisListLikeIterable(this._rawClass)) {
                     this._iterableDiffer = this._iterableDiffers.find(this._rawClass).create();
@@ -2123,29 +3585,19 @@ var NgClass = (function () {
      */
     function () {
         if (this._iterableDiffer) {
-            var /** @type {?} */ iterableChanges = this._iterableDiffer.diff(/** @type {?} */ (this._rawClass));
+            /** @type {?} */
+            var iterableChanges = this._iterableDiffer.diff(/** @type {?} */ (this._rawClass));
             if (iterableChanges) {
                 this._applyIterableChanges(iterableChanges);
             }
         }
         else if (this._keyValueDiffer) {
-            var /** @type {?} */ keyValueChanges = this._keyValueDiffer.diff(/** @type {?} */ (this._rawClass));
+            /** @type {?} */
+            var keyValueChanges = this._keyValueDiffer.diff(/** @type {?} */ (this._rawClass));
             if (keyValueChanges) {
                 this._applyKeyValueChanges(keyValueChanges);
             }
         }
-    };
-    /**
-     * @param {?} rawClassVal
-     * @return {?}
-     */
-    NgClass.prototype._cleanupClasses = /**
-     * @param {?} rawClassVal
-     * @return {?}
-     */
-    function (rawClassVal) {
-        this._applyClasses(rawClassVal, true);
-        this._applyInitialClasses(false);
     };
     /**
      * @param {?} changes
@@ -2186,38 +3638,56 @@ var NgClass = (function () {
         changes.forEachRemovedItem(function (record) { return _this._toggleClass(record.item, false); });
     };
     /**
-     * @param {?} isCleanup
-     * @return {?}
-     */
-    NgClass.prototype._applyInitialClasses = /**
-     * @param {?} isCleanup
-     * @return {?}
-     */
-    function (isCleanup) {
-        var _this = this;
-        this._initialClasses.forEach(function (klass) { return _this._toggleClass(klass, !isCleanup); });
-    };
-    /**
+     * Applies a collection of CSS classes to the DOM element.
+     *
+     * For argument of type Set and Array CSS class names contained in those collections are always
+     * added.
+     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+     * for truthy and removed for falsy).
      * @param {?} rawClassVal
-     * @param {?} isCleanup
      * @return {?}
      */
     NgClass.prototype._applyClasses = /**
+     * Applies a collection of CSS classes to the DOM element.
+     *
+     * For argument of type Set and Array CSS class names contained in those collections are always
+     * added.
+     * For argument of type Map CSS class name in the map's key is toggled based on the value (added
+     * for truthy and removed for falsy).
      * @param {?} rawClassVal
-     * @param {?} isCleanup
      * @return {?}
      */
-    function (rawClassVal, isCleanup) {
+    function (rawClassVal) {
         var _this = this;
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
-                (/** @type {?} */ (rawClassVal)).forEach(function (klass) { return _this._toggleClass(klass, !isCleanup); });
+                (/** @type {?} */ (rawClassVal)).forEach(function (klass) { return _this._toggleClass(klass, true); });
             }
             else {
-                Object.keys(rawClassVal).forEach(function (klass) {
-                    if (rawClassVal[klass] != null)
-                        _this._toggleClass(klass, !isCleanup);
-                });
+                Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, !!rawClassVal[klass]); });
+            }
+        }
+    };
+    /**
+     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+     * purposes.
+     * @param {?} rawClassVal
+     * @return {?}
+     */
+    NgClass.prototype._removeClasses = /**
+     * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
+     * purposes.
+     * @param {?} rawClassVal
+     * @return {?}
+     */
+    function (rawClassVal) {
+        var _this = this;
+        if (rawClassVal) {
+            if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
+                (/** @type {?} */ (rawClassVal)).forEach(function (klass) { return _this._toggleClass(klass, false); });
+            }
+            else {
+                Object.keys(rawClassVal).forEach(function (klass) { return _this._toggleClass(klass, false); });
             }
         }
     };
@@ -2250,21 +3720,21 @@ var NgClass = (function () {
     ];
     /** @nocollapse */
     NgClass.ctorParameters = function () { return [
-        { type: _angular_core.IterableDiffers, },
-        { type: _angular_core.KeyValueDiffers, },
-        { type: _angular_core.ElementRef, },
-        { type: _angular_core.Renderer2, },
+        { type: _angular_core.IterableDiffers },
+        { type: _angular_core.KeyValueDiffers },
+        { type: _angular_core.ElementRef },
+        { type: _angular_core.Renderer2 }
     ]; };
     NgClass.propDecorators = {
-        "klass": [{ type: _angular_core.Input, args: ['class',] },],
-        "ngClass": [{ type: _angular_core.Input },],
+        klass: [{ type: _angular_core.Input, args: ['class',] }],
+        ngClass: [{ type: _angular_core.Input }]
     };
     return NgClass;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -2279,6 +3749,8 @@ var NgClass = (function () {
  *
  * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
  * any existing component will get destroyed.
+ *
+ * \@usageNotes
  *
  * ### Fine tune control
  *
@@ -2314,7 +3786,8 @@ var NgClass = (function () {
  *                                   ngModuleFactory: moduleFactory;">
  * </ng-container>
  * ```
- * ## Example
+ *
+ * ### A simple example
  *
  * {\@example common/ngComponentOutlet/ts/module.ts region='SimpleExample'}
  *
@@ -2327,7 +3800,7 @@ var NgClass = (function () {
  *
  * \@experimental
  */
-var NgComponentOutlet = (function () {
+var NgComponentOutlet = /** @class */ (function () {
     function NgComponentOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
         this._componentRef = null;
@@ -2345,21 +3818,25 @@ var NgComponentOutlet = (function () {
         this._viewContainerRef.clear();
         this._componentRef = null;
         if (this.ngComponentOutlet) {
-            var /** @type {?} */ elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
+            /** @type {?} */
+            var elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
             if (changes['ngComponentOutletNgModuleFactory']) {
                 if (this._moduleRef)
                     this._moduleRef.destroy();
                 if (this.ngComponentOutletNgModuleFactory) {
-                    var /** @type {?} */ parentModule = elInjector.get(_angular_core.NgModuleRef);
+                    /** @type {?} */
+                    var parentModule = elInjector.get(_angular_core.NgModuleRef);
                     this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
                 }
                 else {
                     this._moduleRef = null;
                 }
             }
-            var /** @type {?} */ componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
+            /** @type {?} */
+            var componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
                 elInjector.get(_angular_core.ComponentFactoryResolver);
-            var /** @type {?} */ componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
+            /** @type {?} */
+            var componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
             this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
         }
     };
@@ -2378,20 +3855,20 @@ var NgComponentOutlet = (function () {
     ];
     /** @nocollapse */
     NgComponentOutlet.ctorParameters = function () { return [
-        { type: _angular_core.ViewContainerRef, },
+        { type: _angular_core.ViewContainerRef }
     ]; };
     NgComponentOutlet.propDecorators = {
-        "ngComponentOutlet": [{ type: _angular_core.Input },],
-        "ngComponentOutletInjector": [{ type: _angular_core.Input },],
-        "ngComponentOutletContent": [{ type: _angular_core.Input },],
-        "ngComponentOutletNgModuleFactory": [{ type: _angular_core.Input },],
+        ngComponentOutlet: [{ type: _angular_core.Input }],
+        ngComponentOutletInjector: [{ type: _angular_core.Input }],
+        ngComponentOutletContent: [{ type: _angular_core.Input }],
+        ngComponentOutletNgModuleFactory: [{ type: _angular_core.Input }]
     };
     return NgComponentOutlet;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -2401,9 +3878,9 @@ var NgComponentOutlet = (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@stable
+ * @template T
  */
-var NgForOfContext = (function () {
+var NgForOfContext = /** @class */ (function () {
     function NgForOfContext($implicit, ngForOf, index, count) {
         this.$implicit = $implicit;
         this.ngForOf = ngForOf;
@@ -2448,6 +3925,8 @@ var NgForOfContext = (function () {
  * The `NgForOf` directive instantiates a template once per item from an iterable. The context
  * for each instantiated template inherits from the outer context with the given loop variable
  * set to the current item from the iterable.
+ *
+ * \@usageNotes
  *
  * ### Local Variables
  *
@@ -2512,15 +3991,29 @@ var NgForOfContext = (function () {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- * \@stable
+ *
+ * @template T
  */
-var NgForOf = (function () {
+var NgForOf = /** @class */ (function () {
     function NgForOf(_viewContainer, _template, _differs) {
         this._viewContainer = _viewContainer;
         this._template = _template;
         this._differs = _differs;
+        this._ngForOfDirty = true;
         this._differ = null;
     }
+    Object.defineProperty(NgForOf.prototype, "ngForOf", {
+        set: /**
+         * @param {?} ngForOf
+         * @return {?}
+         */
+        function (ngForOf) {
+            this._ngForOf = ngForOf;
+            this._ngForOfDirty = true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(NgForOf.prototype, "ngForTrackBy", {
         get: /**
          * @return {?}
@@ -2560,36 +4053,28 @@ var NgForOf = (function () {
         configurable: true
     });
     /**
-     * @param {?} changes
-     * @return {?}
-     */
-    NgForOf.prototype.ngOnChanges = /**
-     * @param {?} changes
-     * @return {?}
-     */
-    function (changes) {
-        if ('ngForOf' in changes) {
-            // React on ngForOf changes only once all inputs have been initialized
-            var /** @type {?} */ value = changes['ngForOf'].currentValue;
-            if (!this._differ && value) {
-                try {
-                    this._differ = this._differs.find(value).create(this.ngForTrackBy);
-                }
-                catch (/** @type {?} */ e) {
-                    throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
-                }
-            }
-        }
-    };
-    /**
      * @return {?}
      */
     NgForOf.prototype.ngDoCheck = /**
      * @return {?}
      */
     function () {
+        if (this._ngForOfDirty) {
+            this._ngForOfDirty = false;
+            /** @type {?} */
+            var value = this._ngForOf;
+            if (!this._differ && value) {
+                try {
+                    this._differ = this._differs.find(value).create(this.ngForTrackBy);
+                }
+                catch (e) {
+                    throw new Error("Cannot find a differ supporting object '" + value + "' of type '" + getTypeNameForDebugging(value) + "'. NgFor only supports binding to Iterables such as Arrays.");
+                }
+            }
+        }
         if (this._differ) {
-            var /** @type {?} */ changes = this._differ.diff(this.ngForOf);
+            /** @type {?} */
+            var changes = this._differ.diff(this._ngForOf);
             if (changes)
                 this._applyChanges(changes);
         }
@@ -2604,33 +4089,41 @@ var NgForOf = (function () {
      */
     function (changes) {
         var _this = this;
-        var /** @type {?} */ insertTuples = [];
+        /** @type {?} */
+        var insertTuples = [];
         changes.forEachOperation(function (item, adjustedPreviousIndex, currentIndex) {
             if (item.previousIndex == null) {
-                var /** @type {?} */ view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(/** @type {?} */ ((null)), _this.ngForOf, -1, -1), currentIndex);
-                var /** @type {?} */ tuple = new RecordViewTuple(item, view);
+                /** @type {?} */
+                var view = _this._viewContainer.createEmbeddedView(_this._template, new NgForOfContext(/** @type {?} */ ((null)), _this._ngForOf, -1, -1), currentIndex);
+                /** @type {?} */
+                var tuple = new RecordViewTuple(item, view);
                 insertTuples.push(tuple);
             }
             else if (currentIndex == null) {
                 _this._viewContainer.remove(adjustedPreviousIndex);
             }
             else {
-                var /** @type {?} */ view = /** @type {?} */ ((_this._viewContainer.get(adjustedPreviousIndex)));
+                /** @type {?} */
+                var view = /** @type {?} */ ((_this._viewContainer.get(adjustedPreviousIndex)));
                 _this._viewContainer.move(view, currentIndex);
-                var /** @type {?} */ tuple = new RecordViewTuple(item, /** @type {?} */ (view));
+                /** @type {?} */
+                var tuple = new RecordViewTuple(item, /** @type {?} */ (view));
                 insertTuples.push(tuple);
             }
         });
-        for (var /** @type {?} */ i = 0; i < insertTuples.length; i++) {
+        for (var i = 0; i < insertTuples.length; i++) {
             this._perViewChange(insertTuples[i].view, insertTuples[i].record);
         }
-        for (var /** @type {?} */ i = 0, /** @type {?} */ ilen = this._viewContainer.length; i < ilen; i++) {
-            var /** @type {?} */ viewRef = /** @type {?} */ (this._viewContainer.get(i));
+        for (var i = 0, ilen = this._viewContainer.length; i < ilen; i++) {
+            /** @type {?} */
+            var viewRef = /** @type {?} */ (this._viewContainer.get(i));
             viewRef.context.index = i;
             viewRef.context.count = ilen;
+            viewRef.context.ngForOf = this._ngForOf;
         }
         changes.forEachIdentityChange(function (record) {
-            var /** @type {?} */ viewRef = /** @type {?} */ (_this._viewContainer.get(record.currentIndex));
+            /** @type {?} */
+            var viewRef = /** @type {?} */ (_this._viewContainer.get(record.currentIndex));
             viewRef.context.$implicit = record.item;
         });
     };
@@ -2652,18 +4145,21 @@ var NgForOf = (function () {
     ];
     /** @nocollapse */
     NgForOf.ctorParameters = function () { return [
-        { type: _angular_core.ViewContainerRef, },
-        { type: _angular_core.TemplateRef, },
-        { type: _angular_core.IterableDiffers, },
+        { type: _angular_core.ViewContainerRef },
+        { type: _angular_core.TemplateRef },
+        { type: _angular_core.IterableDiffers }
     ]; };
     NgForOf.propDecorators = {
-        "ngForOf": [{ type: _angular_core.Input },],
-        "ngForTrackBy": [{ type: _angular_core.Input },],
-        "ngForTemplate": [{ type: _angular_core.Input },],
+        ngForOf: [{ type: _angular_core.Input }],
+        ngForTrackBy: [{ type: _angular_core.Input }],
+        ngForTemplate: [{ type: _angular_core.Input }]
     };
     return NgForOf;
 }());
-var RecordViewTuple = (function () {
+/**
+ * @template T
+ */
+var RecordViewTuple = /** @class */ (function () {
     function RecordViewTuple(record, view) {
         this.record = record;
         this.view = view;
@@ -2680,7 +4176,7 @@ function getTypeNameForDebugging(type) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -2697,13 +4193,16 @@ function getTypeNameForDebugging(type) {
  *  - `then` template is the inline template of `ngIf` unless bound to a different value.
  *  - `else` template is blank unless it is bound.
  *
- * ## Most common usage
+ *
+ * \@usageNotes
+ *
+ * ### Most common usage
  *
  * The most common usage of the `ngIf` directive is to conditionally show the inline template as
  * seen in this example:
  * {\@example common/ngIf/ts/module.ts region='NgIfSimple'}
  *
- * ## Showing an alternative template using `else`
+ * ### Showing an alternative template using `else`
  *
  * If it is necessary to display a template when the `expression` is falsy use the `else` template
  * binding as shown. Note that the `else` binding points to a `<ng-template>` labeled `#elseBlock`.
@@ -2712,7 +4211,7 @@ function getTypeNameForDebugging(type) {
  *
  * {\@example common/ngIf/ts/module.ts region='NgIfElse'}
  *
- * ## Using non-inlined `then` template
+ * ### Using non-inlined `then` template
  *
  * Usually the `then` template is the inlined template of the `ngIf`, but it can be changed using
  * a binding (just like `else`). Because `then` and `else` are bindings, the template references can
@@ -2720,7 +4219,7 @@ function getTypeNameForDebugging(type) {
  *
  * {\@example common/ngIf/ts/module.ts region='NgIfThenElse'}
  *
- * ## Storing conditional result in a variable
+ * ### Storing conditional result in a variable
  *
  * A common pattern is that we need to show a set of properties from the same object. If the
  * object is undefined, then we have to use the safe-traversal-operator `?.` to guard against
@@ -2776,9 +4275,9 @@ function getTypeNameForDebugging(type) {
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- * \@stable
+ *
  */
-var NgIf = (function () {
+var NgIf = /** @class */ (function () {
     function NgIf(_viewContainer, templateRef) {
         this._viewContainer = _viewContainer;
         this._context = new NgIfContext();
@@ -2806,6 +4305,7 @@ var NgIf = (function () {
          * @return {?}
          */
         function (templateRef) {
+            assertTemplate('ngIfThen', templateRef);
             this._thenTemplateRef = templateRef;
             this._thenViewRef = null; // clear previous view if any.
             this._updateView();
@@ -2819,6 +4319,7 @@ var NgIf = (function () {
          * @return {?}
          */
         function (templateRef) {
+            assertTemplate('ngIfElse', templateRef);
             this._elseTemplateRef = templateRef;
             this._elseViewRef = null; // clear previous view if any.
             this._updateView();
@@ -2859,30 +4360,39 @@ var NgIf = (function () {
     ];
     /** @nocollapse */
     NgIf.ctorParameters = function () { return [
-        { type: _angular_core.ViewContainerRef, },
-        { type: _angular_core.TemplateRef, },
+        { type: _angular_core.ViewContainerRef },
+        { type: _angular_core.TemplateRef }
     ]; };
     NgIf.propDecorators = {
-        "ngIf": [{ type: _angular_core.Input },],
-        "ngIfThen": [{ type: _angular_core.Input },],
-        "ngIfElse": [{ type: _angular_core.Input },],
+        ngIf: [{ type: _angular_core.Input }],
+        ngIfThen: [{ type: _angular_core.Input }],
+        ngIfElse: [{ type: _angular_core.Input }]
     };
     return NgIf;
 }());
-/**
- * \@stable
- */
-var NgIfContext = (function () {
+var NgIfContext = /** @class */ (function () {
     function NgIfContext() {
         this.$implicit = null;
         this.ngIf = null;
     }
     return NgIfContext;
 }());
+/**
+ * @param {?} property
+ * @param {?} templateRef
+ * @return {?}
+ */
+function assertTemplate(property, templateRef) {
+    /** @type {?} */
+    var isTemplateRefOrNull = !!(!templateRef || templateRef.createEmbeddedView);
+    if (!isTemplateRefOrNull) {
+        throw new Error(property + " must be a TemplateRef, but received '" + _angular_core.ɵstringify(templateRef) + "'.");
+    }
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -2891,7 +4401,7 @@ var NgIfContext = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var SwitchView = (function () {
+var SwitchView = /** @class */ (function () {
     function SwitchView(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
         this._templateRef = _templateRef;
@@ -2938,10 +4448,7 @@ var SwitchView = (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Adds / removes DOM sub-trees when the nest match expressions matches the switch
- *             expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  *     <container-element [ngSwitch]="switch_expression">
  *       <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -2956,6 +4463,8 @@ var SwitchView = (function () {
  *     </container-element>
  * ```
  * \@description
+ *
+ * Adds / removes DOM sub-trees when the nest match expressions matches the switch expression.
  *
  * `NgSwitch` stamps out nested views when their match expression value matches the value of the
  * switch expression.
@@ -2974,9 +4483,9 @@ var SwitchView = (function () {
  * When no matching expression is found on a `ngSwitchCase` view, the `ngSwitchDefault` view is
  * stamped out.
  *
- * \@stable
+ *
  */
-var NgSwitch = (function () {
+var NgSwitch = /** @class */ (function () {
     function NgSwitch() {
         this._defaultUsed = false;
         this._caseCount = 0;
@@ -3036,7 +4545,8 @@ var NgSwitch = (function () {
      * @return {?}
      */
     function (value) {
-        var /** @type {?} */ matched = value == this._ngSwitch;
+        /** @type {?} */
+        var matched = value == this._ngSwitch;
         this._lastCasesMatched = this._lastCasesMatched || matched;
         this._lastCaseCheckIndex++;
         if (this._lastCaseCheckIndex === this._caseCount) {
@@ -3057,8 +4567,9 @@ var NgSwitch = (function () {
     function (useDefault) {
         if (this._defaultViews && useDefault !== this._defaultUsed) {
             this._defaultUsed = useDefault;
-            for (var /** @type {?} */ i = 0; i < this._defaultViews.length; i++) {
-                var /** @type {?} */ defaultView = this._defaultViews[i];
+            for (var i = 0; i < this._defaultViews.length; i++) {
+                /** @type {?} */
+                var defaultView = this._defaultViews[i];
                 defaultView.enforceState(useDefault);
             }
         }
@@ -3066,27 +4577,25 @@ var NgSwitch = (function () {
     NgSwitch.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngSwitch]' },] },
     ];
-    /** @nocollapse */
-    NgSwitch.ctorParameters = function () { return []; };
     NgSwitch.propDecorators = {
-        "ngSwitch": [{ type: _angular_core.Input },],
+        ngSwitch: [{ type: _angular_core.Input }]
     };
     return NgSwitch;
 }());
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Creates a view that will be added/removed from the parent {\@link NgSwitch} when the
- *             given expression evaluate to respectively the same/different value as the switch
- *             expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
  * </container-element>
  * ```
  * \@description
+ *
+ * Creates a view that will be added/removed from the parent {\@link NgSwitch} when the
+ * given expression evaluate to respectively the same/different value as the switch
+ * expression.
  *
  * Insert the sub-tree when the expression evaluates to the same value as the enclosing switch
  * expression.
@@ -3095,9 +4604,9 @@ var NgSwitch = (function () {
  *
  * See {\@link NgSwitch} for more details and example.
  *
- * \@stable
+ *
  */
-var NgSwitchCase = (function () {
+var NgSwitchCase = /** @class */ (function () {
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
         ngSwitch._addCase();
@@ -3115,22 +4624,18 @@ var NgSwitchCase = (function () {
     ];
     /** @nocollapse */
     NgSwitchCase.ctorParameters = function () { return [
-        { type: _angular_core.ViewContainerRef, },
-        { type: _angular_core.TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
+        { type: _angular_core.ViewContainerRef },
+        { type: _angular_core.TemplateRef },
+        { type: NgSwitch, decorators: [{ type: _angular_core.Host }] }
     ]; };
     NgSwitchCase.propDecorators = {
-        "ngSwitchCase": [{ type: _angular_core.Input },],
+        ngSwitchCase: [{ type: _angular_core.Input }]
     };
     return NgSwitchCase;
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
- * match the
- *             switch expression.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <container-element [ngSwitch]="switch_expression">
  *   <some-element *ngSwitchCase="match_expression_1">...</some-element>
@@ -3140,14 +4645,17 @@ var NgSwitchCase = (function () {
  *
  * \@description
  *
+ * Creates a view that is added to the parent {\@link NgSwitch} when no case expressions
+ * match the switch expression.
+ *
  * Insert the sub-tree when no case expressions evaluate to the same value as the enclosing switch
  * expression.
  *
  * See {\@link NgSwitch} for more details and example.
  *
- * \@stable
+ *
  */
-var NgSwitchDefault = (function () {
+var NgSwitchDefault = /** @class */ (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
@@ -3156,16 +4664,16 @@ var NgSwitchDefault = (function () {
     ];
     /** @nocollapse */
     NgSwitchDefault.ctorParameters = function () { return [
-        { type: _angular_core.ViewContainerRef, },
-        { type: _angular_core.TemplateRef, },
-        { type: NgSwitch, decorators: [{ type: _angular_core.Host },] },
+        { type: _angular_core.ViewContainerRef },
+        { type: _angular_core.TemplateRef },
+        { type: NgSwitch, decorators: [{ type: _angular_core.Host }] }
     ]; };
     return NgSwitchDefault;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -3177,9 +4685,7 @@ var NgSwitchDefault = (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <some-element [ngPlural]="value">
  *   <ng-template ngPluralCase="=0">there is nothing</ng-template>
@@ -3189,6 +4695,8 @@ var NgSwitchDefault = (function () {
  * ```
  *
  * \@description
+ *
+ * Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.
  *
  * Displays DOM sub-trees that match the switch expression value, or failing that, DOM sub-trees
  * that match the switch expression's pluralization category.
@@ -3205,7 +4713,7 @@ var NgSwitchDefault = (function () {
  *
  * \@experimental
  */
-var NgPlural = (function () {
+var NgPlural = /** @class */ (function () {
     function NgPlural(_localization) {
         this._localization = _localization;
         this._caseViews = {};
@@ -3241,8 +4749,10 @@ var NgPlural = (function () {
      */
     function () {
         this._clearViews();
-        var /** @type {?} */ cases = Object.keys(this._caseViews);
-        var /** @type {?} */ key = getPluralCategory(this._switchValue, cases, this._localization);
+        /** @type {?} */
+        var cases = Object.keys(this._caseViews);
+        /** @type {?} */
+        var key = getPluralCategory(this._switchValue, cases, this._localization);
         this._activateView(this._caseViews[key]);
     };
     /**
@@ -3274,20 +4784,22 @@ var NgPlural = (function () {
     ];
     /** @nocollapse */
     NgPlural.ctorParameters = function () { return [
-        { type: NgLocalization, },
+        { type: NgLocalization }
     ]; };
     NgPlural.propDecorators = {
-        "ngPlural": [{ type: _angular_core.Input },],
+        ngPlural: [{ type: _angular_core.Input }]
     };
     return NgPlural;
 }());
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Creates a view that will be added/removed from the parent {\@link NgPlural} when the
- *             given expression matches the plural expression according to CLDR rules.
+ * \@description
  *
- * \@howToUse
+ * Creates a view that will be added/removed from the parent {\@link NgPlural} when the
+ * given expression matches the plural expression according to CLDR rules.
+ *
+ * \@usageNotes
  * ```
  * <some-element [ngPlural]="value">
  *   <ng-template ngPluralCase="=0">...</ng-template>
@@ -3299,10 +4811,11 @@ var NgPlural = (function () {
  *
  * \@experimental
  */
-var NgPluralCase = (function () {
+var NgPluralCase = /** @class */ (function () {
     function NgPluralCase(value, template, viewContainer, ngPlural) {
         this.value = value;
-        var /** @type {?} */ isANumber = !isNaN(Number(value));
+        /** @type {?} */
+        var isANumber = !isNaN(Number(value));
         ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
     }
     NgPluralCase.decorators = [
@@ -3310,17 +4823,17 @@ var NgPluralCase = (function () {
     ];
     /** @nocollapse */
     NgPluralCase.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] },] },
-        { type: _angular_core.TemplateRef, },
-        { type: _angular_core.ViewContainerRef, },
-        { type: NgPlural, decorators: [{ type: _angular_core.Host },] },
+        { type: String, decorators: [{ type: _angular_core.Attribute, args: ['ngPluralCase',] }] },
+        { type: _angular_core.TemplateRef },
+        { type: _angular_core.ViewContainerRef },
+        { type: NgPlural, decorators: [{ type: _angular_core.Host }] }
     ]; };
     return NgPluralCase;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -3332,9 +4845,7 @@ var NgPluralCase = (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Update an HTML element styles.
- *
- * \@howToUse
+ * \@usageNotes
  * ```
  * <some-element [ngStyle]="{'font-style': styleExp}">...</some-element>
  *
@@ -3345,13 +4856,15 @@ var NgPluralCase = (function () {
  *
  * \@description
  *
+ * Update an HTML element styles.
+ *
  * The styles are updated according to the value of the expression evaluation:
  * - keys are style names with an optional `.<unit>` suffix (ie 'top.px', 'font-style.em'),
  * - values are the values assigned to those properties (expressed in the given unit).
  *
- * \@stable
+ *
  */
-var NgStyle = (function () {
+var NgStyle = /** @class */ (function () {
     function NgStyle(_differs, _ngEl, _renderer) {
         this._differs = _differs;
         this._ngEl = _ngEl;
@@ -3359,13 +4872,13 @@ var NgStyle = (function () {
     }
     Object.defineProperty(NgStyle.prototype, "ngStyle", {
         set: /**
-         * @param {?} v
+         * @param {?} values
          * @return {?}
          */
-        function (v) {
-            this._ngStyle = v;
-            if (!this._differ && v) {
-                this._differ = this._differs.find(v).create();
+        function (values) {
+            this._ngStyle = values;
+            if (!this._differ && values) {
+                this._differ = this._differs.find(values).create();
             }
         },
         enumerable: true,
@@ -3379,7 +4892,8 @@ var NgStyle = (function () {
      */
     function () {
         if (this._differ) {
-            var /** @type {?} */ changes = this._differ.diff(this._ngStyle);
+            /** @type {?} */
+            var changes = this._differ.diff(this._ngStyle);
             if (changes) {
                 this._applyChanges(changes);
             }
@@ -3412,26 +4926,31 @@ var NgStyle = (function () {
     function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
         value = value != null && unit ? "" + value + unit : value;
-        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        if (value != null) {
+            this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
+        }
+        else {
+            this._renderer.removeStyle(this._ngEl.nativeElement, name);
+        }
     };
     NgStyle.decorators = [
         { type: _angular_core.Directive, args: [{ selector: '[ngStyle]' },] },
     ];
     /** @nocollapse */
     NgStyle.ctorParameters = function () { return [
-        { type: _angular_core.KeyValueDiffers, },
-        { type: _angular_core.ElementRef, },
-        { type: _angular_core.Renderer2, },
+        { type: _angular_core.KeyValueDiffers },
+        { type: _angular_core.ElementRef },
+        { type: _angular_core.Renderer2 }
     ]; };
     NgStyle.propDecorators = {
-        "ngStyle": [{ type: _angular_core.Input },],
+        ngStyle: [{ type: _angular_core.Input }]
     };
     return NgStyle;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -3443,28 +4962,27 @@ var NgStyle = (function () {
 /**
  * \@ngModule CommonModule
  *
- * \@whatItDoes Inserts an embedded view from a prepared `TemplateRef`
- *
- * \@howToUse
- * ```
- * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
- * ```
- *
  * \@description
+ *
+ * Inserts an embedded view from a prepared `TemplateRef`.
  *
  * You can attach a context object to the `EmbeddedViewRef` by setting `[ngTemplateOutletContext]`.
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * Note: using the key `$implicit` in the context object will set it's value as default.
+ * \@usageNotes
+ * ```
+ * <ng-container *ngTemplateOutlet="templateRefExp; context: contextExp"></ng-container>
+ * ```
  *
- * ## Example
+ * Using the key `$implicit` in the context object will set its value as default.
+ *
+ * ### Example
  *
  * {\@example common/ngTemplateOutlet/ts/module.ts region='NgTemplateOutlet'}
  *
- * \@stable
  */
-var NgTemplateOutlet = (function () {
+var NgTemplateOutlet = /** @class */ (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
@@ -3477,7 +4995,8 @@ var NgTemplateOutlet = (function () {
      * @return {?}
      */
     function (changes) {
-        var /** @type {?} */ recreateView = this._shouldRecreateView(changes);
+        /** @type {?} */
+        var recreateView = this._shouldRecreateView(changes);
         if (recreateView) {
             if (this._viewRef) {
                 this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._viewRef));
@@ -3517,7 +5036,8 @@ var NgTemplateOutlet = (function () {
      * @return {?}
      */
     function (changes) {
-        var /** @type {?} */ ctxChange = changes['ngTemplateOutletContext'];
+        /** @type {?} */
+        var ctxChange = changes['ngTemplateOutletContext'];
         return !!changes['ngTemplateOutlet'] || (ctxChange && this._hasContextShapeChanged(ctxChange));
     };
     /**
@@ -3529,8 +5049,10 @@ var NgTemplateOutlet = (function () {
      * @return {?}
      */
     function (ctxChange) {
-        var /** @type {?} */ prevCtxKeys = Object.keys(ctxChange.previousValue || {});
-        var /** @type {?} */ currCtxKeys = Object.keys(ctxChange.currentValue || {});
+        /** @type {?} */
+        var prevCtxKeys = Object.keys(ctxChange.previousValue || {});
+        /** @type {?} */
+        var currCtxKeys = Object.keys(ctxChange.currentValue || {});
         if (prevCtxKeys.length === currCtxKeys.length) {
             for (var _i = 0, currCtxKeys_1 = currCtxKeys; _i < currCtxKeys_1.length; _i++) {
                 var propName = currCtxKeys_1[_i];
@@ -3563,23 +5085,30 @@ var NgTemplateOutlet = (function () {
     ];
     /** @nocollapse */
     NgTemplateOutlet.ctorParameters = function () { return [
-        { type: _angular_core.ViewContainerRef, },
+        { type: _angular_core.ViewContainerRef }
     ]; };
     NgTemplateOutlet.propDecorators = {
-        "ngTemplateOutletContext": [{ type: _angular_core.Input },],
-        "ngTemplateOutlet": [{ type: _angular_core.Input },],
+        ngTemplateOutletContext: [{ type: _angular_core.Input }],
+        ngTemplateOutlet: [{ type: _angular_core.Input }]
     };
     return NgTemplateOutlet;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/** *
  * A collection of Angular directives that are likely to be used in each and every Angular
  * application.
- */
+  @type {?} */
 var COMMON_DIRECTIVES = [
     NgClass,
     NgComponentOutlet,
@@ -3596,654 +5125,7 @@ var COMMON_DIRECTIVES = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var NAMED_FORMATS = {};
-var DATE_FORMATS_SPLIT = /((?:[^GyMLwWdEabBhHmsSzZO']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;
-/** @enum {number} */
-var ZoneWidth = {
-    Short: 0,
-    ShortGMT: 1,
-    Long: 2,
-    Extended: 3,
-};
-ZoneWidth[ZoneWidth.Short] = "Short";
-ZoneWidth[ZoneWidth.ShortGMT] = "ShortGMT";
-ZoneWidth[ZoneWidth.Long] = "Long";
-ZoneWidth[ZoneWidth.Extended] = "Extended";
-/** @enum {number} */
-var DateType = {
-    FullYear: 0,
-    Month: 1,
-    Date: 2,
-    Hours: 3,
-    Minutes: 4,
-    Seconds: 5,
-    Milliseconds: 6,
-    Day: 7,
-};
-DateType[DateType.FullYear] = "FullYear";
-DateType[DateType.Month] = "Month";
-DateType[DateType.Date] = "Date";
-DateType[DateType.Hours] = "Hours";
-DateType[DateType.Minutes] = "Minutes";
-DateType[DateType.Seconds] = "Seconds";
-DateType[DateType.Milliseconds] = "Milliseconds";
-DateType[DateType.Day] = "Day";
-/** @enum {number} */
-var TranslationType = {
-    DayPeriods: 0,
-    Days: 1,
-    Months: 2,
-    Eras: 3,
-};
-TranslationType[TranslationType.DayPeriods] = "DayPeriods";
-TranslationType[TranslationType.Days] = "Days";
-TranslationType[TranslationType.Months] = "Months";
-TranslationType[TranslationType.Eras] = "Eras";
-/**
- * Transforms a date to a locale string based on a pattern and a timezone
- *
- * \@internal
- * @param {?} date
- * @param {?} format
- * @param {?} locale
- * @param {?=} timezone
- * @return {?}
- */
-function formatDate(date, format, locale, timezone) {
-    var /** @type {?} */ namedFormat = getNamedFormat(locale, format);
-    format = namedFormat || format;
-    var /** @type {?} */ parts = [];
-    var /** @type {?} */ match;
-    while (format) {
-        match = DATE_FORMATS_SPLIT.exec(format);
-        if (match) {
-            parts = parts.concat(match.slice(1));
-            var /** @type {?} */ part = parts.pop();
-            if (!part) {
-                break;
-            }
-            format = part;
-        }
-        else {
-            parts.push(format);
-            break;
-        }
-    }
-    var /** @type {?} */ dateTimezoneOffset = date.getTimezoneOffset();
-    if (timezone) {
-        dateTimezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
-        date = convertTimezoneToLocal(date, timezone, true);
-    }
-    var /** @type {?} */ text = '';
-    parts.forEach(function (value) {
-        var /** @type {?} */ dateFormatter = getDateFormatter(value);
-        text += dateFormatter ?
-            dateFormatter(date, locale, dateTimezoneOffset) :
-            value === '\'\'' ? '\'' : value.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
-    });
-    return text;
-}
-/**
- * @param {?} locale
- * @param {?} format
- * @return {?}
- */
-function getNamedFormat(locale, format) {
-    var /** @type {?} */ localeId = getLocaleId(locale);
-    NAMED_FORMATS[localeId] = NAMED_FORMATS[localeId] || {};
-    if (NAMED_FORMATS[localeId][format]) {
-        return NAMED_FORMATS[localeId][format];
-    }
-    var /** @type {?} */ formatValue = '';
-    switch (format) {
-        case 'shortDate':
-            formatValue = getLocaleDateFormat(locale, FormatWidth.Short);
-            break;
-        case 'mediumDate':
-            formatValue = getLocaleDateFormat(locale, FormatWidth.Medium);
-            break;
-        case 'longDate':
-            formatValue = getLocaleDateFormat(locale, FormatWidth.Long);
-            break;
-        case 'fullDate':
-            formatValue = getLocaleDateFormat(locale, FormatWidth.Full);
-            break;
-        case 'shortTime':
-            formatValue = getLocaleTimeFormat(locale, FormatWidth.Short);
-            break;
-        case 'mediumTime':
-            formatValue = getLocaleTimeFormat(locale, FormatWidth.Medium);
-            break;
-        case 'longTime':
-            formatValue = getLocaleTimeFormat(locale, FormatWidth.Long);
-            break;
-        case 'fullTime':
-            formatValue = getLocaleTimeFormat(locale, FormatWidth.Full);
-            break;
-        case 'short':
-            var /** @type {?} */ shortTime = getNamedFormat(locale, 'shortTime');
-            var /** @type {?} */ shortDate = getNamedFormat(locale, 'shortDate');
-            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Short), [shortTime, shortDate]);
-            break;
-        case 'medium':
-            var /** @type {?} */ mediumTime = getNamedFormat(locale, 'mediumTime');
-            var /** @type {?} */ mediumDate = getNamedFormat(locale, 'mediumDate');
-            formatValue = formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Medium), [mediumTime, mediumDate]);
-            break;
-        case 'long':
-            var /** @type {?} */ longTime = getNamedFormat(locale, 'longTime');
-            var /** @type {?} */ longDate = getNamedFormat(locale, 'longDate');
-            formatValue =
-                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Long), [longTime, longDate]);
-            break;
-        case 'full':
-            var /** @type {?} */ fullTime = getNamedFormat(locale, 'fullTime');
-            var /** @type {?} */ fullDate = getNamedFormat(locale, 'fullDate');
-            formatValue =
-                formatDateTime(getLocaleDateTimeFormat(locale, FormatWidth.Full), [fullTime, fullDate]);
-            break;
-    }
-    if (formatValue) {
-        NAMED_FORMATS[localeId][format] = formatValue;
-    }
-    return formatValue;
-}
-/**
- * @param {?} str
- * @param {?} opt_values
- * @return {?}
- */
-function formatDateTime(str, opt_values) {
-    if (opt_values) {
-        str = str.replace(/\{([^}]+)}/g, function (match, key) {
-            return (opt_values != null && key in opt_values) ? opt_values[key] : match;
-        });
-    }
-    return str;
-}
-/**
- * @param {?} num
- * @param {?} digits
- * @param {?=} minusSign
- * @param {?=} trim
- * @param {?=} negWrap
- * @return {?}
- */
-function padNumber(num, digits, minusSign, trim, negWrap) {
-    if (minusSign === void 0) { minusSign = '-'; }
-    var /** @type {?} */ neg = '';
-    if (num < 0 || (negWrap && num <= 0)) {
-        if (negWrap) {
-            num = -num + 1;
-        }
-        else {
-            num = -num;
-            neg = minusSign;
-        }
-    }
-    var /** @type {?} */ strNum = '' + num;
-    while (strNum.length < digits)
-        strNum = '0' + strNum;
-    if (trim) {
-        strNum = strNum.substr(strNum.length - digits);
-    }
-    return neg + strNum;
-}
-/**
- * Returns a date formatter that transforms a date into its locale digit representation
- * @param {?} name
- * @param {?} size
- * @param {?=} offset
- * @param {?=} trim
- * @param {?=} negWrap
- * @return {?}
- */
-function dateGetter(name, size, offset, trim, negWrap) {
-    if (offset === void 0) { offset = 0; }
-    if (trim === void 0) { trim = false; }
-    if (negWrap === void 0) { negWrap = false; }
-    return function (date, locale) {
-        var /** @type {?} */ part = getDatePart(name, date, size);
-        if (offset > 0 || part > -offset) {
-            part += offset;
-        }
-        if (name === DateType.Hours && part === 0 && offset === -12) {
-            part = 12;
-        }
-        return padNumber(part, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign), trim, negWrap);
-    };
-}
-/**
- * @param {?} name
- * @param {?} date
- * @param {?} size
- * @return {?}
- */
-function getDatePart(name, date, size) {
-    switch (name) {
-        case DateType.FullYear:
-            return date.getFullYear();
-        case DateType.Month:
-            return date.getMonth();
-        case DateType.Date:
-            return date.getDate();
-        case DateType.Hours:
-            return date.getHours();
-        case DateType.Minutes:
-            return date.getMinutes();
-        case DateType.Seconds:
-            return date.getSeconds();
-        case DateType.Milliseconds:
-            var /** @type {?} */ div = size === 1 ? 100 : (size === 2 ? 10 : 1);
-            return Math.round(date.getMilliseconds() / div);
-        case DateType.Day:
-            return date.getDay();
-        default:
-            throw new Error("Unknown DateType value \"" + name + "\".");
-    }
-}
-/**
- * Returns a date formatter that transforms a date into its locale string representation
- * @param {?} name
- * @param {?} width
- * @param {?=} form
- * @param {?=} extended
- * @return {?}
- */
-function dateStrGetter(name, width, form, extended) {
-    if (form === void 0) { form = FormStyle.Format; }
-    if (extended === void 0) { extended = false; }
-    return function (date, locale) {
-        return getDateTranslation(date, locale, name, width, form, extended);
-    };
-}
-/**
- * Returns the locale translation of a date for a given form, type and width
- * @param {?} date
- * @param {?} locale
- * @param {?} name
- * @param {?} width
- * @param {?} form
- * @param {?} extended
- * @return {?}
- */
-function getDateTranslation(date, locale, name, width, form, extended) {
-    switch (name) {
-        case TranslationType.Months:
-            return getLocaleMonthNames(locale, form, width)[date.getMonth()];
-        case TranslationType.Days:
-            return getLocaleDayNames(locale, form, width)[date.getDay()];
-        case TranslationType.DayPeriods:
-            var /** @type {?} */ currentHours_1 = date.getHours();
-            var /** @type {?} */ currentMinutes_1 = date.getMinutes();
-            if (extended) {
-                var /** @type {?} */ rules = getLocaleExtraDayPeriodRules(locale);
-                var /** @type {?} */ dayPeriods_1 = getLocaleExtraDayPeriods(locale, form, width);
-                var /** @type {?} */ result_1;
-                rules.forEach(function (rule, index) {
-                    if (Array.isArray(rule)) {
-                        // morning, afternoon, evening, night
-                        var _a = rule[0], hoursFrom = _a.hours, minutesFrom = _a.minutes;
-                        var _b = rule[1], hoursTo = _b.hours, minutesTo = _b.minutes;
-                        if (currentHours_1 >= hoursFrom && currentMinutes_1 >= minutesFrom &&
-                            (currentHours_1 < hoursTo ||
-                                (currentHours_1 === hoursTo && currentMinutes_1 < minutesTo))) {
-                            result_1 = dayPeriods_1[index];
-                        }
-                    }
-                    else {
-                        // noon or midnight
-                        var hours = rule.hours, minutes = rule.minutes;
-                        if (hours === currentHours_1 && minutes === currentMinutes_1) {
-                            result_1 = dayPeriods_1[index];
-                        }
-                    }
-                });
-                if (result_1) {
-                    return result_1;
-                }
-            }
-            // if no rules for the day periods, we use am/pm by default
-            return getLocaleDayPeriods(locale, form, /** @type {?} */ (width))[currentHours_1 < 12 ? 0 : 1];
-        case TranslationType.Eras:
-            return getLocaleEraNames(locale, /** @type {?} */ (width))[date.getFullYear() <= 0 ? 0 : 1];
-    }
-}
-/**
- * Returns a date formatter that transforms a date and an offset into a timezone with ISO8601 or
- * GMT format depending on the width (eg: short = +0430, short:GMT = GMT+4, long = GMT+04:30,
- * extended = +04:30)
- * @param {?} width
- * @return {?}
- */
-function timeZoneGetter(width) {
-    return function (date, locale, offset) {
-        var /** @type {?} */ zone = -1 * offset;
-        var /** @type {?} */ minusSign = getLocaleNumberSymbol(locale, NumberSymbol.MinusSign);
-        var /** @type {?} */ hours = zone > 0 ? Math.floor(zone / 60) : Math.ceil(zone / 60);
-        switch (width) {
-            case ZoneWidth.Short:
-                return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) +
-                    padNumber(Math.abs(zone % 60), 2, minusSign);
-            case ZoneWidth.ShortGMT:
-                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 1, minusSign);
-            case ZoneWidth.Long:
-                return 'GMT' + ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
-                    padNumber(Math.abs(zone % 60), 2, minusSign);
-            case ZoneWidth.Extended:
-                if (offset === 0) {
-                    return 'Z';
-                }
-                else {
-                    return ((zone >= 0) ? '+' : '') + padNumber(hours, 2, minusSign) + ':' +
-                        padNumber(Math.abs(zone % 60), 2, minusSign);
-                }
-            default:
-                throw new Error("Unknown zone width \"" + width + "\"");
-        }
-    };
-}
-var JANUARY = 0;
-var THURSDAY = 4;
-/**
- * @param {?} year
- * @return {?}
- */
-function getFirstThursdayOfYear(year) {
-    var /** @type {?} */ firstDayOfYear = (new Date(year, JANUARY, 1)).getDay();
-    return new Date(year, 0, 1 + ((firstDayOfYear <= THURSDAY) ? THURSDAY : THURSDAY + 7) - firstDayOfYear);
-}
-/**
- * @param {?} datetime
- * @return {?}
- */
-function getThursdayThisWeek(datetime) {
-    return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (THURSDAY - datetime.getDay()));
-}
-/**
- * @param {?} size
- * @param {?=} monthBased
- * @return {?}
- */
-function weekGetter(size, monthBased) {
-    if (monthBased === void 0) { monthBased = false; }
-    return function (date, locale) {
-        var /** @type {?} */ result;
-        if (monthBased) {
-            var /** @type {?} */ nbDaysBefore1stDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay() - 1;
-            var /** @type {?} */ today = date.getDate();
-            result = 1 + Math.floor((today + nbDaysBefore1stDayOfMonth) / 7);
-        }
-        else {
-            var /** @type {?} */ firstThurs = getFirstThursdayOfYear(date.getFullYear());
-            var /** @type {?} */ thisThurs = getThursdayThisWeek(date);
-            var /** @type {?} */ diff = thisThurs.getTime() - firstThurs.getTime();
-            result = 1 + Math.round(diff / 6.048e8); // 6.048e8 ms per week
-        }
-        return padNumber(result, size, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    };
-}
-var DATE_FORMATS = {};
-/**
- * @param {?} format
- * @return {?}
- */
-function getDateFormatter(format) {
-    if (DATE_FORMATS[format]) {
-        return DATE_FORMATS[format];
-    }
-    var /** @type {?} */ formatter;
-    switch (format) {
-        // Era name (AD/BC)
-        case 'G':
-        case 'GG':
-        case 'GGG':
-            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Abbreviated);
-            break;
-        case 'GGGG':
-            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Wide);
-            break;
-        case 'GGGGG':
-            formatter = dateStrGetter(TranslationType.Eras, TranslationWidth.Narrow);
-            break;
-        // 1 digit representation of the year, e.g. (AD 1 => 1, AD 199 => 199)
-        case 'y':
-            formatter = dateGetter(DateType.FullYear, 1, 0, false, true);
-            break;
-        // 2 digit representation of the year, padded (00-99). (e.g. AD 2001 => 01, AD 2010 => 10)
-        case 'yy':
-            formatter = dateGetter(DateType.FullYear, 2, 0, true, true);
-            break;
-        // 3 digit representation of the year, padded (000-999). (e.g. AD 2001 => 01, AD 2010 => 10)
-        case 'yyy':
-            formatter = dateGetter(DateType.FullYear, 3, 0, false, true);
-            break;
-        // 4 digit representation of the year (e.g. AD 1 => 0001, AD 2010 => 2010)
-        case 'yyyy':
-            formatter = dateGetter(DateType.FullYear, 4, 0, false, true);
-            break;
-        // Month of the year (1-12), numeric
-        case 'M':
-        case 'L':
-            formatter = dateGetter(DateType.Month, 1, 1);
-            break;
-        case 'MM':
-        case 'LL':
-            formatter = dateGetter(DateType.Month, 2, 1);
-            break;
-        // Month of the year (January, ...), string, format
-        case 'MMM':
-            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated);
-            break;
-        case 'MMMM':
-            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Wide);
-            break;
-        case 'MMMMM':
-            formatter = dateStrGetter(TranslationType.Months, TranslationWidth.Narrow);
-            break;
-        // Month of the year (January, ...), string, standalone
-        case 'LLL':
-            formatter =
-                dateStrGetter(TranslationType.Months, TranslationWidth.Abbreviated, FormStyle.Standalone);
-            break;
-        case 'LLLL':
-            formatter =
-                dateStrGetter(TranslationType.Months, TranslationWidth.Wide, FormStyle.Standalone);
-            break;
-        case 'LLLLL':
-            formatter =
-                dateStrGetter(TranslationType.Months, TranslationWidth.Narrow, FormStyle.Standalone);
-            break;
-        // Week of the year (1, ... 52)
-        case 'w':
-            formatter = weekGetter(1);
-            break;
-        case 'ww':
-            formatter = weekGetter(2);
-            break;
-        // Week of the month (1, ...)
-        case 'W':
-            formatter = weekGetter(1, true);
-            break;
-        // Day of the month (1-31)
-        case 'd':
-            formatter = dateGetter(DateType.Date, 1);
-            break;
-        case 'dd':
-            formatter = dateGetter(DateType.Date, 2);
-            break;
-        // Day of the Week
-        case 'E':
-        case 'EE':
-        case 'EEE':
-            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Abbreviated);
-            break;
-        case 'EEEE':
-            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Wide);
-            break;
-        case 'EEEEE':
-            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Narrow);
-            break;
-        case 'EEEEEE':
-            formatter = dateStrGetter(TranslationType.Days, TranslationWidth.Short);
-            break;
-        // Generic period of the day (am-pm)
-        case 'a':
-        case 'aa':
-        case 'aaa':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated);
-            break;
-        case 'aaaa':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide);
-            break;
-        case 'aaaaa':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow);
-            break;
-        // Extended period of the day (midnight, at night, ...), standalone
-        case 'b':
-        case 'bb':
-        case 'bbb':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Standalone, true);
-            break;
-        case 'bbbb':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Standalone, true);
-            break;
-        case 'bbbbb':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Standalone, true);
-            break;
-        // Extended period of the day (midnight, night, ...), standalone
-        case 'B':
-        case 'BB':
-        case 'BBB':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Abbreviated, FormStyle.Format, true);
-            break;
-        case 'BBBB':
-            formatter =
-                dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Wide, FormStyle.Format, true);
-            break;
-        case 'BBBBB':
-            formatter = dateStrGetter(TranslationType.DayPeriods, TranslationWidth.Narrow, FormStyle.Format, true);
-            break;
-        // Hour in AM/PM, (1-12)
-        case 'h':
-            formatter = dateGetter(DateType.Hours, 1, -12);
-            break;
-        case 'hh':
-            formatter = dateGetter(DateType.Hours, 2, -12);
-            break;
-        // Hour of the day (0-23)
-        case 'H':
-            formatter = dateGetter(DateType.Hours, 1);
-            break;
-        // Hour in day, padded (00-23)
-        case 'HH':
-            formatter = dateGetter(DateType.Hours, 2);
-            break;
-        // Minute of the hour (0-59)
-        case 'm':
-            formatter = dateGetter(DateType.Minutes, 1);
-            break;
-        case 'mm':
-            formatter = dateGetter(DateType.Minutes, 2);
-            break;
-        // Second of the minute (0-59)
-        case 's':
-            formatter = dateGetter(DateType.Seconds, 1);
-            break;
-        case 'ss':
-            formatter = dateGetter(DateType.Seconds, 2);
-            break;
-        // Fractional second padded (0-9)
-        case 'S':
-            formatter = dateGetter(DateType.Milliseconds, 1);
-            break;
-        case 'SS':
-            formatter = dateGetter(DateType.Milliseconds, 2);
-            break;
-        // = millisecond
-        case 'SSS':
-            formatter = dateGetter(DateType.Milliseconds, 3);
-            break;
-        // Timezone ISO8601 short format (-0430)
-        case 'Z':
-        case 'ZZ':
-        case 'ZZZ':
-            formatter = timeZoneGetter(ZoneWidth.Short);
-            break;
-        // Timezone ISO8601 extended format (-04:30)
-        case 'ZZZZZ':
-            formatter = timeZoneGetter(ZoneWidth.Extended);
-            break;
-        // Timezone GMT short format (GMT+4)
-        case 'O':
-        case 'OO':
-        case 'OOO':
-        // Should be location, but fallback to format O instead because we don't have the data yet
-        case 'z':
-        case 'zz':
-        case 'zzz':
-            formatter = timeZoneGetter(ZoneWidth.ShortGMT);
-            break;
-        // Timezone GMT long format (GMT+0430)
-        case 'OOOO':
-        case 'ZZZZ':
-        // Should be location, but fallback to format O instead because we don't have the data yet
-        case 'zzzz':
-            formatter = timeZoneGetter(ZoneWidth.Long);
-            break;
-        default:
-            return null;
-    }
-    DATE_FORMATS[format] = formatter;
-    return formatter;
-}
-/**
- * @param {?} timezone
- * @param {?} fallback
- * @return {?}
- */
-function timezoneToOffset(timezone, fallback) {
-    // Support: IE 9-11 only, Edge 13-15+
-    // IE/Edge do not "understand" colon (`:`) in timezone
-    timezone = timezone.replace(/:/g, '');
-    var /** @type {?} */ requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
-    return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
-}
-/**
- * @param {?} date
- * @param {?} minutes
- * @return {?}
- */
-function addDateMinutes(date, minutes) {
-    date = new Date(date.getTime());
-    date.setMinutes(date.getMinutes() + minutes);
-    return date;
-}
-/**
- * @param {?} date
- * @param {?} timezone
- * @param {?} reverse
- * @return {?}
- */
-function convertTimezoneToLocal(date, timezone, reverse) {
-    var /** @type {?} */ reverseValue = reverse ? -1 : 1;
-    var /** @type {?} */ dateTimezoneOffset = date.getTimezoneOffset();
-    var /** @type {?} */ timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
-    return addDateMinutes(date, reverseValue * (timezoneOffset - dateTimezoneOffset));
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -4263,241 +5145,9 @@ function invalidPipeArgumentError(type, value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
-/**
- * \@ngModule CommonModule
- * \@whatItDoes Formats a date according to locale rules.
- * \@howToUse `date_expression | date[:format[:timezone[:locale]]]`
- * \@description
- *
- * Where:
- * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
- * (https://www.w3.org/TR/NOTE-datetime).
- * - `format` indicates which date/time components to include. The format can be predefined as
- *   shown below (all examples are given for `en-US`) or custom as shown in the table.
- *   - `'short'`: equivalent to `'M/d/yy, h:mm a'` (e.g. `6/15/15, 9:03 AM`)
- *   - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (e.g. `Jun 15, 2015, 9:03:01 AM`)
- *   - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (e.g. `June 15, 2015 at 9:03:01 AM GMT+1`)
- *   - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (e.g. `Monday, June 15, 2015 at
- * 9:03:01 AM GMT+01:00`)
- *   - `'shortDate'`: equivalent to `'M/d/yy'` (e.g. `6/15/15`)
- *   - `'mediumDate'`: equivalent to `'MMM d, y'` (e.g. `Jun 15, 2015`)
- *   - `'longDate'`: equivalent to `'MMMM d, y'` (e.g. `June 15, 2015`)
- *   - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (e.g. `Monday, June 15, 2015`)
- *   - `'shortTime'`: equivalent to `'h:mm a'` (e.g. `9:03 AM`)
- *   - `'mediumTime'`: equivalent to `'h:mm:ss a'` (e.g. `9:03:01 AM`)
- *   - `'longTime'`: equivalent to `'h:mm:ss a z'` (e.g. `9:03:01 AM GMT+1`)
- *   - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (e.g. `9:03:01 AM GMT+01:00`)
- *  - `timezone` to be used for formatting. It understands UTC/GMT and the continental US time zone
- *  abbreviations, but for general use, use a time zone offset, for example,
- *  `'+0430'` (4 hours, 30 minutes east of the Greenwich meridian)
- *  If not specified, the local system timezone of the end-user's browser will be used.
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
- *
- *
- *  | Field Type         | Format      | Description                                                   | Example Value                                              |
- *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
- *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
- *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
- *  |                    | GGGGG       | Narrow                                                        | A                                                          |
- *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
- *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
- *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
- *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
- *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
- *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
- *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
- *  |                    | MMMM        | Wide                                                          | September                                                  |
- *  |                    | MMMMM       | Narrow                                                        | S                                                          |
- *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
- *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
- *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
- *  |                    | LLLL        | Wide                                                          | September                                                  |
- *  |                    | LLLLL       | Narrow                                                        | S                                                          |
- *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
- *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
- *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
- *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
- *  |                    | dd          | Numeric: 2 digits + zero padded                               | 1                                                          |
- *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
- *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
- *  |                    | EEEEE       | Narrow                                                        | T                                                          |
- *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
- *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
- *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
- *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
- *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
- *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
- *  |                    | BBBBB       | Narrow                                                        | md                                                         |
- *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
- *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
- *  |                    | bbbbb       | Narrow                                                        | md                                                         |
- *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
- *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
- *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
- *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
- *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
- *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
- *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
- *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
- *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
- *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
- *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
- *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
- *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
- *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
- *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
- *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
- *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
- *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
- *
- *
- * When the expression is a ISO string without time (e.g. 2016-09-19) the time zone offset is not
- * applied and the formatted text will have the same day, month and year of the expression.
- *
- * WARNINGS:
- * - this pipe has only access to en-US locale data by default. If you want to localize the dates
- *   in another language, you will have to import data for other locales.
- *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import additional locale
- *   data.
- * - Fields suffixed with * are only available in the extra dataset.
- *   See the {\@linkDocs guide/i18n#i18n-pipes "I18n guide"} to know how to import extra locale
- *   data.
- * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
- *   Instead users should treat the date as an immutable object and change the reference when the
- *   pipe needs to re-run (this is to avoid reformatting the date on every change detection run
- *   which would be an expensive operation).
- *
- * ### Examples
- *
- * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
- * in the _local_ time and locale is 'en-US':
- *
- * {\@example common/pipes/ts/date_pipe.ts region='DatePipe'}
- *
- * \@stable
- */
-var DatePipe = (function () {
-    function DatePipe(locale) {
-        this.locale = locale;
-    }
-    /**
-     * @param {?} value
-     * @param {?=} format
-     * @param {?=} timezone
-     * @param {?=} locale
-     * @return {?}
-     */
-    DatePipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?=} format
-     * @param {?=} timezone
-     * @param {?=} locale
-     * @return {?}
-     */
-    function (value, format, timezone, locale) {
-        if (format === void 0) { format = 'mediumDate'; }
-        if (value == null || value === '' || value !== value)
-            return null;
-        if (typeof value === 'string') {
-            value = value.trim();
-        }
-        var /** @type {?} */ date;
-        if (isDate$1(value)) {
-            date = value;
-        }
-        else if (!isNaN(value - parseFloat(value))) {
-            date = new Date(parseFloat(value));
-        }
-        else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
-            /**
-             * For ISO Strings without time the day, month and year must be extracted from the ISO String
-             * before Date creation to avoid time offset and errors in the new Date.
-             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-             * date, some browsers (e.g. IE 9) will throw an invalid Date error
-             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the timeoffset
-             * is applied
-             * Note: ISO months are 0 for January, 1 for February, ...
-             */
-            var _a = value.split('-').map(function (val) { return +val; }), y = _a[0], m = _a[1], d = _a[2];
-            date = new Date(y, m - 1, d);
-        }
-        else {
-            date = new Date(value);
-        }
-        if (!isDate$1(date)) {
-            var /** @type {?} */ match = void 0;
-            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
-                date = isoStringToDate(match);
-            }
-            else {
-                throw invalidPipeArgumentError(DatePipe, value);
-            }
-        }
-        return formatDate(date, format, locale || this.locale, timezone);
-    };
-    DatePipe.decorators = [
-        { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
-    ];
-    /** @nocollapse */
-    DatePipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
-    ]; };
-    return DatePipe;
-}());
-/**
- * \@internal
- * @param {?} match
- * @return {?}
- */
-function isoStringToDate(match) {
-    var /** @type {?} */ date = new Date(0);
-    var /** @type {?} */ tzHour = 0;
-    var /** @type {?} */ tzMin = 0;
-    var /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
-    var /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
-    if (match[9]) {
-        tzHour = +(match[9] + match[10]);
-        tzMin = +(match[9] + match[11]);
-    }
-    dateSetter.call(date, +(match[1]), +(match[2]) - 1, +(match[3]));
-    var /** @type {?} */ h = +(match[4] || '0') - tzHour;
-    var /** @type {?} */ m = +(match[5] || '0') - tzMin;
-    var /** @type {?} */ s = +(match[6] || '0');
-    var /** @type {?} */ ms = Math.round(parseFloat('0.' + (match[7] || 0)) * 1000);
-    timeSetter.call(date, h, m, s, ms);
-    return date;
-}
-/**
- * @param {?} value
- * @return {?}
- */
-function isDate$1(value) {
-    return value instanceof Date && !isNaN(value.valueOf());
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var NumberFormatter = (function () {
+var NumberFormatter = /** @class */ (function () {
     function NumberFormatter() {
     }
     /**
@@ -4517,7 +5167,8 @@ var NumberFormatter = (function () {
     function (num, locale, style, opts) {
         if (opts === void 0) { opts = {}; }
         var minimumIntegerDigits = opts.minimumIntegerDigits, minimumFractionDigits = opts.minimumFractionDigits, maximumFractionDigits = opts.maximumFractionDigits, currency = opts.currency, _a = opts.currencyAsSymbol, currencyAsSymbol = _a === void 0 ? false : _a;
-        var /** @type {?} */ options = {
+        /** @type {?} */
+        var options = {
             minimumIntegerDigits: minimumIntegerDigits,
             minimumFractionDigits: minimumFractionDigits,
             maximumFractionDigits: maximumFractionDigits,
@@ -4531,7 +5182,9 @@ var NumberFormatter = (function () {
     };
     return NumberFormatter;
 }());
+/** @type {?} */
 var DATE_FORMATS_SPLIT$1 = /((?:[^yMLdHhmsazZEwGjJ']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|L+|d+|H+|h+|J+|j+|m+|s+|a|z|Z|G+|w+))(.*)/;
+/** @type {?} */
 var PATTERN_ALIASES = {
     // Keys are quoted so they do not get renamed during closure compilation.
     'yMMMdjms': datePartGetterFactory(combine([
@@ -4556,6 +5209,7 @@ var PATTERN_ALIASES = {
     'jms': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('second', 1), digitCondition('minute', 1)])),
     'jm': datePartGetterFactory(combine([digitCondition('hour', 1), digitCondition('minute', 1)]))
 };
+/** @type {?} */
 var DATE_FORMATS$1 = {
     // Keys are quoted so they do not get renamed.
     'yyyy': datePartGetterFactory(digitCondition('year', 4)),
@@ -4607,7 +5261,8 @@ var DATE_FORMATS$1 = {
  */
 function digitModifier(inner) {
     return function (date, locale) {
-        var /** @type {?} */ result = inner(date, locale);
+        /** @type {?} */
+        var result = inner(date, locale);
         return result.length == 1 ? '0' + result : result;
     };
 }
@@ -4639,10 +5294,11 @@ function intlDateFormat(date, locale, options) {
  * @return {?}
  */
 function timeZoneGetter$1(timezone) {
-    // To workaround `Intl` API restriction for single timezone let format with 24 hours
-    var /** @type {?} */ options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
+    /** @type {?} */
+    var options = { hour: '2-digit', hour12: false, timeZoneName: timezone };
     return function (date, locale) {
-        var /** @type {?} */ result = intlDateFormat(date, locale, options);
+        /** @type {?} */
+        var result = intlDateFormat(date, locale, options);
         // Then extract first 3 letters that related to hours
         return result ? result.substring(3) : '';
     };
@@ -4662,7 +5318,8 @@ function hour12Modify(options, value) {
  * @return {?}
  */
 function digitCondition(prop, len) {
-    var /** @type {?} */ result = {};
+    /** @type {?} */
+    var result = {};
     result[prop] = len === 2 ? '2-digit' : 'numeric';
     return result;
 }
@@ -4672,7 +5329,8 @@ function digitCondition(prop, len) {
  * @return {?}
  */
 function nameCondition(prop, len) {
-    var /** @type {?} */ result = {};
+    /** @type {?} */
+    var result = {};
     if (len < 4) {
         result[prop] = len > 1 ? 'short' : 'narrow';
     }
@@ -4695,6 +5353,7 @@ function combine(options) {
 function datePartGetterFactory(ret) {
     return function (date, locale) { return intlDateFormat(date, locale, ret); };
 }
+/** @type {?} */
 var DATE_FORMATTER_CACHE = new Map();
 /**
  * @param {?} format
@@ -4703,16 +5362,21 @@ var DATE_FORMATTER_CACHE = new Map();
  * @return {?}
  */
 function dateFormatter(format, date, locale) {
-    var /** @type {?} */ fn = PATTERN_ALIASES[format];
+    /** @type {?} */
+    var fn = PATTERN_ALIASES[format];
     if (fn)
         return fn(date, locale);
-    var /** @type {?} */ cacheKey = format;
-    var /** @type {?} */ parts = DATE_FORMATTER_CACHE.get(cacheKey);
+    /** @type {?} */
+    var cacheKey = format;
+    /** @type {?} */
+    var parts = DATE_FORMATTER_CACHE.get(cacheKey);
     if (!parts) {
         parts = [];
-        var /** @type {?} */ match = void 0;
+        /** @type {?} */
+        var match = void 0;
         DATE_FORMATS_SPLIT$1.exec(format);
-        var /** @type {?} */ _format = format;
+        /** @type {?} */
+        var _format = format;
         while (_format) {
             match = DATE_FORMATS_SPLIT$1.exec(_format);
             if (match) {
@@ -4727,7 +5391,8 @@ function dateFormatter(format, date, locale) {
         DATE_FORMATTER_CACHE.set(cacheKey, parts);
     }
     return parts.reduce(function (text, part) {
-        var /** @type {?} */ fn = DATE_FORMATS$1[part];
+        /** @type {?} */
+        var fn = DATE_FORMATS$1[part];
         return text + (fn ? fn(date, locale) : partToTime(part));
     }, '');
 }
@@ -4738,7 +5403,7 @@ function dateFormatter(format, date, locale) {
 function partToTime(part) {
     return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
 }
-var DateFormatter = (function () {
+var DateFormatter$1 = /** @class */ (function () {
     function DateFormatter() {
     }
     /**
@@ -4761,7 +5426,7 @@ var DateFormatter = (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
 * @license
@@ -4772,9 +5437,9 @@ var DateFormatter = (function () {
   */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a date according to locale rules.
- * \@howToUse `date_expression | date[:format]`
  * \@description
+ *
+ * Formats a date according to locale rules.
  *
  * Where:
  * - `expression` is a date object or a number (milliseconds since UTC epoch) or an ISO string
@@ -4823,6 +5488,8 @@ var DateFormatter = (function () {
  * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
  *   browsers.
  *
+ * \@usageNotes
+ *
  * ### Examples
  *
  * Assuming `dateObj` is (year: 2010, month: 9, day: 3, hour: 12 PM, minute: 05, second: 08)
@@ -4830,9 +5497,9 @@ var DateFormatter = (function () {
  *
  * {\@example common/pipes/ts/date_pipe.ts region='DeprecatedDatePipe'}
  *
- * \@stable
+ *
  */
-var DeprecatedDatePipe = (function () {
+var DeprecatedDatePipe = /** @class */ (function () {
     function DeprecatedDatePipe(_locale) {
         this._locale = _locale;
     }
@@ -4850,35 +5517,27 @@ var DeprecatedDatePipe = (function () {
         if (pattern === void 0) { pattern = 'mediumDate'; }
         if (value == null || value === '' || value !== value)
             return null;
-        var /** @type {?} */ date;
+        /** @type {?} */
+        var date;
         if (typeof value === 'string') {
             value = value.trim();
         }
-        if (isDate(value)) {
+        if (isDate$1(value)) {
             date = value;
         }
         else if (!isNaN(value - parseFloat(value))) {
             date = new Date(parseFloat(value));
         }
         else if (typeof value === 'string' && /^(\d{4}-\d{1,2}-\d{1,2})$/.test(value)) {
-            /**
-             * For ISO Strings without time the day, month and year must be extracted from the ISO String
-             * before Date creation to avoid time offset and errors in the new Date.
-             * If we only replace '-' with ',' in the ISO String ("2015,01,01"), and try to create a new
-             * date, some browsers (e.g. IE 9) will throw an invalid Date error
-             * If we leave the '-' ("2015-01-01") and try to create a new Date("2015-01-01") the
-             * timeoffset
-             * is applied
-             * Note: ISO months are 0 for January, 1 for February, ...
-             */
             var _a = value.split('-').map(function (val) { return parseInt(val, 10); }), y = _a[0], m = _a[1], d = _a[2];
             date = new Date(y, m - 1, d);
         }
         else {
             date = new Date(value);
         }
-        if (!isDate(date)) {
-            var /** @type {?} */ match = void 0;
+        if (!isDate$1(date)) {
+            /** @type {?} */
+            var match = void 0;
             if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
                 date = isoStringToDate(match);
             }
@@ -4886,7 +5545,7 @@ var DeprecatedDatePipe = (function () {
                 throw invalidPipeArgumentError(DeprecatedDatePipe, value);
             }
         }
-        return DateFormatter.format(date, this._locale, DeprecatedDatePipe._ALIASES[pattern] || pattern);
+        return DateFormatter$1.format(date, this._locale, DeprecatedDatePipe._ALIASES[pattern] || pattern);
     };
     /**
      * \@internal
@@ -4906,7 +5565,7 @@ var DeprecatedDatePipe = (function () {
     ];
     /** @nocollapse */
     DeprecatedDatePipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] }
     ]; };
     return DeprecatedDatePipe;
 }());
@@ -4914,346 +5573,13 @@ var DeprecatedDatePipe = (function () {
  * @param {?} value
  * @return {?}
  */
-function isDate(value) {
+function isDate$1(value) {
     return value instanceof Date && !isNaN(value.valueOf());
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
-var MAX_DIGITS = 22;
-var DECIMAL_SEP = '.';
-var ZERO_CHAR = '0';
-var PATTERN_SEP = ';';
-var GROUP_SEP = ',';
-var DIGIT_CHAR = '#';
-var CURRENCY_CHAR = '¤';
-var PERCENT_CHAR = '%';
-/**
- * Transform a number to a locale string based on a style and a format
- *
- * \@internal
- * @param {?} value
- * @param {?} locale
- * @param {?} style
- * @param {?=} digitsInfo
- * @param {?=} currency
- * @return {?}
- */
-function formatNumber$1(value, locale, style, digitsInfo, currency) {
-    if (currency === void 0) { currency = null; }
-    var /** @type {?} */ res = { str: null };
-    var /** @type {?} */ format = getLocaleNumberFormat(locale, style);
-    var /** @type {?} */ num;
-    // Convert strings to numbers
-    if (typeof value === 'string' && !isNaN(+value - parseFloat(value))) {
-        num = +value;
-    }
-    else if (typeof value !== 'number') {
-        res.error = value + " is not a number";
-        return res;
-    }
-    else {
-        num = value;
-    }
-    if (style === NumberFormatStyle.Percent) {
-        num = num * 100;
-    }
-    var /** @type {?} */ numStr = Math.abs(num) + '';
-    var /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
-    var /** @type {?} */ formattedText = '';
-    var /** @type {?} */ isZero = false;
-    if (!isFinite(num)) {
-        formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
-    }
-    else {
-        var /** @type {?} */ parsedNumber = parseNumber(numStr);
-        var /** @type {?} */ minInt = pattern.minInt;
-        var /** @type {?} */ minFraction = pattern.minFrac;
-        var /** @type {?} */ maxFraction = pattern.maxFrac;
-        if (digitsInfo) {
-            var /** @type {?} */ parts = digitsInfo.match(NUMBER_FORMAT_REGEXP);
-            if (parts === null) {
-                res.error = digitsInfo + " is not a valid digit info";
-                return res;
-            }
-            var /** @type {?} */ minIntPart = parts[1];
-            var /** @type {?} */ minFractionPart = parts[3];
-            var /** @type {?} */ maxFractionPart = parts[5];
-            if (minIntPart != null) {
-                minInt = parseIntAutoRadix(minIntPart);
-            }
-            if (minFractionPart != null) {
-                minFraction = parseIntAutoRadix(minFractionPart);
-            }
-            if (maxFractionPart != null) {
-                maxFraction = parseIntAutoRadix(maxFractionPart);
-            }
-            else if (minFractionPart != null && minFraction > maxFraction) {
-                maxFraction = minFraction;
-            }
-        }
-        roundNumber(parsedNumber, minFraction, maxFraction);
-        var /** @type {?} */ digits = parsedNumber.digits;
-        var /** @type {?} */ integerLen = parsedNumber.integerLen;
-        var /** @type {?} */ exponent = parsedNumber.exponent;
-        var /** @type {?} */ decimals = [];
-        isZero = digits.every(function (d) { return !d; });
-        // pad zeros for small numbers
-        for (; integerLen < minInt; integerLen++) {
-            digits.unshift(0);
-        }
-        // pad zeros for small numbers
-        for (; integerLen < 0; integerLen++) {
-            digits.unshift(0);
-        }
-        // extract decimals digits
-        if (integerLen > 0) {
-            decimals = digits.splice(integerLen, digits.length);
-        }
-        else {
-            decimals = digits;
-            digits = [0];
-        }
-        // format the integer digits with grouping separators
-        var /** @type {?} */ groups = [];
-        if (digits.length >= pattern.lgSize) {
-            groups.unshift(digits.splice(-pattern.lgSize, digits.length).join(''));
-        }
-        while (digits.length > pattern.gSize) {
-            groups.unshift(digits.splice(-pattern.gSize, digits.length).join(''));
-        }
-        if (digits.length) {
-            groups.unshift(digits.join(''));
-        }
-        var /** @type {?} */ groupSymbol = currency ? NumberSymbol.CurrencyGroup : NumberSymbol.Group;
-        formattedText = groups.join(getLocaleNumberSymbol(locale, groupSymbol));
-        // append the decimal digits
-        if (decimals.length) {
-            var /** @type {?} */ decimalSymbol = currency ? NumberSymbol.CurrencyDecimal : NumberSymbol.Decimal;
-            formattedText += getLocaleNumberSymbol(locale, decimalSymbol) + decimals.join('');
-        }
-        if (exponent) {
-            formattedText += getLocaleNumberSymbol(locale, NumberSymbol.Exponential) + '+' + exponent;
-        }
-    }
-    if (num < 0 && !isZero) {
-        formattedText = pattern.negPre + formattedText + pattern.negSuf;
-    }
-    else {
-        formattedText = pattern.posPre + formattedText + pattern.posSuf;
-    }
-    if (style === NumberFormatStyle.Currency && currency !== null) {
-        res.str = formattedText
-            .replace(CURRENCY_CHAR, currency)
-            .replace(CURRENCY_CHAR, '');
-        return res;
-    }
-    if (style === NumberFormatStyle.Percent) {
-        res.str = formattedText.replace(new RegExp(PERCENT_CHAR, 'g'), getLocaleNumberSymbol(locale, NumberSymbol.PercentSign));
-        return res;
-    }
-    res.str = formattedText;
-    return res;
-}
-/**
- * @param {?} format
- * @param {?=} minusSign
- * @return {?}
- */
-function parseNumberFormat(format, minusSign) {
-    if (minusSign === void 0) { minusSign = '-'; }
-    var /** @type {?} */ p = {
-        minInt: 1,
-        minFrac: 0,
-        maxFrac: 0,
-        posPre: '',
-        posSuf: '',
-        negPre: '',
-        negSuf: '',
-        gSize: 0,
-        lgSize: 0
-    };
-    var /** @type {?} */ patternParts = format.split(PATTERN_SEP);
-    var /** @type {?} */ positive = patternParts[0];
-    var /** @type {?} */ negative = patternParts[1];
-    var /** @type {?} */ positiveParts = positive.indexOf(DECIMAL_SEP) !== -1 ?
-        positive.split(DECIMAL_SEP) :
-        [
-            positive.substring(0, positive.lastIndexOf(ZERO_CHAR) + 1),
-            positive.substring(positive.lastIndexOf(ZERO_CHAR) + 1)
-        ], /** @type {?} */
-    integer = positiveParts[0], /** @type {?} */ fraction = positiveParts[1] || '';
-    p.posPre = integer.substr(0, integer.indexOf(DIGIT_CHAR));
-    for (var /** @type {?} */ i = 0; i < fraction.length; i++) {
-        var /** @type {?} */ ch = fraction.charAt(i);
-        if (ch === ZERO_CHAR) {
-            p.minFrac = p.maxFrac = i + 1;
-        }
-        else if (ch === DIGIT_CHAR) {
-            p.maxFrac = i + 1;
-        }
-        else {
-            p.posSuf += ch;
-        }
-    }
-    var /** @type {?} */ groups = integer.split(GROUP_SEP);
-    p.gSize = groups[1] ? groups[1].length : 0;
-    p.lgSize = (groups[2] || groups[1]) ? (groups[2] || groups[1]).length : 0;
-    if (negative) {
-        var /** @type {?} */ trunkLen = positive.length - p.posPre.length - p.posSuf.length, /** @type {?} */
-        pos = negative.indexOf(DIGIT_CHAR);
-        p.negPre = negative.substr(0, pos).replace(/'/g, '');
-        p.negSuf = negative.substr(pos + trunkLen).replace(/'/g, '');
-    }
-    else {
-        p.negPre = minusSign + p.posPre;
-        p.negSuf = p.posSuf;
-    }
-    return p;
-}
-/**
- * Parse a number (as a string)
- * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
- * @param {?} numStr
- * @return {?}
- */
-function parseNumber(numStr) {
-    var /** @type {?} */ exponent = 0, /** @type {?} */ digits, /** @type {?} */ integerLen;
-    var /** @type {?} */ i, /** @type {?} */ j, /** @type {?} */ zeros;
-    // Decimal point?
-    if ((integerLen = numStr.indexOf(DECIMAL_SEP)) > -1) {
-        numStr = numStr.replace(DECIMAL_SEP, '');
-    }
-    // Exponential form?
-    if ((i = numStr.search(/e/i)) > 0) {
-        // Work out the exponent.
-        if (integerLen < 0)
-            integerLen = i;
-        integerLen += +numStr.slice(i + 1);
-        numStr = numStr.substring(0, i);
-    }
-    else if (integerLen < 0) {
-        // There was no decimal point or exponent so it is an integer.
-        integerLen = numStr.length;
-    }
-    // Count the number of leading zeros.
-    for (i = 0; numStr.charAt(i) === ZERO_CHAR; i++) {
-        /* empty */
-    }
-    if (i === (zeros = numStr.length)) {
-        // The digits are all zero.
-        digits = [0];
-        integerLen = 1;
-    }
-    else {
-        // Count the number of trailing zeros
-        zeros--;
-        while (numStr.charAt(zeros) === ZERO_CHAR)
-            zeros--;
-        // Trailing zeros are insignificant so ignore them
-        integerLen -= i;
-        digits = [];
-        // Convert string to array of digits without leading/trailing zeros.
-        for (j = 0; i <= zeros; i++, j++) {
-            digits[j] = +numStr.charAt(i);
-        }
-    }
-    // If the number overflows the maximum allowed digits then use an exponent.
-    if (integerLen > MAX_DIGITS) {
-        digits = digits.splice(0, MAX_DIGITS - 1);
-        exponent = integerLen - 1;
-        integerLen = 1;
-    }
-    return { digits: digits, exponent: exponent, integerLen: integerLen };
-}
-/**
- * Round the parsed number to the specified number of decimal places
- * This function changes the parsedNumber in-place
- * @param {?} parsedNumber
- * @param {?} minFrac
- * @param {?} maxFrac
- * @return {?}
- */
-function roundNumber(parsedNumber, minFrac, maxFrac) {
-    if (minFrac > maxFrac) {
-        throw new Error("The minimum number of digits after fraction (" + minFrac + ") is higher than the maximum (" + maxFrac + ").");
-    }
-    var /** @type {?} */ digits = parsedNumber.digits;
-    var /** @type {?} */ fractionLen = digits.length - parsedNumber.integerLen;
-    var /** @type {?} */ fractionSize = Math.min(Math.max(minFrac, fractionLen), maxFrac);
-    // The index of the digit to where rounding is to occur
-    var /** @type {?} */ roundAt = fractionSize + parsedNumber.integerLen;
-    var /** @type {?} */ digit = digits[roundAt];
-    if (roundAt > 0) {
-        // Drop fractional digits beyond `roundAt`
-        digits.splice(Math.max(parsedNumber.integerLen, roundAt));
-        // Set non-fractional digits beyond `roundAt` to 0
-        for (var /** @type {?} */ j = roundAt; j < digits.length; j++) {
-            digits[j] = 0;
-        }
-    }
-    else {
-        // We rounded to zero so reset the parsedNumber
-        fractionLen = Math.max(0, fractionLen);
-        parsedNumber.integerLen = 1;
-        digits.length = Math.max(1, roundAt = fractionSize + 1);
-        digits[0] = 0;
-        for (var /** @type {?} */ i = 1; i < roundAt; i++)
-            digits[i] = 0;
-    }
-    if (digit >= 5) {
-        if (roundAt - 1 < 0) {
-            for (var /** @type {?} */ k = 0; k > roundAt; k--) {
-                digits.unshift(0);
-                parsedNumber.integerLen++;
-            }
-            digits.unshift(1);
-            parsedNumber.integerLen++;
-        }
-        else {
-            digits[roundAt - 1]++;
-        }
-    }
-    // Pad out with zeros to get the required fraction length
-    for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
-        digits.push(0);
-    // Do any carrying, e.g. a digit was rounded up to 10
-    var /** @type {?} */ carry = digits.reduceRight(function (carry, d, i, digits) {
-        d = d + carry;
-        digits[i] = d % 10;
-        return Math.floor(d / 10);
-    }, 0);
-    if (carry) {
-        digits.unshift(carry);
-        parsedNumber.integerLen++;
-    }
-}
-/**
- * \@internal
- * @param {?} text
- * @return {?}
- */
-function parseIntAutoRadix(text) {
-    var /** @type {?} */ result = parseInt(text);
-    if (isNaN(result)) {
-        throw new Error('Invalid integer literal when parsing ' + text);
-    }
-    return result;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -5272,7 +5598,7 @@ function parseIntAutoRadix(text) {
  * @param {?=} currencyAsSymbol
  * @return {?}
  */
-function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
+function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAsSymbol) {
     if (currency === void 0) { currency = null; }
     if (currencyAsSymbol === void 0) { currencyAsSymbol = false; }
     if (value == null)
@@ -5282,9 +5608,12 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
     if (typeof value !== 'number') {
         throw invalidPipeArgumentError(pipe, value);
     }
-    var /** @type {?} */ minInt;
-    var /** @type {?} */ minFraction;
-    var /** @type {?} */ maxFraction;
+    /** @type {?} */
+    var minInt;
+    /** @type {?} */
+    var minFraction;
+    /** @type {?} */
+    var maxFraction;
     if (style !== NumberFormatStyle.Currency) {
         // rely on Intl default for currency
         minInt = 1;
@@ -5292,19 +5621,20 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
         maxFraction = 3;
     }
     if (digits) {
-        var /** @type {?} */ parts = digits.match(NUMBER_FORMAT_REGEXP);
+        /** @type {?} */
+        var parts = digits.match(NUMBER_FORMAT_REGEXP);
         if (parts === null) {
             throw new Error(digits + " is not a valid digit info for number pipes");
         }
-        if (parts[1] != null) {
+        if (parts[1] != null) { // min integer digits
             // min integer digits
             minInt = parseIntAutoRadix(parts[1]);
         }
-        if (parts[3] != null) {
+        if (parts[3] != null) { // min fraction digits
             // min fraction digits
             minFraction = parseIntAutoRadix(parts[3]);
         }
-        if (parts[5] != null) {
+        if (parts[5] != null) { // max fraction digits
             // max fraction digits
             maxFraction = parseIntAutoRadix(parts[5]);
         }
@@ -5319,8 +5649,6 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
 }
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
- * \@howToUse `number_expression | number[:digitInfo]`
  *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
@@ -5338,13 +5666,14 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
  * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
+ * \@usageNotes
+ *
  * ### Example
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
- * \@stable
  */
-var DeprecatedDecimalPipe = (function () {
+var DeprecatedDecimalPipe = /** @class */ (function () {
     function DeprecatedDecimalPipe(_locale) {
         this._locale = _locale;
     }
@@ -5359,38 +5688,38 @@ var DeprecatedDecimalPipe = (function () {
      * @return {?}
      */
     function (value, digits) {
-        return formatNumber(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
+        return formatNumber$1(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
     };
     DeprecatedDecimalPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'number' },] },
     ];
     /** @nocollapse */
     DeprecatedDecimalPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] }
     ]; };
     return DeprecatedDecimalPipe;
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
- * \@howToUse `number_expression | percent[:digitInfo]`
  *
  * \@description
  *
- * Formats a number as percentage.
+ * Formats a number as percentage according to locale rules.
  *
  * - `digitInfo` See {\@link DecimalPipe} for detailed description.
  *
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
  * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
+ * \@usageNotes
+ *
  * ### Example
  *
  * {\@example common/pipes/ts/percent_pipe.ts region='DeprecatedPercentPipe'}
  *
- * \@stable
+ *
  */
-var DeprecatedPercentPipe = (function () {
+var DeprecatedPercentPipe = /** @class */ (function () {
     function DeprecatedPercentPipe(_locale) {
         this._locale = _locale;
     }
@@ -5405,22 +5734,22 @@ var DeprecatedPercentPipe = (function () {
      * @return {?}
      */
     function (value, digits) {
-        return formatNumber(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
+        return formatNumber$1(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
     };
     DeprecatedPercentPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
     ];
     /** @nocollapse */
     DeprecatedPercentPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] }
     ]; };
     return DeprecatedPercentPipe;
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
- * \@howToUse `number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]`
  * \@description
+ *
+ * Formats a number as currency using locale rules.
  *
  * Use `currency` to format a number as currency.
  *
@@ -5434,13 +5763,15 @@ var DeprecatedPercentPipe = (function () {
  * WARNING: this pipe uses the Internationalization API which is not yet available in all browsers
  * and may require a polyfill. See [Browser Support](guide/browser-support) for details.
  *
+ * \@usageNotes
+ *
  * ### Example
  *
  * {\@example common/pipes/ts/currency_pipe.ts region='DeprecatedCurrencyPipe'}
  *
- * \@stable
+ *
  */
-var DeprecatedCurrencyPipe = (function () {
+var DeprecatedCurrencyPipe = /** @class */ (function () {
     function DeprecatedCurrencyPipe(_locale) {
         this._locale = _locale;
     }
@@ -5461,32 +5792,21 @@ var DeprecatedCurrencyPipe = (function () {
     function (value, currencyCode, symbolDisplay, digits) {
         if (currencyCode === void 0) { currencyCode = 'USD'; }
         if (symbolDisplay === void 0) { symbolDisplay = false; }
-        return formatNumber(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
+        return formatNumber$1(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     };
     DeprecatedCurrencyPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
     ];
     /** @nocollapse */
     DeprecatedCurrencyPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] }
     ]; };
     return DeprecatedCurrencyPipe;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * A collection of deprecated i18n pipes that require intl api
- *
- * @deprecated from v5
- */
-var COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -5495,7 +5815,25 @@ var COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ObservableStrategy = (function () {
+/** *
+ * A collection of deprecated i18n pipes that require intl api
+ *
+ * @deprecated from v5
+  @type {?} */
+var COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe, DeprecatedCurrencyPipe, DeprecatedDatePipe];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ObservableStrategy = /** @class */ (function () {
     function ObservableStrategy() {
     }
     /**
@@ -5531,7 +5869,7 @@ var ObservableStrategy = (function () {
     function (subscription) { subscription.unsubscribe(); };
     return ObservableStrategy;
 }());
-var PromiseStrategy = (function () {
+var PromiseStrategy = /** @class */ (function () {
     function PromiseStrategy() {
     }
     /**
@@ -5567,20 +5905,24 @@ var PromiseStrategy = (function () {
     function (subscription) { };
     return PromiseStrategy;
 }());
+/** @type {?} */
 var _promiseStrategy = new PromiseStrategy();
+/** @type {?} */
 var _observableStrategy = new ObservableStrategy();
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Unwraps a value from an asynchronous primitive.
- * \@howToUse `observable_or_promise_expression | async`
  * \@description
+ *
+ * Unwraps a value from an asynchronous primitive.
+ *
  * The `async` pipe subscribes to an `Observable` or `Promise` and returns the latest value it has
  * emitted. When a new value is emitted, the `async` pipe marks the component to be checked for
  * changes. When the component gets destroyed, the `async` pipe unsubscribes automatically to avoid
  * potential memory leaks.
  *
+ * \@usageNotes
  *
- * ## Examples
+ * ### Examples
  *
  * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
  * promise.
@@ -5592,9 +5934,8 @@ var _observableStrategy = new ObservableStrategy();
  *
  * {\@example common/pipes/ts/async_pipe.ts region='AsyncPipeObservable'}
  *
- * \@stable
  */
-var AsyncPipe = (function () {
+var AsyncPipe = /** @class */ (function () {
     function AsyncPipe(_ref) {
         this._ref = _ref;
         this._latestValue = null;
@@ -5705,14 +6046,14 @@ var AsyncPipe = (function () {
     ];
     /** @nocollapse */
     AsyncPipe.ctorParameters = function () { return [
-        { type: _angular_core.ChangeDetectorRef, },
+        { type: _angular_core.ChangeDetectorRef }
     ]; };
     return AsyncPipe;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -5722,21 +6063,31 @@ var AsyncPipe = (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Transforms text to lowercase.
+ * Transforms text to all lower case.
  *
- * {\@example  common/pipes/ts/lowerupper_pipe.ts region='LowerUpperPipe' }
+ * @see `UpperCasePipe`
+ * @see `TitleCasePipe`
+ * \@usageNotes
  *
- * \@stable
+ * The following example defines a view that allows the user to enter
+ * text, and then uses the pipe to convert the input text to all lower case.
+ *
+ * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
+ *
+ *
  */
-var LowerCasePipe = (function () {
+var LowerCasePipe = /** @class */ (function () {
     function LowerCasePipe() {
     }
     /**
-     * @param {?} value
+     * @param value The string to transform to lower case.
+     */
+    /**
+     * @param {?} value The string to transform to lower case.
      * @return {?}
      */
     LowerCasePipe.prototype.transform = /**
-     * @param {?} value
+     * @param {?} value The string to transform to lower case.
      * @return {?}
      */
     function (value) {
@@ -5750,36 +6101,38 @@ var LowerCasePipe = (function () {
     LowerCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'lowercase' },] },
     ];
-    /** @nocollapse */
-    LowerCasePipe.ctorParameters = function () { return []; };
     return LowerCasePipe;
 }());
+/** @type {?} */
+var unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u08A0-\u08B4\u08B6-\u08BD\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E87\u0E88\u0E8A\u0E8D\u0E94-\u0E97\u0E99-\u0E9F\u0EA1-\u0EA3\u0EA5\u0EA7\u0EAA\u0EAB\u0EAD-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1877\u1880-\u1884\u1887-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C88\u1CE9-\u1CEC\u1CEE-\u1CF1\u1CF5\u1CF6\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312E\u3131-\u318E\u31A0-\u31BA\u31F0-\u31FF\u3400-\u4DB5\u4E00-\u9FEA\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA7AE\uA7B0-\uA7B7\uA7F7-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB65\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF2D-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDCB0-\uDCD3\uDCD8-\uDCFB\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDCE0-\uDCF2\uDCF4\uDCF5\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE33\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48\uDC80-\uDCB2\uDCC0-\uDCF2]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDDDC\uDE00-\uDE11\uDE13-\uDE2B\uDE80-\uDE86\uDE88\uDE8A-\uDE8D\uDE8F-\uDE9D\uDE9F-\uDEA8\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF50\uDF5D-\uDF61]|\uD805[\uDC00-\uDC34\uDC47-\uDC4A\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDDD8-\uDDDB\uDE00-\uDE2F\uDE44\uDE80-\uDEAA\uDF00-\uDF19]|\uD806[\uDCA0-\uDCDF\uDCFF\uDE00\uDE0B-\uDE32\uDE3A\uDE50\uDE5C-\uDE83\uDE86-\uDE89\uDEC0-\uDEF8]|\uD807[\uDC00-\uDC08\uDC0A-\uDC2E\uDC40\uDC72-\uDC8F\uDD00-\uDD06\uDD08\uDD09\uDD0B-\uDD30\uDD46]|\uD808[\uDC00-\uDF99]|\uD809[\uDC80-\uDD43]|[\uD80C\uD81C-\uD820\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD811[\uDC00-\uDE46]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDF00-\uDF44\uDF50\uDF93-\uDF9F\uDFE0\uDFE1]|\uD821[\uDC00-\uDFEC]|\uD822[\uDC00-\uDEF2]|\uD82C[\uDC00-\uDD1E\uDD70-\uDEFB]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD83A[\uDC00-\uDCC4\uDD00-\uDD43]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]|\uD87E[\uDC00-\uDE1D])\S*/g;
 /**
- * Helper method to transform a single word to titlecase.
+ * Transforms text to title case.
+ * Capitalizes the first letter of each word, and transforms the
+ * rest of the word to lower case.
+ * Words are delimited by any whitespace character, such as a space, tab, or line-feed character.
  *
- * \@stable
- * @param {?} word
- * @return {?}
- */
-function titleCaseWord(word) {
-    if (!word)
-        return word;
-    return word[0].toUpperCase() + word.substr(1).toLowerCase();
-}
-/**
- * Transforms text to titlecase.
+ * @see `LowerCasePipe`
+ * @see `UpperCasePipe`
  *
- * \@stable
+ * \@usageNotes
+ * The following example shows the result of transforming various strings into title case.
+ *
+ * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
+ *
+ *
  */
-var TitleCasePipe = (function () {
+var TitleCasePipe = /** @class */ (function () {
     function TitleCasePipe() {
     }
     /**
-     * @param {?} value
+     * @param value The string to transform to title case.
+     */
+    /**
+     * @param {?} value The string to transform to title case.
      * @return {?}
      */
     TitleCasePipe.prototype.transform = /**
-     * @param {?} value
+     * @param {?} value The string to transform to title case.
      * @return {?}
      */
     function (value) {
@@ -5788,29 +6141,30 @@ var TitleCasePipe = (function () {
         if (typeof value !== 'string') {
             throw invalidPipeArgumentError(TitleCasePipe, value);
         }
-        return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
+        return value.replace(unicodeWordMatch, (function (txt) { return txt[0].toUpperCase() + txt.substr(1).toLowerCase(); }));
     };
     TitleCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'titlecase' },] },
     ];
-    /** @nocollapse */
-    TitleCasePipe.ctorParameters = function () { return []; };
     return TitleCasePipe;
 }());
 /**
- * Transforms text to uppercase.
- *
- * \@stable
+ * Transforms text to all upper case.
+ * @see `LowerCasePipe`
+ * @see `TitleCasePipe`
  */
-var UpperCasePipe = (function () {
+var UpperCasePipe = /** @class */ (function () {
     function UpperCasePipe() {
     }
     /**
-     * @param {?} value
+     * @param value The string to transform to upper case.
+     */
+    /**
+     * @param {?} value The string to transform to upper case.
      * @return {?}
      */
     UpperCasePipe.prototype.transform = /**
-     * @param {?} value
+     * @param {?} value The string to transform to upper case.
      * @return {?}
      */
     function (value) {
@@ -5824,14 +6178,12 @@ var UpperCasePipe = (function () {
     UpperCasePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'uppercase' },] },
     ];
-    /** @nocollapse */
-    UpperCasePipe.ctorParameters = function () { return []; };
     return UpperCasePipe;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -5840,40 +6192,259 @@ var UpperCasePipe = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * \@ngModule CommonModule
+ * \@description
+ *
+ * Formats a date value according to locale rules.
+ *
+ * Only the `en-US` locale data comes with Angular. To localize dates
+ * in another language, you must import the corresponding locale data.
+ * See the [I18n guide](guide/i18n#i18n-pipes) for more information.
+ *
+ * @see `formatDate()`
+ *
+ *
+ * \@usageNotes
+ *
+ * The result of this pipe is not reevaluated when the input is mutated. To avoid the need to
+ * reformat the date on every change-detection cycle, treat the date as an immutable object
+ * and change the reference when the pipe needs to run again.
+ *
+ * ### Pre-defined format options
+ *
+ * Examples are given in `en-US` locale.
+ *
+ * - `'short'`: equivalent to `'M/d/yy, h:mm a'` (`6/15/15, 9:03 AM`).
+ * - `'medium'`: equivalent to `'MMM d, y, h:mm:ss a'` (`Jun 15, 2015, 9:03:01 AM`).
+ * - `'long'`: equivalent to `'MMMM d, y, h:mm:ss a z'` (`June 15, 2015 at 9:03:01 AM
+ * GMT+1`).
+ * - `'full'`: equivalent to `'EEEE, MMMM d, y, h:mm:ss a zzzz'` (`Monday, June 15, 2015 at
+ * 9:03:01 AM GMT+01:00`).
+ * - `'shortDate'`: equivalent to `'M/d/yy'` (`6/15/15`).
+ * - `'mediumDate'`: equivalent to `'MMM d, y'` (`Jun 15, 2015`).
+ * - `'longDate'`: equivalent to `'MMMM d, y'` (`June 15, 2015`).
+ * - `'fullDate'`: equivalent to `'EEEE, MMMM d, y'` (`Monday, June 15, 2015`).
+ * - `'shortTime'`: equivalent to `'h:mm a'` (`9:03 AM`).
+ * - `'mediumTime'`: equivalent to `'h:mm:ss a'` (`9:03:01 AM`).
+ * - `'longTime'`: equivalent to `'h:mm:ss a z'` (`9:03:01 AM GMT+1`).
+ * - `'fullTime'`: equivalent to `'h:mm:ss a zzzz'` (`9:03:01 AM GMT+01:00`).
+ *
+ * ### Custom format options
+ *
+ * You can construct a format string using symbols to specify the components
+ * of a date-time value, as described in the following table.
+ * Format details depend on the locale.
+ * Fields marked with (*) are only available in the extra data set for the given locale.
+ *
+ *  | Field type         | Format      | Description                                                   | Example Value                                              |
+ *  |--------------------|-------------|---------------------------------------------------------------|------------------------------------------------------------|
+ *  | Era                | G, GG & GGG | Abbreviated                                                   | AD                                                         |
+ *  |                    | GGGG        | Wide                                                          | Anno Domini                                                |
+ *  |                    | GGGGG       | Narrow                                                        | A                                                          |
+ *  | Year               | y           | Numeric: minimum digits                                       | 2, 20, 201, 2017, 20173                                    |
+ *  |                    | yy          | Numeric: 2 digits + zero padded                               | 02, 20, 01, 17, 73                                         |
+ *  |                    | yyy         | Numeric: 3 digits + zero padded                               | 002, 020, 201, 2017, 20173                                 |
+ *  |                    | yyyy        | Numeric: 4 digits or more + zero padded                       | 0002, 0020, 0201, 2017, 20173                              |
+ *  | Month              | M           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                    | MM          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                    | MMM         | Abbreviated                                                   | Sep                                                        |
+ *  |                    | MMMM        | Wide                                                          | September                                                  |
+ *  |                    | MMMMM       | Narrow                                                        | S                                                          |
+ *  | Month standalone   | L           | Numeric: 1 digit                                              | 9, 12                                                      |
+ *  |                    | LL          | Numeric: 2 digits + zero padded                               | 09, 12                                                     |
+ *  |                    | LLL         | Abbreviated                                                   | Sep                                                        |
+ *  |                    | LLLL        | Wide                                                          | September                                                  |
+ *  |                    | LLLLL       | Narrow                                                        | S                                                          |
+ *  | Week of year       | w           | Numeric: minimum digits                                       | 1... 53                                                    |
+ *  |                    | ww          | Numeric: 2 digits + zero padded                               | 01... 53                                                   |
+ *  | Week of month      | W           | Numeric: 1 digit                                              | 1... 5                                                     |
+ *  | Day of month       | d           | Numeric: minimum digits                                       | 1                                                          |
+ *  |                    | dd          | Numeric: 2 digits + zero padded                               | 01                                                          |
+ *  | Week day           | E, EE & EEE | Abbreviated                                                   | Tue                                                        |
+ *  |                    | EEEE        | Wide                                                          | Tuesday                                                    |
+ *  |                    | EEEEE       | Narrow                                                        | T                                                          |
+ *  |                    | EEEEEE      | Short                                                         | Tu                                                         |
+ *  | Period             | a, aa & aaa | Abbreviated                                                   | am/pm or AM/PM                                             |
+ *  |                    | aaaa        | Wide (fallback to `a` when missing)                           | ante meridiem/post meridiem                                |
+ *  |                    | aaaaa       | Narrow                                                        | a/p                                                        |
+ *  | Period*            | B, BB & BBB | Abbreviated                                                   | mid.                                                       |
+ *  |                    | BBBB        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                    | BBBBB       | Narrow                                                        | md                                                         |
+ *  | Period standalone* | b, bb & bbb | Abbreviated                                                   | mid.                                                       |
+ *  |                    | bbbb        | Wide                                                          | am, pm, midnight, noon, morning, afternoon, evening, night |
+ *  |                    | bbbbb       | Narrow                                                        | md                                                         |
+ *  | Hour 1-12          | h           | Numeric: minimum digits                                       | 1, 12                                                      |
+ *  |                    | hh          | Numeric: 2 digits + zero padded                               | 01, 12                                                     |
+ *  | Hour 0-23          | H           | Numeric: minimum digits                                       | 0, 23                                                      |
+ *  |                    | HH          | Numeric: 2 digits + zero padded                               | 00, 23                                                     |
+ *  | Minute             | m           | Numeric: minimum digits                                       | 8, 59                                                      |
+ *  |                    | mm          | Numeric: 2 digits + zero padded                               | 08, 59                                                     |
+ *  | Second             | s           | Numeric: minimum digits                                       | 0... 59                                                    |
+ *  |                    | ss          | Numeric: 2 digits + zero padded                               | 00... 59                                                   |
+ *  | Fractional seconds | S           | Numeric: 1 digit                                              | 0... 9                                                     |
+ *  |                    | SS          | Numeric: 2 digits + zero padded                               | 00... 99                                                   |
+ *  |                    | SSS         | Numeric: 3 digits + zero padded (= milliseconds)              | 000... 999                                                 |
+ *  | Zone               | z, zz & zzz | Short specific non location format (fallback to O)            | GMT-8                                                      |
+ *  |                    | zzzz        | Long specific non location format (fallback to OOOO)          | GMT-08:00                                                  |
+ *  |                    | Z, ZZ & ZZZ | ISO8601 basic format                                          | -0800                                                      |
+ *  |                    | ZZZZ        | Long localized GMT format                                     | GMT-8:00                                                   |
+ *  |                    | ZZZZZ       | ISO8601 extended format + Z indicator for offset 0 (= XXXXX)  | -08:00                                                     |
+ *  |                    | O, OO & OOO | Short localized GMT format                                    | GMT-8                                                      |
+ *  |                    | OOOO        | Long localized GMT format                                     | GMT-08:00                                                  |
+ *
+ * Note that timezone correction is not applied to an ISO string that has no time component, such as "2016-09-19"
+ *
+ * ### Format examples
+ *
+ * These examples transform a date into various formats,
+ * assuming that `dateObj` is a JavaScript `Date` object for
+ * year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11,
+ * given in the local time for the `en-US` locale.
+ *
+ * ```
+ * {{ dateObj | date }}               // output is 'Jun 15, 2015'
+ * {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
+ * {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
+ * {{ dateObj | date:'mmss' }}        // output is '43:11'
+ * ```
+ *
+ * ### Usage example
+ *
+ * The following component uses a date pipe to display the current date in different formats.
+ *
+ * ```
+ * \@Component({
+ *  selector: 'date-pipe',
+ *  template: `<div>
+ *    <p>Today is {{today | date}}</p>
+ *    <p>Or if you prefer, {{today | date:'fullDate'}}</p>
+ *    <p>The time is {{today | date:'h:mm a z'}}</p>
+ *  </div>`
+ * })
+ * // Get the current date and time as a date-time value.
+ * export class DatePipeComponent {
+ *   today: number = Date.now();
+ * }
+ * ```
+ *
+ */
+var DatePipe = /** @class */ (function () {
+    function DatePipe(locale) {
+        this.locale = locale;
+    }
+    /**
+     * @param value The date expression: a `Date` object,  a number
+     * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
+     * @param format The date/time components to include, using predefined options or a
+     * custom format string.
+     * @param timezone A timezone offset (such as `'+0430'`), or a standard
+     * UTC/GMT or continental US timezone abbreviation. Default is
+     * the local system timezone of the end-user's machine.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     * @returns A date string in the desired format.
+     */
+    /**
+     * @param {?} value The date expression: a `Date` object,  a number
+     * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
+     * @param {?=} format The date/time components to include, using predefined options or a
+     * custom format string.
+     * @param {?=} timezone A timezone offset (such as `'+0430'`), or a standard
+     * UTC/GMT or continental US timezone abbreviation. Default is
+     * the local system timezone of the end-user's machine.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     * @return {?} A date string in the desired format.
+     */
+    DatePipe.prototype.transform = /**
+     * @param {?} value The date expression: a `Date` object,  a number
+     * (milliseconds since UTC epoch), or an ISO string (https://www.w3.org/TR/NOTE-datetime).
+     * @param {?=} format The date/time components to include, using predefined options or a
+     * custom format string.
+     * @param {?=} timezone A timezone offset (such as `'+0430'`), or a standard
+     * UTC/GMT or continental US timezone abbreviation. Default is
+     * the local system timezone of the end-user's machine.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     * @return {?} A date string in the desired format.
+     */
+    function (value, format, timezone, locale) {
+        if (format === void 0) { format = 'mediumDate'; }
+        if (value == null || value === '' || value !== value)
+            return null;
+        try {
+            return formatDate(value, format, locale || this.locale, timezone);
+        }
+        catch (error) {
+            throw invalidPipeArgumentError(DatePipe, error.message);
+        }
+    };
+    DatePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'date', pure: true },] },
+    ];
+    /** @nocollapse */
+    DatePipe.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] }
+    ]; };
+    return DatePipe;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/** @type {?} */
 var _INTERPOLATION_REGEXP = /#/g;
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Maps a value to a string that pluralizes the value according to locale rules.
- * \@howToUse `expression | i18nPlural:mapping[:locale]`
  * \@description
  *
- *  Where:
- *  - `expression` is a number.
- *  - `mapping` is an object that mimics the ICU format, see
- *    http://userguide.icu-project.org/formatparse/messages
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
+ * Maps a value to a string that pluralizes the value according to locale rules.
  *
- *  ## Example
+ * \@usageNotes
+ *
+ * ### Example
  *
  * {\@example common/pipes/ts/i18n_pipe.ts region='I18nPluralPipeComponent'}
  *
  * \@experimental
  */
-var I18nPluralPipe = (function () {
+var I18nPluralPipe = /** @class */ (function () {
     function I18nPluralPipe(_localization) {
         this._localization = _localization;
     }
     /**
-     * @param {?} value
-     * @param {?} pluralMap
-     * @param {?=} locale
+     * @param value the number to be formatted
+     * @param pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param locale a `string` defining the locale to use (uses the current {@link LOCALE_ID} by
+     * default).
+     */
+    /**
+     * @param {?} value the number to be formatted
+     * @param {?} pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     I18nPluralPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?} pluralMap
-     * @param {?=} locale
+     * @param {?} value the number to be formatted
+     * @param {?} pluralMap an object that mimics the ICU format, see
+     * http://userguide.icu-project.org/formatparse/messages.
+     * @param {?=} locale a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
+     * default).
      * @return {?}
      */
     function (value, pluralMap, locale) {
@@ -5882,7 +6453,8 @@ var I18nPluralPipe = (function () {
         if (typeof pluralMap !== 'object' || pluralMap === null) {
             throw invalidPipeArgumentError(I18nPluralPipe, pluralMap);
         }
-        var /** @type {?} */ key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
+        /** @type {?} */
+        var key = getPluralCategory(value, Object.keys(pluralMap), this._localization, locale);
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     };
     I18nPluralPipe.decorators = [
@@ -5890,14 +6462,14 @@ var I18nPluralPipe = (function () {
     ];
     /** @nocollapse */
     I18nPluralPipe.ctorParameters = function () { return [
-        { type: NgLocalization, },
+        { type: NgLocalization }
     ]; };
     return I18nPluralPipe;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -5908,32 +6480,39 @@ var I18nPluralPipe = (function () {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Generic selector that displays the string that matches the current value.
- * \@howToUse `expression | i18nSelect:mapping`
  * \@description
  *
- *  Where `mapping` is an object that indicates the text that should be displayed
- *  for different values of the provided `expression`.
- *  If none of the keys of the mapping match the value of the `expression`, then the content
- *  of the `other` key is returned when present, otherwise an empty string is returned.
+ * Generic selector that displays the string that matches the current value.
  *
- *  ## Example
+ * If none of the keys of the `mapping` match the `value`, then the content
+ * of the `other` key is returned when present, otherwise an empty string is returned.
+ *
+ * \@usageNotes
+ *
+ * ### Example
  *
  * {\@example common/pipes/ts/i18n_pipe.ts region='I18nSelectPipeComponent'}
  *
- *  \@experimental
+ * \@experimental
  */
-var I18nSelectPipe = (function () {
+var I18nSelectPipe = /** @class */ (function () {
     function I18nSelectPipe() {
     }
     /**
-     * @param {?} value
-     * @param {?} mapping
+     * @param value a string to be internationalized.
+     * @param mapping an object that indicates the text that should be displayed
+     * for different values of the provided `value`.
+     */
+    /**
+     * @param {?} value a string to be internationalized.
+     * @param {?} mapping an object that indicates the text that should be displayed
+     * for different values of the provided `value`.
      * @return {?}
      */
     I18nSelectPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?} mapping
+     * @param {?} value a string to be internationalized.
+     * @param {?} mapping an object that indicates the text that should be displayed
+     * for different values of the provided `value`.
      * @return {?}
      */
     function (value, mapping) {
@@ -5953,14 +6532,12 @@ var I18nSelectPipe = (function () {
     I18nSelectPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'i18nSelect', pure: true },] },
     ];
-    /** @nocollapse */
-    I18nSelectPipe.ctorParameters = function () { return []; };
     return I18nSelectPipe;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -5971,40 +6548,172 @@ var I18nSelectPipe = (function () {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Converts value into JSON string.
- * \@howToUse `expression | json`
  * \@description
  *
- * Converts value into string using `JSON.stringify`. Useful for debugging.
+ * Converts a value into its JSON-format representation.  Useful for debugging.
  *
- * ### Example
+ * \@usageNotes
+ *
+ * The following component uses a JSON pipe to convert an object
+ * to JSON format, and displays the string in both formats for comparison.
+ *
  * {\@example common/pipes/ts/json_pipe.ts region='JsonPipe'}
  *
- * \@stable
  */
-var JsonPipe = (function () {
+var JsonPipe = /** @class */ (function () {
     function JsonPipe() {
     }
     /**
-     * @param {?} value
+     * @param value A value of any type to convert into a JSON-format string.
+     */
+    /**
+     * @param {?} value A value of any type to convert into a JSON-format string.
      * @return {?}
      */
     JsonPipe.prototype.transform = /**
-     * @param {?} value
+     * @param {?} value A value of any type to convert into a JSON-format string.
      * @return {?}
      */
     function (value) { return JSON.stringify(value, null, 2); };
     JsonPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'json', pure: false },] },
     ];
-    /** @nocollapse */
-    JsonPipe.ctorParameters = function () { return []; };
     return JsonPipe;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @template K, V
+ * @param {?} key
+ * @param {?} value
+ * @return {?}
+ */
+function makeKeyValuePair(key, value) {
+    return { key: key, value: value };
+}
+/**
+ * A key value pair.
+ * Usually used to represent the key value pairs from a Map or Object.
+ * @record
+ * @template K, V
+ */
+
+/**
+ * \@ngModule CommonModule
+ * \@description
+ *
+ * Transforms Object or Map into an array of key value pairs.
+ *
+ * The output array will be ordered by keys.
+ * By default the comparator will be by Unicode point value.
+ * You can optionally pass a compareFn if your keys are complex types.
+ *
+ * ## Examples
+ *
+ * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
+ * pipe.
+ *
+ * {\@example common/pipes/ts/keyvalue_pipe.ts region='KeyValuePipe'}
+ */
+var KeyValuePipe = /** @class */ (function () {
+    function KeyValuePipe(differs) {
+        this.differs = differs;
+    }
+    /**
+     * @template K, V
+     * @param {?} input
+     * @param {?=} compareFn
+     * @return {?}
+     */
+    KeyValuePipe.prototype.transform = /**
+     * @template K, V
+     * @param {?} input
+     * @param {?=} compareFn
+     * @return {?}
+     */
+    function (input, compareFn) {
+        var _this = this;
+        if (compareFn === void 0) { compareFn = defaultComparator; }
+        if (!input || (!(input instanceof Map) && typeof input !== 'object')) {
+            return null;
+        }
+        if (!this.differ) {
+            // make a differ for whatever type we've been passed in
+            this.differ = this.differs.find(input).create();
+        }
+        /** @type {?} */
+        var differChanges = this.differ.diff(/** @type {?} */ (input));
+        if (differChanges) {
+            this.keyValues = [];
+            differChanges.forEachItem(function (r) {
+                _this.keyValues.push(makeKeyValuePair(r.key, /** @type {?} */ ((r.currentValue))));
+            });
+            this.keyValues.sort(compareFn);
+        }
+        return this.keyValues;
+    };
+    KeyValuePipe.decorators = [
+        { type: _angular_core.Pipe, args: [{ name: 'keyvalue', pure: false },] },
+    ];
+    /** @nocollapse */
+    KeyValuePipe.ctorParameters = function () { return [
+        { type: _angular_core.KeyValueDiffers }
+    ]; };
+    return KeyValuePipe;
+}());
+/**
+ * @template K, V
+ * @param {?} keyValueA
+ * @param {?} keyValueB
+ * @return {?}
+ */
+function defaultComparator(keyValueA, keyValueB) {
+    /** @type {?} */
+    var a = keyValueA.key;
+    /** @type {?} */
+    var b = keyValueB.key;
+    // if same exit with 0;
+    if (a === b)
+        return 0;
+    // make sure that undefined are at the end of the sort.
+    if (a === undefined)
+        return 1;
+    if (b === undefined)
+        return -1;
+    // make sure that nulls are at the end of the sort.
+    if (a === null)
+        return 1;
+    if (b === null)
+        return -1;
+    if (typeof a == 'string' && typeof b == 'string') {
+        return a < b ? -1 : 1;
+    }
+    if (typeof a == 'number' && typeof b == 'number') {
+        return a - b;
+    }
+    if (typeof a == 'boolean' && typeof b == 'boolean') {
+        return a < b ? -1 : 1;
+    }
+    /** @type {?} */
+    var aString = String(a);
+    /** @type {?} */
+    var bString = String(b);
+    return aString == bString ? 0 : aString < bString ? -1 : 1;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -6015,167 +6724,327 @@ var JsonPipe = (function () {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number according to locale rules.
- * \@howToUse `number_expression | number[:digitInfo[:locale]]`
+ * \@description
  *
- * Formats a number as text. Group sizing and separator and other locale-specific
- * configurations are based on the active locale.
+ * Transforms a number into a string,
+ * formatted according to locale rules that determine group sizing and
+ * separator, decimal-point character, and other locale-specific
+ * configurations.
  *
- * where `expression` is a number:
- *  - `digitInfo` is a `string` which has a following format: <br>
- *     <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>
- *   - `minIntegerDigits` is the minimum number of integer digits to use. Defaults to `1`.
- *   - `minFractionDigits` is the minimum number of digits after fraction. Defaults to `0`.
- *   - `maxFractionDigits` is the maximum number of digits after fraction. Defaults to `3`.
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
+ * If no parameters are specified, the function rounds off to the nearest value using this
+ * [rounding method](https://en.wikibooks.org/wiki/Arithmetic/Rounding).
+ * The behavior differs from that of the JavaScript ```Math.round()``` function.
+ * In the following case for example, the pipe rounds down where
+ * ```Math.round()``` rounds up:
  *
- * For more information on the acceptable range for each of these numbers and other
- * details see your native internationalization library.
+ * ```html
+ * -2.5 | number:'1.0-0'
+ * > -3
+ * Math.round(-2.5)
+ * > -2
+ * ```
+ *
+ * @see `formatNumber()`
+ *
+ * \@usageNotes
+ * The following code shows how the pipe transforms numbers
+ * into text strings, according to various format specifications,
+ * where the caller's default locale is `en-US`.
  *
  * ### Example
  *
- * {\@example common/pipes/ts/number_pipe.ts region='NumberPipe'}
+ * <code-example path="common/pipes/ts/number_pipe.ts" region='NumberPipe'></code-example>
  *
- * \@stable
  */
-var DecimalPipe = (function () {
+var DecimalPipe = /** @class */ (function () {
     function DecimalPipe(_locale) {
         this._locale = _locale;
     }
     /**
-     * @param {?} value
-     * @param {?=} digits
-     * @param {?=} locale
+     * @param value The number to be formatted.
+     * @param digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     */
+    /**
+     * @param {?} value The number to be formatted.
+     * @param {?=} digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      * @return {?}
      */
     DecimalPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?=} digits
-     * @param {?=} locale
+     * @param {?} value The number to be formatted.
+     * @param {?=} digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      * @return {?}
      */
-    function (value, digits, locale) {
+    function (value, digitsInfo, locale) {
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
-        var _a = formatNumber$1(value, locale, NumberFormatStyle.Decimal, digits), str = _a.str, error = _a.error;
-        if (error) {
-            throw invalidPipeArgumentError(DecimalPipe, error);
+        try {
+            /** @type {?} */
+            var num = strToNumber(value);
+            return formatNumber(num, locale, digitsInfo);
         }
-        return str;
+        catch (error) {
+            throw invalidPipeArgumentError(DecimalPipe, error.message);
+        }
     };
     DecimalPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'number' },] },
     ];
     /** @nocollapse */
     DecimalPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] }
     ]; };
     return DecimalPipe;
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as a percentage according to locale rules.
- * \@howToUse `number_expression | percent[:digitInfo[:locale]]`
- *
  * \@description
  *
- * Formats a number as percentage.
+ * Transforms a number to a percentage
+ * string, formatted according to locale rules that determine group sizing and
+ * separator, decimal-point character, and other locale-specific
+ * configurations.
  *
- * - `digitInfo` See {\@link DecimalPipe} for detailed description.
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
+ * @see `formatPercent()`
  *
- * ### Example
+ * \@usageNotes
+ * The following code shows how the pipe transforms numbers
+ * into text strings, according to various format specifications,
+ * where the caller's default locale is `en-US`.
  *
- * {\@example common/pipes/ts/percent_pipe.ts region='PercentPipe'}
+ * <code-example path="common/pipes/ts/percent_pipe.ts" region='PercentPipe'></code-example>
  *
- * \@stable
+ *
  */
-var PercentPipe = (function () {
+var PercentPipe = /** @class */ (function () {
     function PercentPipe(_locale) {
         this._locale = _locale;
     }
     /**
-     * @param {?} value
-     * @param {?=} digits
-     * @param {?=} locale
+     *
+     * @param value The number to be formatted as a percentage.
+     * @param digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     */
+    /**
+     *
+     * @param {?} value The number to be formatted as a percentage.
+     * @param {?=} digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      * @return {?}
      */
     PercentPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?=} digits
-     * @param {?=} locale
+     *
+     * @param {?} value The number to be formatted as a percentage.
+     * @param {?=} digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      * @return {?}
      */
-    function (value, digits, locale) {
+    function (value, digitsInfo, locale) {
         if (isEmpty(value))
             return null;
         locale = locale || this._locale;
-        var _a = formatNumber$1(value, locale, NumberFormatStyle.Percent, digits), str = _a.str, error = _a.error;
-        if (error) {
-            throw invalidPipeArgumentError(PercentPipe, error);
+        try {
+            /** @type {?} */
+            var num = strToNumber(value);
+            return formatPercent(num, locale, digitsInfo);
         }
-        return str;
+        catch (error) {
+            throw invalidPipeArgumentError(PercentPipe, error.message);
+        }
     };
     PercentPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'percent' },] },
     ];
     /** @nocollapse */
     PercentPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] }
     ]; };
     return PercentPipe;
 }());
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Formats a number as currency using locale rules.
- * \@howToUse `number_expression | currency[:currencyCode[:display[:digitInfo[:locale]]]]`
  * \@description
  *
- * Use `currency` to format a number as currency.
+ * Transforms a number to a currency string, formatted according to locale rules
+ * that determine group sizing and separator, decimal-point character,
+ * and other locale-specific configurations.
  *
- * - `currencyCode` is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code, such
- *    as `USD` for the US dollar and `EUR` for the euro.
- * - `display` indicates whether to show the currency symbol or the code.
- *   - `code`(default): use code (e.g. `USD`).
- *   - `symbol`: use symbol (e.g. `$`).
- *   - `symbol-narrow`: some countries have two symbols for their currency, one regular and one
- *   - boolean (deprecated from v5): `true` for symbol and false for `code`
- *   narrow (e.g. the canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`).
- *   If there is no narrow symbol for the chosen currency, the regular symbol will be used.
- * - `digitInfo` See {\@link DecimalPipe} for detailed description.
- *  - `locale` is a `string` defining the locale to use (uses the current {\@link LOCALE_ID} by
- * default)
+ * @see `getCurrencySymbol()`
+ * @see `formatCurrency()`
  *
- * ### Example
+ * \@usageNotes
+ * The following code shows how the pipe transforms numbers
+ * into text strings, according to various format specifications,
+ * where the caller's default locale is `en-US`.
  *
- * {\@example common/pipes/ts/currency_pipe.ts region='CurrencyPipe'}
+ * <code-example path="common/pipes/ts/currency_pipe.ts" region='CurrencyPipe'></code-example>
  *
- * \@stable
+ *
  */
-var CurrencyPipe = (function () {
+var CurrencyPipe = /** @class */ (function () {
     function CurrencyPipe(_locale) {
         this._locale = _locale;
     }
     /**
-     * @param {?} value
-     * @param {?=} currencyCode
-     * @param {?=} display
-     * @param {?=} digits
-     * @param {?=} locale
+     *
+     * @param value The number to be formatted as currency.
+     * @param currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
+     * such as `USD` for the US dollar and `EUR` for the euro.
+     * @param display The format for the currency indicator. One of the following:
+     *   - `code`: Show the code (such as `USD`).
+     *   - `symbol`(default): Show the symbol (such as `$`).
+     *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
+     * currency.
+     * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
+     * locale has no narrow symbol, uses the standard symbol for the locale.
+     *   - String: Use the given string value instead of a code or a symbol.
+     *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
+     *
+     * @param digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * If not provided, the number will be formatted with the proper amount of digits,
+     * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+     * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
+     */
+    /**
+     *
+     * @param {?} value The number to be formatted as currency.
+     * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
+     * such as `USD` for the US dollar and `EUR` for the euro.
+     * @param {?=} display The format for the currency indicator. One of the following:
+     *   - `code`: Show the code (such as `USD`).
+     *   - `symbol`(default): Show the symbol (such as `$`).
+     *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
+     * currency.
+     * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
+     * locale has no narrow symbol, uses the standard symbol for the locale.
+     *   - String: Use the given string value instead of a code or a symbol.
+     *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
+     *
+     * @param {?=} digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * If not provided, the number will be formatted with the proper amount of digits,
+     * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+     * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      * @return {?}
      */
     CurrencyPipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?=} currencyCode
-     * @param {?=} display
-     * @param {?=} digits
-     * @param {?=} locale
+     *
+     * @param {?} value The number to be formatted as currency.
+     * @param {?=} currencyCode The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code,
+     * such as `USD` for the US dollar and `EUR` for the euro.
+     * @param {?=} display The format for the currency indicator. One of the following:
+     *   - `code`: Show the code (such as `USD`).
+     *   - `symbol`(default): Show the symbol (such as `$`).
+     *   - `symbol-narrow`: Use the narrow symbol for locales that have two symbols for their
+     * currency.
+     * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
+     * locale has no narrow symbol, uses the standard symbol for the locale.
+     *   - String: Use the given string value instead of a code or a symbol.
+     *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
+     *
+     * @param {?=} digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * If not provided, the number will be formatted with the proper amount of digits,
+     * depending on what the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) specifies.
+     * For example, the Canadian dollar has 2 digits, whereas the Chilean peso has none.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `LOCALE_ID`, which is `en-US` by default.
+     * See [Setting your app locale](guide/i18n#setting-up-the-locale-of-your-app).
      * @return {?}
      */
-    function (value, currencyCode, display, digits, locale) {
+    function (value, currencyCode, display, digitsInfo, locale) {
         if (display === void 0) { display = 'symbol'; }
         if (isEmpty(value))
             return null;
@@ -6186,22 +7055,31 @@ var CurrencyPipe = (function () {
             }
             display = display ? 'symbol' : 'code';
         }
-        var /** @type {?} */ currency = currencyCode || 'USD';
+        /** @type {?} */
+        var currency = currencyCode || 'USD';
         if (display !== 'code') {
-            currency = findCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
+            if (display === 'symbol' || display === 'symbol-narrow') {
+                currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow', locale);
+            }
+            else {
+                currency = display;
+            }
         }
-        var _a = formatNumber$1(value, locale, NumberFormatStyle.Currency, digits, currency), str = _a.str, error = _a.error;
-        if (error) {
-            throw invalidPipeArgumentError(CurrencyPipe, error);
+        try {
+            /** @type {?} */
+            var num = strToNumber(value);
+            return formatCurrency(num, locale, currency, currencyCode, digitsInfo);
         }
-        return str;
+        catch (error) {
+            throw invalidPipeArgumentError(CurrencyPipe, error.message);
+        }
     };
     CurrencyPipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'currency' },] },
     ];
     /** @nocollapse */
     CurrencyPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] },] },
+        { type: String, decorators: [{ type: _angular_core.Inject, args: [_angular_core.LOCALE_ID,] }] }
     ]; };
     return CurrencyPipe;
 }());
@@ -6212,10 +7090,25 @@ var CurrencyPipe = (function () {
 function isEmpty(value) {
     return value == null || value === '' || value !== value;
 }
+/**
+ * Transforms a string into a number (if needed).
+ * @param {?} value
+ * @return {?}
+ */
+function strToNumber(value) {
+    // Convert strings to numbers
+    if (typeof value === 'string' && !isNaN(Number(value) - parseFloat(value))) {
+        return Number(value);
+    }
+    if (typeof value !== 'number') {
+        throw new Error(value + " is not a number");
+    }
+    return value;
+}
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -6226,32 +7119,21 @@ function isEmpty(value) {
  */
 /**
  * \@ngModule CommonModule
- * \@whatItDoes Creates a new List or String containing a subset (slice) of the elements.
- * \@howToUse `array_or_string_expression | slice:start[:end]`
  * \@description
  *
- * Where the input expression is a `List` or `String`, and:
- * - `start`: The starting index of the subset to return.
- *   - **a positive integer**: return the item at `start` index and all items after
- *     in the list or string expression.
- *   - **a negative integer**: return the item at `start` index from the end and all items after
- *     in the list or string expression.
- *   - **if positive and greater than the size of the expression**: return an empty list or string.
- *   - **if negative and greater than the size of the expression**: return entire list or string.
- * - `end`: The ending index of the subset to return.
- *   - **omitted**: return all items until the end.
- *   - **if positive**: return all items before `end` index of the list or string.
- *   - **if negative**: return all items before `end` index from the end of the list or string.
+ * Creates a new `Array` or `String` containing a subset (slice) of the elements.
+ *
+ * \@usageNotes
  *
  * All behavior is based on the expected behavior of the JavaScript API `Array.prototype.slice()`
  * and `String.prototype.slice()`.
  *
- * When operating on a [List], the returned list is always a copy even when all
+ * When operating on an `Array`, the returned `Array` is always a copy even when all
  * the elements are being returned.
  *
  * When operating on a blank value, the pipe returns the blank value.
  *
- * ## List Example
+ * ### List Example
  *
  * This `ngFor` example:
  *
@@ -6259,28 +7141,64 @@ function isEmpty(value) {
  *
  * produces the following:
  *
- *     <li>b</li>
- *     <li>c</li>
+ * ```html
+ * <li>b</li>
+ * <li>c</li>
+ * ```
  *
- * ## String Examples
+ * ### String Examples
  *
  * {\@example common/pipes/ts/slice_pipe.ts region='SlicePipe_string'}
  *
- * \@stable
  */
-var SlicePipe = (function () {
+var SlicePipe = /** @class */ (function () {
     function SlicePipe() {
     }
     /**
-     * @param {?} value
-     * @param {?} start
-     * @param {?=} end
+     * @param value a list or a string to be sliced.
+     * @param start the starting index of the subset to return:
+     *   - **a positive integer**: return the item at `start` index and all items after
+     *     in the list or string expression.
+     *   - **a negative integer**: return the item at `start` index from the end and all items after
+     *     in the list or string expression.
+     *   - **if positive and greater than the size of the expression**: return an empty list or
+     * string.
+     *   - **if negative and greater than the size of the expression**: return entire list or string.
+     * @param end the ending index of the subset to return:
+     *   - **omitted**: return all items until the end.
+     *   - **if positive**: return all items before `end` index of the list or string.
+     *   - **if negative**: return all items before `end` index from the end of the list or string.
+     */
+    /**
+     * @param {?} value a list or a string to be sliced.
+     * @param {?} start the starting index of the subset to return:
+     *   - **a positive integer**: return the item at `start` index and all items after
+     *     in the list or string expression.
+     *   - **a negative integer**: return the item at `start` index from the end and all items after
+     *     in the list or string expression.
+     *   - **if positive and greater than the size of the expression**: return an empty list or
+     * string.
+     *   - **if negative and greater than the size of the expression**: return entire list or string.
+     * @param {?=} end the ending index of the subset to return:
+     *   - **omitted**: return all items until the end.
+     *   - **if positive**: return all items before `end` index of the list or string.
+     *   - **if negative**: return all items before `end` index from the end of the list or string.
      * @return {?}
      */
     SlicePipe.prototype.transform = /**
-     * @param {?} value
-     * @param {?} start
-     * @param {?=} end
+     * @param {?} value a list or a string to be sliced.
+     * @param {?} start the starting index of the subset to return:
+     *   - **a positive integer**: return the item at `start` index and all items after
+     *     in the list or string expression.
+     *   - **a negative integer**: return the item at `start` index from the end and all items after
+     *     in the list or string expression.
+     *   - **if positive and greater than the size of the expression**: return an empty list or
+     * string.
+     *   - **if negative and greater than the size of the expression**: return entire list or string.
+     * @param {?=} end the ending index of the subset to return:
+     *   - **omitted**: return all items until the end.
+     *   - **if positive**: return all items before `end` index of the list or string.
+     *   - **if negative**: return all items before `end` index from the end of the list or string.
      * @return {?}
      */
     function (value, start, end) {
@@ -6303,14 +7221,12 @@ var SlicePipe = (function () {
     SlicePipe.decorators = [
         { type: _angular_core.Pipe, args: [{ name: 'slice', pure: false },] },
     ];
-    /** @nocollapse */
-    SlicePipe.ctorParameters = function () { return []; };
     return SlicePipe;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -6319,14 +7235,9 @@ var SlicePipe = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @module
- * @description
- * This module provides a set of common Pipes.
- */
-/**
+/** *
  * A collection of Angular pipes that are likely to be used in each and every application.
- */
+  @type {?} */
 var COMMON_PIPES = [
     AsyncPipe,
     UpperCasePipe,
@@ -6340,11 +7251,12 @@ var COMMON_PIPES = [
     DatePipe,
     I18nPluralPipe,
     I18nSelectPipe,
+    KeyValuePipe,
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -6356,9 +7268,9 @@ var COMMON_PIPES = [
 /**
  * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
  *
- * \@stable
+ *
  */
-var CommonModule = (function () {
+var CommonModule = /** @class */ (function () {
     function CommonModule() {
     }
     CommonModule.decorators = [
@@ -6370,8 +7282,6 @@ var CommonModule = (function () {
                     ],
                 },] },
     ];
-    /** @nocollapse */
-    CommonModule.ctorParameters = function () { return []; };
     return CommonModule;
 }());
 var ɵ0 = getPluralCase;
@@ -6380,7 +7290,7 @@ var ɵ0 = getPluralCase;
  *
  * @deprecated from v5
  */
-var DeprecatedI18NPipesModule = (function () {
+var DeprecatedI18NPipesModule = /** @class */ (function () {
     function DeprecatedI18NPipesModule() {
     }
     DeprecatedI18NPipesModule.decorators = [
@@ -6390,14 +7300,12 @@ var DeprecatedI18NPipesModule = (function () {
                     providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
                 },] },
     ];
-    /** @nocollapse */
-    DeprecatedI18NPipesModule.ctorParameters = function () { return []; };
     return DeprecatedI18NPipesModule;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -6406,19 +7314,19 @@ var DeprecatedI18NPipesModule = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
+/** *
  * A DI Token representing the main rendering context. In a browser this is the DOM Document.
  *
  * Note: Document might not be available in the Application Context when Application and Rendering
  * Contexts are not the same (e.g. when running the application into a Web Worker).
  *
- * \@stable
- */
+ *
+  @type {?} */
 var DOCUMENT = new _angular_core.InjectionToken('DocumentToken');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -6427,9 +7335,13 @@ var DOCUMENT = new _angular_core.InjectionToken('DocumentToken');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/** @type {?} */
 var PLATFORM_BROWSER_ID = 'browser';
+/** @type {?} */
 var PLATFORM_SERVER_ID = 'server';
+/** @type {?} */
 var PLATFORM_WORKER_APP_ID = 'browserWorkerApp';
+/** @type {?} */
 var PLATFORM_WORKER_UI_ID = 'browserWorkerUi';
 /**
  * Returns whether a platform id represents a browser platform.
@@ -6470,7 +7382,21 @@ function isPlatformWorkerUi(platformId) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/** @type {?} */
+var VERSION = new _angular_core.Version('7.0.0-beta.4-a2418a9037');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -6480,15 +7406,276 @@ function isPlatformWorkerUi(platformId) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
+ * \@whatItDoes Manages the scroll position.
+ * @abstract
  */
+var ViewportScroller = /** @class */ (function () {
+    function ViewportScroller() {
+    }
+    /** @nocollapse */
+    /** @nocollapse */ ViewportScroller.ngInjectableDef = _angular_core.defineInjectable({ providedIn: 'root', factory: function () { return new BrowserViewportScroller(_angular_core.inject(DOCUMENT), window); } });
+    return ViewportScroller;
+}());
 /**
- * \@stable
+ * \@whatItDoes Manages the scroll position.
  */
-var VERSION = new _angular_core.Version('5.1.0-beta.0-21bfaf226');
+var BrowserViewportScroller = /** @class */ (function () {
+    function BrowserViewportScroller(document, window) {
+        this.document = document;
+        this.window = window;
+        this.offset = function () { return [0, 0]; };
+    }
+    /**
+     * @whatItDoes Configures the top offset used when scrolling to an anchor.
+     *
+     * * When given a number, the service will always use the number.
+     * * When given a function, the service will invoke the function every time it restores scroll
+     * position.
+     */
+    /**
+     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     *
+     * * When given a number, the service will always use the number.
+     * * When given a function, the service will invoke the function every time it restores scroll
+     * position.
+     * @param {?} offset
+     * @return {?}
+     */
+    BrowserViewportScroller.prototype.setOffset = /**
+     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     *
+     * * When given a number, the service will always use the number.
+     * * When given a function, the service will invoke the function every time it restores scroll
+     * position.
+     * @param {?} offset
+     * @return {?}
+     */
+    function (offset) {
+        if (Array.isArray(offset)) {
+            this.offset = function () { return offset; };
+        }
+        else {
+            this.offset = offset;
+        }
+    };
+    /**
+     * @whatItDoes Returns the current scroll position.
+     */
+    /**
+     * \@whatItDoes Returns the current scroll position.
+     * @return {?}
+     */
+    BrowserViewportScroller.prototype.getScrollPosition = /**
+     * \@whatItDoes Returns the current scroll position.
+     * @return {?}
+     */
+    function () {
+        if (this.supportScrollRestoration()) {
+            return [this.window.scrollX, this.window.scrollY];
+        }
+        else {
+            return [0, 0];
+        }
+    };
+    /**
+     * @whatItDoes Sets the scroll position.
+     */
+    /**
+     * \@whatItDoes Sets the scroll position.
+     * @param {?} position
+     * @return {?}
+     */
+    BrowserViewportScroller.prototype.scrollToPosition = /**
+     * \@whatItDoes Sets the scroll position.
+     * @param {?} position
+     * @return {?}
+     */
+    function (position) {
+        if (this.supportScrollRestoration()) {
+            this.window.scrollTo(position[0], position[1]);
+        }
+    };
+    /**
+     * @whatItDoes Scrolls to the provided anchor.
+     */
+    /**
+     * \@whatItDoes Scrolls to the provided anchor.
+     * @param {?} anchor
+     * @return {?}
+     */
+    BrowserViewportScroller.prototype.scrollToAnchor = /**
+     * \@whatItDoes Scrolls to the provided anchor.
+     * @param {?} anchor
+     * @return {?}
+     */
+    function (anchor) {
+        if (this.supportScrollRestoration()) {
+            /** @type {?} */
+            var elSelectedById = this.document.querySelector("#" + anchor);
+            if (elSelectedById) {
+                this.scrollToElement(elSelectedById);
+                return;
+            }
+            /** @type {?} */
+            var elSelectedByName = this.document.querySelector("[name='" + anchor + "']");
+            if (elSelectedByName) {
+                this.scrollToElement(elSelectedByName);
+                return;
+            }
+        }
+    };
+    /**
+     * @whatItDoes Disables automatic scroll restoration provided by the browser.
+     */
+    /**
+     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * @param {?} scrollRestoration
+     * @return {?}
+     */
+    BrowserViewportScroller.prototype.setHistoryScrollRestoration = /**
+     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * @param {?} scrollRestoration
+     * @return {?}
+     */
+    function (scrollRestoration) {
+        if (this.supportScrollRestoration()) {
+            /** @type {?} */
+            var history_1 = this.window.history;
+            if (history_1 && history_1.scrollRestoration) {
+                history_1.scrollRestoration = scrollRestoration;
+            }
+        }
+    };
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    BrowserViewportScroller.prototype.scrollToElement = /**
+     * @param {?} el
+     * @return {?}
+     */
+    function (el) {
+        /** @type {?} */
+        var rect = el.getBoundingClientRect();
+        /** @type {?} */
+        var left = rect.left + this.window.pageXOffset;
+        /** @type {?} */
+        var top = rect.top + this.window.pageYOffset;
+        /** @type {?} */
+        var offset = this.offset();
+        this.window.scrollTo(left - offset[0], top - offset[1]);
+    };
+    /**
+     * We only support scroll restoration when we can get a hold of window.
+     * This means that we do not support this behavior when running in a web worker.
+     *
+     * Lifting this restriction right now would require more changes in the dom adapter.
+     * Since webworkers aren't widely used, we will lift it once RouterScroller is
+     * battle-tested.
+     * @return {?}
+     */
+    BrowserViewportScroller.prototype.supportScrollRestoration = /**
+     * We only support scroll restoration when we can get a hold of window.
+     * This means that we do not support this behavior when running in a web worker.
+     *
+     * Lifting this restriction right now would require more changes in the dom adapter.
+     * Since webworkers aren't widely used, we will lift it once RouterScroller is
+     * battle-tested.
+     * @return {?}
+     */
+    function () {
+        try {
+            return !!this.window && !!this.window.scrollTo;
+        }
+        catch (e) {
+            return false;
+        }
+    };
+    return BrowserViewportScroller;
+}());
+/**
+ * \@whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * live in \@angular/common as it will be used by both platform-server and platform-webworker.
+ */
+var NullViewportScroller = /** @class */ (function () {
+    function NullViewportScroller() {
+    }
+    /**
+     * @whatItDoes empty implementation
+     */
+    /**
+     * \@whatItDoes empty implementation
+     * @param {?} offset
+     * @return {?}
+     */
+    NullViewportScroller.prototype.setOffset = /**
+     * \@whatItDoes empty implementation
+     * @param {?} offset
+     * @return {?}
+     */
+    function (offset) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    /**
+     * \@whatItDoes empty implementation
+     * @return {?}
+     */
+    NullViewportScroller.prototype.getScrollPosition = /**
+     * \@whatItDoes empty implementation
+     * @return {?}
+     */
+    function () { return [0, 0]; };
+    /**
+     * @whatItDoes empty implementation
+     */
+    /**
+     * \@whatItDoes empty implementation
+     * @param {?} position
+     * @return {?}
+     */
+    NullViewportScroller.prototype.scrollToPosition = /**
+     * \@whatItDoes empty implementation
+     * @param {?} position
+     * @return {?}
+     */
+    function (position) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    /**
+     * \@whatItDoes empty implementation
+     * @param {?} anchor
+     * @return {?}
+     */
+    NullViewportScroller.prototype.scrollToAnchor = /**
+     * \@whatItDoes empty implementation
+     * @param {?} anchor
+     * @return {?}
+     */
+    function (anchor) { };
+    /**
+     * @whatItDoes empty implementation
+     */
+    /**
+     * \@whatItDoes empty implementation
+     * @param {?} scrollRestoration
+     * @return {?}
+     */
+    NullViewportScroller.prototype.setHistoryScrollRestoration = /**
+     * \@whatItDoes empty implementation
+     * @param {?} scrollRestoration
+     * @return {?}
+     */
+    function (scrollRestoration) { };
+    return NullViewportScroller;
+}());
 
+exports.ɵregisterLocaleData = registerLocaleData;
+exports.formatDate = formatDate;
+exports.formatCurrency = formatCurrency;
+exports.formatNumber = formatNumber;
+exports.formatPercent = formatPercent;
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
 exports.registerLocaleData = registerLocaleData;
@@ -6499,6 +7686,8 @@ exports.TranslationWidth = TranslationWidth;
 exports.FormatWidth = FormatWidth;
 exports.NumberSymbol = NumberSymbol;
 exports.WeekDay = WeekDay;
+exports.getNumberOfCurrencyDigits = getNumberOfCurrencyDigits;
+exports.getCurrencySymbol = getCurrencySymbol;
 exports.getLocaleDayPeriods = getLocaleDayPeriods;
 exports.getLocaleDayNames = getLocaleDayNames;
 exports.getLocaleMonthNames = getLocaleMonthNames;
@@ -6516,7 +7705,6 @@ exports.getLocaleNumberSymbol = getLocaleNumberSymbol;
 exports.getLocaleNumberFormat = getLocaleNumberFormat;
 exports.getLocaleCurrencyName = getLocaleCurrencyName;
 exports.getLocaleCurrencySymbol = getLocaleCurrencySymbol;
-exports.CURRENCIES = CURRENCIES;
 exports.ɵparseCookieValue = parseCookieValue;
 exports.CommonModule = CommonModule;
 exports.DeprecatedI18NPipesModule = DeprecatedI18NPipesModule;
@@ -6546,6 +7734,7 @@ exports.PercentPipe = PercentPipe;
 exports.SlicePipe = SlicePipe;
 exports.UpperCasePipe = UpperCasePipe;
 exports.TitleCasePipe = TitleCasePipe;
+exports.KeyValuePipe = KeyValuePipe;
 exports.DeprecatedDatePipe = DeprecatedDatePipe;
 exports.DeprecatedCurrencyPipe = DeprecatedCurrencyPipe;
 exports.DeprecatedDecimalPipe = DeprecatedDecimalPipe;
@@ -6559,6 +7748,8 @@ exports.isPlatformServer = isPlatformServer;
 exports.isPlatformWorkerApp = isPlatformWorkerApp;
 exports.isPlatformWorkerUi = isPlatformWorkerUi;
 exports.VERSION = VERSION;
+exports.ViewportScroller = ViewportScroller;
+exports.ɵNullViewportScroller = NullViewportScroller;
 exports.PlatformLocation = PlatformLocation;
 exports.LOCATION_INITIALIZED = LOCATION_INITIALIZED;
 exports.LocationStrategy = LocationStrategy;

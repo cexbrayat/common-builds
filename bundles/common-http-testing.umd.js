@@ -1,27 +1,34 @@
 /**
- * @license Angular v5.1.0-beta.0-21bfaf226
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v7.0.0-beta.4-a2418a9037
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs/Observable')) :
-	typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs/Observable'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.Rx));
-}(this, (function (exports,_angular_common_http,_angular_core,rxjs_Observable) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@angular/core'), require('rxjs')) :
+	typeof define === 'function' && define.amd ? define('@angular/common/http/testing', ['exports', '@angular/common/http', '@angular/core', 'rxjs'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}, global.ng.common.http = global.ng.common.http || {}, global.ng.common.http.testing = {}),global.ng.common.http,global.ng.core,global.rxjs));
+}(this, (function (exports,_angular_common_http,_angular_core,rxjs) { 'use strict';
 
 /**
- * @license Angular v5.1.0-beta.0-21bfaf226
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v7.0.0-beta.4-a2418a9037
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Defines a matcher for requests based on URL, method, or both.
  *
- * \@stable
+ *
  * @record
  */
 
@@ -29,10 +36,10 @@
  * Controller to be injected into tests, that allows for mocking and flushing
  * of requests.
  *
- * \@stable
+ *
  * @abstract
  */
-var HttpTestingController = (function () {
+var HttpTestingController = /** @class */ (function () {
     function HttpTestingController() {
     }
     return HttpTestingController;
@@ -40,7 +47,7 @@ var HttpTestingController = (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -55,9 +62,9 @@ var HttpTestingController = (function () {
  * This interface allows access to the underlying `HttpRequest`, and allows
  * responding with `HttpEvent`s or `HttpErrorResponse`s.
  *
- * \@stable
+ *
  */
-var TestRequest = (function () {
+var TestRequest = /** @class */ (function () {
     function TestRequest(request, observer) {
         this.request = request;
         this.observer = observer;
@@ -107,11 +114,15 @@ var TestRequest = (function () {
         if (this.cancelled) {
             throw new Error("Cannot flush a cancelled request.");
         }
-        var /** @type {?} */ url = this.request.urlWithParams;
-        var /** @type {?} */ headers = (opts.headers instanceof _angular_common_http.HttpHeaders) ? opts.headers : new _angular_common_http.HttpHeaders(opts.headers);
+        /** @type {?} */
+        var url = this.request.urlWithParams;
+        /** @type {?} */
+        var headers = (opts.headers instanceof _angular_common_http.HttpHeaders) ? opts.headers : new _angular_common_http.HttpHeaders(opts.headers);
         body = _maybeConvertBody(this.request.responseType, body);
-        var /** @type {?} */ statusText = opts.statusText;
-        var /** @type {?} */ status = opts.status !== undefined ? opts.status : 200;
+        /** @type {?} */
+        var statusText = opts.statusText;
+        /** @type {?} */
+        var status = opts.status !== undefined ? opts.status : 200;
         if (opts.status === undefined) {
             if (body === null) {
                 status = 204;
@@ -155,7 +166,8 @@ var TestRequest = (function () {
         if (opts.status && opts.status >= 200 && opts.status < 300) {
             throw new Error("error() called with a successful status.");
         }
-        var /** @type {?} */ headers = (opts.headers instanceof _angular_common_http.HttpHeaders) ? opts.headers : new _angular_common_http.HttpHeaders(opts.headers);
+        /** @type {?} */
+        var headers = (opts.headers instanceof _angular_common_http.HttpHeaders) ? opts.headers : new _angular_common_http.HttpHeaders(opts.headers);
         this.observer.error(new _angular_common_http.HttpErrorResponse({
             error: error,
             headers: headers,
@@ -263,26 +275,17 @@ function _toTextBody(body) {
  * @return {?}
  */
 function _maybeConvertBody(responseType, body) {
+    if (body === null) {
+        return null;
+    }
     switch (responseType) {
         case 'arraybuffer':
-            if (body === null) {
-                return null;
-            }
             return _toArrayBufferBody(body);
         case 'blob':
-            if (body === null) {
-                return null;
-            }
             return _toBlob(body);
         case 'json':
-            if (body === null) {
-                return 'null';
-            }
             return _toJsonBody(body);
         case 'text':
-            if (body === null) {
-                return null;
-            }
             return _toTextBody(body);
         default:
             throw new Error("Unsupported responseType: " + responseType);
@@ -291,7 +294,7 @@ function _maybeConvertBody(responseType, body) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -309,9 +312,9 @@ function _maybeConvertBody(responseType, body) {
  * requests were made and then flush them. In the end, a verify() method asserts
  * that no unexpected requests were made.
  *
- * \@stable
+ *
  */
-var HttpClientTestingBackend = (function () {
+var HttpClientTestingBackend = /** @class */ (function () {
     function HttpClientTestingBackend() {
         /**
          * List of pending requests which have not yet been expected.
@@ -333,8 +336,9 @@ var HttpClientTestingBackend = (function () {
      */
     function (req) {
         var _this = this;
-        return new rxjs_Observable.Observable(function (observer) {
-            var /** @type {?} */ testReq = new TestRequest(req, observer);
+        return new rxjs.Observable(function (observer) {
+            /** @type {?} */
+            var testReq = new TestRequest(req, observer);
             _this.open.push(testReq);
             observer.next(/** @type {?} */ ({ type: _angular_common_http.HttpEventType.Sent }));
             return function () { testReq._cancelled = true; };
@@ -358,10 +362,8 @@ var HttpClientTestingBackend = (function () {
             return this.open.filter(function (testReq) { return match(testReq.request); });
         }
         else {
-            return this.open.filter(function (testReq) {
-                return (!match.method || testReq.request.method === match.method.toUpperCase()) &&
-                    (!match.url || testReq.request.urlWithParams === match.url);
-            });
+            return this.open.filter(function (testReq) { return (!match.method || testReq.request.method === match.method.toUpperCase()) &&
+                (!match.url || testReq.request.urlWithParams === match.url); });
         }
     };
     /**
@@ -382,9 +384,11 @@ var HttpClientTestingBackend = (function () {
      */
     function (match) {
         var _this = this;
-        var /** @type {?} */ results = this._match(match);
+        /** @type {?} */
+        var results = this._match(match);
         results.forEach(function (result) {
-            var /** @type {?} */ index = _this.open.indexOf(result);
+            /** @type {?} */
+            var index = _this.open.indexOf(result);
             if (index !== -1) {
                 _this.open.splice(index, 1);
             }
@@ -420,7 +424,8 @@ var HttpClientTestingBackend = (function () {
      */
     function (match, description) {
         description = description || this.descriptionFromMatcher(match);
-        var /** @type {?} */ matches = this.match(match);
+        /** @type {?} */
+        var matches = this.match(match);
         if (matches.length > 1) {
             throw new Error("Expected one matching request for criteria \"" + description + "\", found " + matches.length + " requests.");
         }
@@ -449,7 +454,8 @@ var HttpClientTestingBackend = (function () {
      */
     function (match, description) {
         description = description || this.descriptionFromMatcher(match);
-        var /** @type {?} */ matches = this.match(match);
+        /** @type {?} */
+        var matches = this.match(match);
         if (matches.length > 0) {
             throw new Error("Expected zero matching requests for criteria \"" + description + "\", found " + matches.length + ".");
         }
@@ -469,17 +475,20 @@ var HttpClientTestingBackend = (function () {
      */
     function (opts) {
         if (opts === void 0) { opts = {}; }
-        var /** @type {?} */ open = this.open;
+        /** @type {?} */
+        var open = this.open;
         // It's possible that some requests may be cancelled, and this is expected.
         // The user can ask to ignore open requests which have been cancelled.
         if (opts.ignoreCancelled) {
             open = open.filter(function (testReq) { return !testReq.cancelled; });
         }
         if (open.length > 0) {
-            // Show the methods and URLs of open requests in the error, for convenience.
-            var /** @type {?} */ requests = open.map(function (testReq) {
-                var /** @type {?} */ url = testReq.request.urlWithParams.split('?')[0];
-                var /** @type {?} */ method = testReq.request.method;
+            /** @type {?} */
+            var requests = open.map(function (testReq) {
+                /** @type {?} */
+                var url = testReq.request.urlWithParams.split('?')[0];
+                /** @type {?} */
+                var method = testReq.request.method;
                 return method + " " + url;
             })
                 .join(', ');
@@ -499,8 +508,10 @@ var HttpClientTestingBackend = (function () {
             return "Match URL: " + matcher;
         }
         else if (typeof matcher === 'object') {
-            var /** @type {?} */ method = matcher.method || '(any)';
-            var /** @type {?} */ url = matcher.url || '(any)';
+            /** @type {?} */
+            var method = matcher.method || '(any)';
+            /** @type {?} */
+            var url = matcher.url || '(any)';
             return "Match method: " + method + ", URL: " + url;
         }
         else {
@@ -510,14 +521,12 @@ var HttpClientTestingBackend = (function () {
     HttpClientTestingBackend.decorators = [
         { type: _angular_core.Injectable },
     ];
-    /** @nocollapse */
-    HttpClientTestingBackend.ctorParameters = function () { return []; };
     return HttpClientTestingBackend;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @license
@@ -531,9 +540,9 @@ var HttpClientTestingBackend = (function () {
  *
  * Inject `HttpTestingController` to expect and flush requests in your tests.
  *
- * \@stable
+ *
  */
-var HttpClientTestingModule = (function () {
+var HttpClientTestingModule = /** @class */ (function () {
     function HttpClientTestingModule() {
     }
     HttpClientTestingModule.decorators = [
@@ -548,8 +557,6 @@ var HttpClientTestingModule = (function () {
                     ],
                 },] },
     ];
-    /** @nocollapse */
-    HttpClientTestingModule.ctorParameters = function () { return []; };
     return HttpClientTestingModule;
 }());
 

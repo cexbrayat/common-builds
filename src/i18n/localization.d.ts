@@ -18,6 +18,12 @@ export declare abstract class NgLocalization {
     abstract getPluralCategory(value: any, locale?: string): string;
 }
 /**
+ * Returns the plural category for a given value.
+ * - "=value" when the case exists,
+ * - the plural category otherwise
+ */
+export declare function getPluralCategory(value: number, cases: string[], ngLocalization: NgLocalization, locale?: string): string;
+/**
  * Returns the plural case based on the locale
  *
  * @experimental
@@ -25,10 +31,10 @@ export declare abstract class NgLocalization {
 export declare class NgLocaleLocalization extends NgLocalization {
     protected locale: string;
     /** @deprecated from v5 */
-    protected deprecatedPluralFn: ((locale: string, value: string | number) => Plural) | null | undefined;
+    protected deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined;
     constructor(locale: string, 
-        /** @deprecated from v5 */
-        deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
+    /** @deprecated from v5 */
+    deprecatedPluralFn?: ((locale: string, value: string | number) => Plural) | null | undefined);
     getPluralCategory(value: any, locale?: string): string;
 }
 /**
