@@ -141,7 +141,7 @@ if (false) {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- *
+ * \@ngModule CommonModule
  * @template T
  */
 var NgForOf = /** @class */ (function () {
@@ -289,6 +289,35 @@ var NgForOf = /** @class */ (function () {
      */
     function (view, record) {
         view.context.$implicit = record.item;
+    };
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     */
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     * @template T
+     * @param {?} dir
+     * @param {?} ctx
+     * @return {?}
+     */
+    NgForOf.ngTemplateContextGuard = /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     * @template T
+     * @param {?} dir
+     * @param {?} ctx
+     * @return {?}
+     */
+    function (dir, ctx) {
+        return true;
     };
     NgForOf.decorators = [
         { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },

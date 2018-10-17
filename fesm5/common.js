@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.4-a2418a9037
+ * @license Angular v7.0.0-rc.1-1c561a833c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3751,6 +3751,7 @@ var NgClass = /** @class */ (function () {
  * {\@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
  * \@experimental
+ * \@ngModule CommonModule
  */
 var NgComponentOutlet = /** @class */ (function () {
     function NgComponentOutlet(_viewContainerRef) {
@@ -3943,7 +3944,7 @@ var NgForOfContext = /** @class */ (function () {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- *
+ * \@ngModule CommonModule
  * @template T
  */
 var NgForOf = /** @class */ (function () {
@@ -4092,6 +4093,35 @@ var NgForOf = /** @class */ (function () {
     function (view, record) {
         view.context.$implicit = record.item;
     };
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     */
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     * @template T
+     * @param {?} dir
+     * @param {?} ctx
+     * @return {?}
+     */
+    NgForOf.ngTemplateContextGuard = /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     * @template T
+     * @param {?} dir
+     * @param {?} ctx
+     * @return {?}
+     */
+    function (dir, ctx) {
+        return true;
+    };
     NgForOf.decorators = [
         { type: Directive, args: [{ selector: '[ngFor][ngForOf]' },] },
     ];
@@ -4227,7 +4257,7 @@ function getTypeNameForDebugging(type) {
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- *
+ * \@ngModule CommonModule
  */
 var NgIf = /** @class */ (function () {
     function NgIf(_viewContainer, templateRef) {
@@ -4307,6 +4337,39 @@ var NgIf = /** @class */ (function () {
             }
         }
     };
+    /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that when the
+     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
+     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
+     * strictNullChecks feature of TypeScript to work with `NgIf`.
+     */
+    /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that when the
+     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
+     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
+     * strictNullChecks feature of TypeScript to work with `NgIf`.
+     * @template E
+     * @param {?} dir
+     * @param {?} expr
+     * @return {?}
+     */
+    NgIf.ngTemplateGuard_ngIf = /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that when the
+     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
+     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
+     * strictNullChecks feature of TypeScript to work with `NgIf`.
+     * @template E
+     * @param {?} dir
+     * @param {?} expr
+     * @return {?}
+     */
+    function (dir, expr) { return true; };
     NgIf.decorators = [
         { type: Directive, args: [{ selector: '[ngIf]' },] },
     ];
@@ -5600,8 +5663,6 @@ function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAs
     });
 }
 /**
- * \@ngModule CommonModule
- *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
  *
@@ -5624,6 +5685,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency, currencyAs
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
+ * \@ngModule CommonModule
  */
 var DeprecatedDecimalPipe = /** @class */ (function () {
     function DeprecatedDecimalPipe(_locale) {
@@ -6026,7 +6088,7 @@ var AsyncPipe = /** @class */ (function () {
  *
  * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
  *
- *
+ * \@ngModule CommonModule
  */
 var LowerCasePipe = /** @class */ (function () {
     function LowerCasePipe() {
@@ -6071,7 +6133,7 @@ var unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C
  *
  * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
  *
- *
+ * \@ngModule CommonModule
  */
 var TitleCasePipe = /** @class */ (function () {
     function TitleCasePipe() {
@@ -6104,6 +6166,8 @@ var TitleCasePipe = /** @class */ (function () {
  * Transforms text to all upper case.
  * @see `LowerCasePipe`
  * @see `TitleCasePipe`
+ *
+ * \@ngModule CommonModule
  */
 var UpperCasePipe = /** @class */ (function () {
     function UpperCasePipe() {
@@ -6570,7 +6634,8 @@ function makeKeyValuePair(key, value) {
  * By default the comparator will be by Unicode point value.
  * You can optionally pass a compareFn if your keys are complex types.
  *
- * ## Examples
+ * \@usageNotes
+ * ### Examples
  *
  * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
  * pipe.
@@ -6914,6 +6979,7 @@ var CurrencyPipe = /** @class */ (function () {
      * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
      * locale has no narrow symbol, uses the standard symbol for the locale.
      *   - String: Use the given string value instead of a code or a symbol.
+     * For example, an empty string will suppress the currency & symbol.
      *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
      *
      * @param digitsInfo Decimal representation options, specified by a string
@@ -6945,6 +7011,7 @@ var CurrencyPipe = /** @class */ (function () {
      * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
      * locale has no narrow symbol, uses the standard symbol for the locale.
      *   - String: Use the given string value instead of a code or a symbol.
+     * For example, an empty string will suppress the currency & symbol.
      *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
      *
      * @param {?=} digitsInfo Decimal representation options, specified by a string
@@ -6977,6 +7044,7 @@ var CurrencyPipe = /** @class */ (function () {
      * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
      * locale has no narrow symbol, uses the standard symbol for the locale.
      *   - String: Use the given string value instead of a code or a symbol.
+     * For example, an empty string will suppress the currency & symbol.
      *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
      *
      * @param {?=} digitsInfo Decimal representation options, specified by a string
@@ -7218,8 +7286,15 @@ var COMMON_PIPES = [
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
+ * Exports all the basic Angular directives and pipes,
+ * such as `NgIf`, `NgForOf`, `DecimalPipe`, and so on.
+ * Re-exported by `BrowserModule`, which is included automatically in the root
+ * `AppModule` when you create a new app with the CLI `new` command.
  *
+ * * The `providers` options configure the NgModule's injector to provide
+ * localization dependencies to members.
+ * * The `exports` options make the declared directives and pipes available for import
+ * by other NgModules.
  *
  */
 var CommonModule = /** @class */ (function () {
@@ -7344,7 +7419,7 @@ function isPlatformWorkerUi(platformId) {
  * found in the LICENSE file at https://angular.io/license
  */
 /** @type {?} */
-var VERSION = new Version('7.0.0-beta.4-a2418a9037');
+var VERSION = new Version('7.0.0-rc.1-1c561a833c');
 
 /**
  * @fileoverview added by tsickle
@@ -7358,7 +7433,7 @@ var VERSION = new Version('7.0.0-beta.4-a2418a9037');
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  * @abstract
  */
 var ViewportScroller = /** @class */ (function () {
@@ -7369,7 +7444,7 @@ var ViewportScroller = /** @class */ (function () {
     return ViewportScroller;
 }());
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 var BrowserViewportScroller = /** @class */ (function () {
     function BrowserViewportScroller(document, window) {
@@ -7378,14 +7453,14 @@ var BrowserViewportScroller = /** @class */ (function () {
         this.offset = function () { return [0, 0]; };
     }
     /**
-     * @whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
      * position.
      */
     /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -7394,7 +7469,7 @@ var BrowserViewportScroller = /** @class */ (function () {
      * @return {?}
      */
     BrowserViewportScroller.prototype.setOffset = /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -7411,14 +7486,14 @@ var BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      */
     /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @return {?}
      */
     BrowserViewportScroller.prototype.getScrollPosition = /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @return {?}
      */
     function () {
@@ -7430,15 +7505,15 @@ var BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      */
     /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @param {?} position
      * @return {?}
      */
     BrowserViewportScroller.prototype.scrollToPosition = /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @param {?} position
      * @return {?}
      */
@@ -7448,15 +7523,15 @@ var BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      */
     /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @param {?} anchor
      * @return {?}
      */
     BrowserViewportScroller.prototype.scrollToAnchor = /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @param {?} anchor
      * @return {?}
      */
@@ -7477,15 +7552,15 @@ var BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      */
     /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      * @param {?} scrollRestoration
      * @return {?}
      */
     BrowserViewportScroller.prototype.setHistoryScrollRestoration = /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      * @param {?} scrollRestoration
      * @return {?}
      */
@@ -7546,76 +7621,76 @@ var BrowserViewportScroller = /** @class */ (function () {
     return BrowserViewportScroller;
 }());
 /**
- * \@whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in \@angular/common as it will be used by both platform-server and platform-webworker.
  */
 var NullViewportScroller = /** @class */ (function () {
     function NullViewportScroller() {
     }
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} offset
      * @return {?}
      */
     NullViewportScroller.prototype.setOffset = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} offset
      * @return {?}
      */
     function (offset) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @return {?}
      */
     NullViewportScroller.prototype.getScrollPosition = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @return {?}
      */
     function () { return [0, 0]; };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} position
      * @return {?}
      */
     NullViewportScroller.prototype.scrollToPosition = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} position
      * @return {?}
      */
     function (position) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} anchor
      * @return {?}
      */
     NullViewportScroller.prototype.scrollToAnchor = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} anchor
      * @return {?}
      */
     function (anchor) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} scrollRestoration
      * @return {?}
      */
     NullViewportScroller.prototype.setHistoryScrollRestoration = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} scrollRestoration
      * @return {?}
      */

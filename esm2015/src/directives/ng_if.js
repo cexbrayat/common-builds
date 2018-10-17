@@ -100,7 +100,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef, ɵstringify as stringi
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- *
+ * \@ngModule CommonModule
  */
 export class NgIf {
     /**
@@ -169,6 +169,19 @@ export class NgIf {
             }
         }
     }
+    /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that when the
+     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
+     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
+     * strictNullChecks feature of TypeScript to work with `NgIf`.
+     * @template E
+     * @param {?} dir
+     * @param {?} expr
+     * @return {?}
+     */
+    static ngTemplateGuard_ngIf(dir, expr) { return true; }
 }
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] },

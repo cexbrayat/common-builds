@@ -123,7 +123,7 @@ if (false) {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- *
+ * \@ngModule CommonModule
  * @template T
  */
 export class NgForOf {
@@ -251,6 +251,19 @@ export class NgForOf {
      */
     _perViewChange(view, record) {
         view.context.$implicit = record.item;
+    }
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     * @template T
+     * @param {?} dir
+     * @param {?} ctx
+     * @return {?}
+     */
+    static ngTemplateContextGuard(dir, ctx) {
+        return true;
     }
 }
 NgForOf.decorators = [

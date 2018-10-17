@@ -66,6 +66,7 @@ import { ComponentFactoryResolver, Directive, Injector, Input, NgModuleFactory, 
  * {\@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
  * \@experimental
+ * \@ngModule CommonModule
  */
 export class NgComponentOutlet {
     /**

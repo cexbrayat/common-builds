@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.4-a2418a9037
+ * @license Angular v7.0.0-rc.1-1c561a833c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -3500,6 +3500,7 @@ NgClass.propDecorators = {
  * {\@example common/ngComponentOutlet/ts/module.ts region='NgModuleFactoryExample'}
  *
  * \@experimental
+ * \@ngModule CommonModule
  */
 class NgComponentOutlet {
     /**
@@ -3676,7 +3677,7 @@ class NgForOfContext {
  * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
  * example.
  *
- *
+ * \@ngModule CommonModule
  * @template T
  */
 class NgForOf {
@@ -3804,6 +3805,19 @@ class NgForOf {
      */
     _perViewChange(view, record) {
         view.context.$implicit = record.item;
+    }
+    /**
+     * Assert the correct type of the context for the template that `NgForOf` will render.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that the
+     * `NgForOf` structural directive renders its template with a specific context type.
+     * @template T
+     * @param {?} dir
+     * @param {?} ctx
+     * @return {?}
+     */
+    static ngTemplateContextGuard(dir, ctx) {
+        return true;
     }
 }
 NgForOf.decorators = [
@@ -3942,7 +3956,7 @@ function getTypeNameForDebugging(type) {
  * <ng-template #elseBlock>...</ng-template>
  * ```
  *
- *
+ * \@ngModule CommonModule
  */
 class NgIf {
     /**
@@ -4011,6 +4025,19 @@ class NgIf {
             }
         }
     }
+    /**
+     * Assert the correct type of the expression bound to the `ngIf` input within the template.
+     *
+     * The presence of this method is a signal to the Ivy template type check compiler that when the
+     * `NgIf` structural directive renders its template, the type of the expression bound to `ngIf`
+     * should be narrowed in some way. For `NgIf`, it is narrowed to be non-null, which allows the
+     * strictNullChecks feature of TypeScript to work with `NgIf`.
+     * @template E
+     * @param {?} dir
+     * @param {?} expr
+     * @return {?}
+     */
+    static ngTemplateGuard_ngIf(dir, expr) { return true; }
 }
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]' },] },
@@ -5199,8 +5226,6 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
     });
 }
 /**
- * \@ngModule CommonModule
- *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
  *
@@ -5223,6 +5248,7 @@ function formatNumber$1(pipe, locale, value, style, digits, currency = null, cur
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
+ * \@ngModule CommonModule
  */
 class DeprecatedDecimalPipe {
     /**
@@ -5558,7 +5584,7 @@ AsyncPipe.ctorParameters = () => [
  *
  * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
  *
- *
+ * \@ngModule CommonModule
  */
 class LowerCasePipe {
     /**
@@ -5593,7 +5619,7 @@ const unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u0
  *
  * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
  *
- *
+ * \@ngModule CommonModule
  */
 class TitleCasePipe {
     /**
@@ -5616,6 +5642,8 @@ TitleCasePipe.decorators = [
  * Transforms text to all upper case.
  * @see `LowerCasePipe`
  * @see `TitleCasePipe`
+ *
+ * \@ngModule CommonModule
  */
 class UpperCasePipe {
     /**
@@ -6010,7 +6038,8 @@ function makeKeyValuePair(key, value) {
  * By default the comparator will be by Unicode point value.
  * You can optionally pass a compareFn if your keys are complex types.
  *
- * ## Examples
+ * \@usageNotes
+ * ### Examples
  *
  * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
  * pipe.
@@ -6291,6 +6320,7 @@ class CurrencyPipe {
      * For example, the Canadian dollar CAD has the symbol `CA$` and the symbol-narrow `$`. If the
      * locale has no narrow symbol, uses the standard symbol for the locale.
      *   - String: Use the given string value instead of a code or a symbol.
+     * For example, an empty string will suppress the currency & symbol.
      *   - Boolean (marked deprecated in v5): `true` for symbol and false for `code`.
      *
      * @param {?=} digitsInfo Decimal representation options, specified by a string
@@ -6492,8 +6522,15 @@ const COMMON_PIPES = [
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * The module that includes all the basic Angular directives like {\@link NgIf}, {\@link NgForOf}, ...
+ * Exports all the basic Angular directives and pipes,
+ * such as `NgIf`, `NgForOf`, `DecimalPipe`, and so on.
+ * Re-exported by `BrowserModule`, which is included automatically in the root
+ * `AppModule` when you create a new app with the CLI `new` command.
  *
+ * * The `providers` options configure the NgModule's injector to provide
+ * localization dependencies to members.
+ * * The `exports` options make the declared directives and pipes available for import
+ * by other NgModules.
  *
  */
 class CommonModule {
@@ -6612,7 +6649,7 @@ function isPlatformWorkerUi(platformId) {
  * found in the LICENSE file at https://angular.io/license
  */
 /** @type {?} */
-const VERSION = new Version('7.0.0-beta.4-a2418a9037');
+const VERSION = new Version('7.0.0-rc.1-1c561a833c');
 
 /**
  * @fileoverview added by tsickle
@@ -6626,7 +6663,7 @@ const VERSION = new Version('7.0.0-beta.4-a2418a9037');
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  * @abstract
  */
 class ViewportScroller {
@@ -6634,7 +6671,7 @@ class ViewportScroller {
 /** @nocollapse */
 /** @nocollapse */ ViewportScroller.ngInjectableDef = defineInjectable({ providedIn: 'root', factory: () => new BrowserViewportScroller(inject(DOCUMENT), window) });
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 class BrowserViewportScroller {
     /**
@@ -6647,7 +6684,7 @@ class BrowserViewportScroller {
         this.offset = () => [0, 0];
     }
     /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -6664,7 +6701,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @return {?}
      */
     getScrollPosition() {
@@ -6676,7 +6713,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @param {?} position
      * @return {?}
      */
@@ -6686,7 +6723,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @param {?} anchor
      * @return {?}
      */
@@ -6707,7 +6744,7 @@ class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      * @param {?} scrollRestoration
      * @return {?}
      */
@@ -6754,35 +6791,35 @@ class BrowserViewportScroller {
     }
 }
 /**
- * \@whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in \@angular/common as it will be used by both platform-server and platform-webworker.
  */
 class NullViewportScroller {
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} offset
      * @return {?}
      */
     setOffset(offset) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @return {?}
      */
     getScrollPosition() { return [0, 0]; }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} position
      * @return {?}
      */
     scrollToPosition(position) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} anchor
      * @return {?}
      */
     scrollToAnchor(anchor) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} scrollRestoration
      * @return {?}
      */

@@ -12,7 +12,7 @@
 import { defineInjectable, inject } from '@angular/core';
 import { DOCUMENT } from './dom_tokens';
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  * @abstract
  */
 export class ViewportScroller {
@@ -26,7 +26,7 @@ if (false) {
      */
     ViewportScroller.ngInjectableDef;
     /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * When given a tuple with two number, the service will always use the numbers.
      * When given a function, the service will invoke the function every time it restores scroll
@@ -37,27 +37,29 @@ if (false) {
      */
     ViewportScroller.prototype.setOffset = function (offset) { };
     /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @abstract
      * @return {?}
      */
     ViewportScroller.prototype.getScrollPosition = function () { };
     /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @abstract
      * @param {?} position
      * @return {?}
      */
     ViewportScroller.prototype.scrollToPosition = function (position) { };
     /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @abstract
      * @param {?} anchor
      * @return {?}
      */
     ViewportScroller.prototype.scrollToAnchor = function (anchor) { };
     /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     *
+     * Disables automatic scroll restoration provided by the browser.
+     *
      * See also [window.history.scrollRestoration
      * info](https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration)
      * @abstract
@@ -67,7 +69,7 @@ if (false) {
     ViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) { };
 }
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 export class BrowserViewportScroller {
     /**
@@ -80,7 +82,7 @@ export class BrowserViewportScroller {
         this.offset = () => [0, 0];
     }
     /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -97,7 +99,7 @@ export class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @return {?}
      */
     getScrollPosition() {
@@ -109,7 +111,7 @@ export class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @param {?} position
      * @return {?}
      */
@@ -119,7 +121,7 @@ export class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @param {?} anchor
      * @return {?}
      */
@@ -140,7 +142,7 @@ export class BrowserViewportScroller {
         }
     }
     /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      * @param {?} scrollRestoration
      * @return {?}
      */
@@ -195,35 +197,35 @@ if (false) {
     BrowserViewportScroller.prototype.window;
 }
 /**
- * \@whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in \@angular/common as it will be used by both platform-server and platform-webworker.
  */
 export class NullViewportScroller {
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} offset
      * @return {?}
      */
     setOffset(offset) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @return {?}
      */
     getScrollPosition() { return [0, 0]; }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} position
      * @return {?}
      */
     scrollToPosition(position) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} anchor
      * @return {?}
      */
     scrollToAnchor(anchor) { }
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} scrollRestoration
      * @return {?}
      */

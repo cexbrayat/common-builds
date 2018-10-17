@@ -12,7 +12,7 @@
 import { defineInjectable, inject } from '@angular/core';
 import { DOCUMENT } from './dom_tokens';
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  * @abstract
  */
 var ViewportScroller = /** @class */ (function () {
@@ -30,7 +30,7 @@ if (false) {
      */
     ViewportScroller.ngInjectableDef;
     /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * When given a tuple with two number, the service will always use the numbers.
      * When given a function, the service will invoke the function every time it restores scroll
@@ -41,27 +41,29 @@ if (false) {
      */
     ViewportScroller.prototype.setOffset = function (offset) { };
     /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @abstract
      * @return {?}
      */
     ViewportScroller.prototype.getScrollPosition = function () { };
     /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @abstract
      * @param {?} position
      * @return {?}
      */
     ViewportScroller.prototype.scrollToPosition = function (position) { };
     /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @abstract
      * @param {?} anchor
      * @return {?}
      */
     ViewportScroller.prototype.scrollToAnchor = function (anchor) { };
     /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     *
+     * Disables automatic scroll restoration provided by the browser.
+     *
      * See also [window.history.scrollRestoration
      * info](https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration)
      * @abstract
@@ -71,10 +73,10 @@ if (false) {
     ViewportScroller.prototype.setHistoryScrollRestoration = function (scrollRestoration) { };
 }
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 var /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 BrowserViewportScroller = /** @class */ (function () {
     function BrowserViewportScroller(document, window) {
@@ -83,14 +85,14 @@ BrowserViewportScroller = /** @class */ (function () {
         this.offset = function () { return [0, 0]; };
     }
     /**
-     * @whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
      * position.
      */
     /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -99,7 +101,7 @@ BrowserViewportScroller = /** @class */ (function () {
      * @return {?}
      */
     BrowserViewportScroller.prototype.setOffset = /**
-     * \@whatItDoes Configures the top offset used when scrolling to an anchor.
+     * Configures the top offset used when scrolling to an anchor.
      *
      * * When given a number, the service will always use the number.
      * * When given a function, the service will invoke the function every time it restores scroll
@@ -116,14 +118,14 @@ BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      */
     /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @return {?}
      */
     BrowserViewportScroller.prototype.getScrollPosition = /**
-     * \@whatItDoes Returns the current scroll position.
+     * Returns the current scroll position.
      * @return {?}
      */
     function () {
@@ -135,15 +137,15 @@ BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      */
     /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @param {?} position
      * @return {?}
      */
     BrowserViewportScroller.prototype.scrollToPosition = /**
-     * \@whatItDoes Sets the scroll position.
+     * Sets the scroll position.
      * @param {?} position
      * @return {?}
      */
@@ -153,15 +155,15 @@ BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      */
     /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @param {?} anchor
      * @return {?}
      */
     BrowserViewportScroller.prototype.scrollToAnchor = /**
-     * \@whatItDoes Scrolls to the provided anchor.
+     * Scrolls to the provided anchor.
      * @param {?} anchor
      * @return {?}
      */
@@ -182,15 +184,15 @@ BrowserViewportScroller = /** @class */ (function () {
         }
     };
     /**
-     * @whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      */
     /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      * @param {?} scrollRestoration
      * @return {?}
      */
     BrowserViewportScroller.prototype.setHistoryScrollRestoration = /**
-     * \@whatItDoes Disables automatic scroll restoration provided by the browser.
+     * Disables automatic scroll restoration provided by the browser.
      * @param {?} scrollRestoration
      * @return {?}
      */
@@ -251,7 +253,7 @@ BrowserViewportScroller = /** @class */ (function () {
     return BrowserViewportScroller;
 }());
 /**
- * \@whatItDoes Manages the scroll position.
+ * Manages the scroll position.
  */
 export { BrowserViewportScroller };
 if (false) {
@@ -263,80 +265,80 @@ if (false) {
     BrowserViewportScroller.prototype.window;
 }
 /**
- * \@whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in \@angular/common as it will be used by both platform-server and platform-webworker.
  */
 var /**
- * \@whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in \@angular/common as it will be used by both platform-server and platform-webworker.
  */
 NullViewportScroller = /** @class */ (function () {
     function NullViewportScroller() {
     }
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} offset
      * @return {?}
      */
     NullViewportScroller.prototype.setOffset = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} offset
      * @return {?}
      */
     function (offset) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @return {?}
      */
     NullViewportScroller.prototype.getScrollPosition = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @return {?}
      */
     function () { return [0, 0]; };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} position
      * @return {?}
      */
     NullViewportScroller.prototype.scrollToPosition = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} position
      * @return {?}
      */
     function (position) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} anchor
      * @return {?}
      */
     NullViewportScroller.prototype.scrollToAnchor = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} anchor
      * @return {?}
      */
     function (anchor) { };
     /**
-     * @whatItDoes empty implementation
+     * Empty implementation
      */
     /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} scrollRestoration
      * @return {?}
      */
     NullViewportScroller.prototype.setHistoryScrollRestoration = /**
-     * \@whatItDoes empty implementation
+     * Empty implementation
      * @param {?} scrollRestoration
      * @return {?}
      */
@@ -344,7 +346,7 @@ NullViewportScroller = /** @class */ (function () {
     return NullViewportScroller;
 }());
 /**
- * \@whatItDoes Provides an empty implementation of the viewport scroller. This will
+ * Provides an empty implementation of the viewport scroller. This will
  * live in \@angular/common as it will be used by both platform-server and platform-webworker.
  */
 export { NullViewportScroller };

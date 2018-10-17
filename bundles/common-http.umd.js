@@ -1,5 +1,5 @@
 /**
- * @license Angular v7.0.0-beta.4-a2418a9037
+ * @license Angular v7.0.0-rc.1-1c561a833c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -10,7 +10,7 @@
 }(this, (function (exports,_angular_core,rxjs,rxjs_operators,tslib,_angular_common) { 'use strict';
 
 /**
- * @license Angular v7.0.0-beta.4-a2418a9037
+ * @license Angular v7.0.0-rc.1-1c561a833c
  * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1932,9 +1932,6 @@ var JsonpClientBackend = /** @class */ (function () {
             // Set the response callback in this.callbackMap (which will be the window
             // object in the browser. The script being loaded via the <script> tag will
             // eventually call this callback.
-            // Set the response callback in this.callbackMap (which will be the window
-            // object in the browser. The script being loaded via the <script> tag will
-            // eventually call this callback.
             _this.callbackMap[callback] = function (data) {
                 // Data has been received from the JSONP script. Firstly, delete this callback.
                 delete _this.callbackMap[callback];
@@ -2570,7 +2567,7 @@ function jsonpCallbackContext() {
     return {};
 }
 /**
- * An NgModule that adds XSRF protection support to outgoing requests.
+ * Configures XSRF protection support for outgoing requests.
  *
  * For a server that supports a cookie-based XSRF protection system,
  * use directly to configure XSRF protection with the correct
@@ -2653,10 +2650,11 @@ var HttpClientXsrfModule = /** @class */ (function () {
     return HttpClientXsrfModule;
 }());
 /**
- * An NgModule that provides the `HttpClient` and associated services.
+ * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
+ * with supporting services for XSRF. Automatically imported by `HttpClientModule`.
  *
- * Interceptors can be added to the chain behind `HttpClient` by binding them
- * to the multiprovider for `HTTP_INTERCEPTORS`.
+ * You can add interceptors to the chain behind `HttpClient` by binding them to the
+ * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
  *
  *
  */
@@ -2675,7 +2673,8 @@ var HttpClientModule = /** @class */ (function () {
                         }),
                     ],
                     /**
-                       * The module provides `HttpClient` itself, and supporting services.
+                       * Configures the [dependency injector](guide/glossary#injector) where it is imported
+                       * with supporting services for HTTP communications.
                        */
                     providers: [
                         HttpClient,
@@ -2690,10 +2689,13 @@ var HttpClientModule = /** @class */ (function () {
     return HttpClientModule;
 }());
 /**
- * An NgModule that enables JSONP support in `HttpClient`.
+ * Configures the [dependency injector](guide/glossary#injector) for `HttpClient`
+ * with supporting services for JSONP.
+ * Without this module, Jsonp requests reach the backend
+ * with method JSONP, where they are rejected.
  *
- * Without this module, Jsonp requests will reach the backend
- * with method JSONP, where they'll be rejected.
+ * You can add interceptors to the chain behind `HttpClient` by binding them to the
+ * multiprovider for built-in [DI token](guide/glossary#di-token) `HTTP_INTERCEPTORS`.
  *
  *
  */

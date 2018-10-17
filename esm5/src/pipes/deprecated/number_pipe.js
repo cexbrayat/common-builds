@@ -74,8 +74,6 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
     });
 }
 /**
- * \@ngModule CommonModule
- *
  * Formats a number as text. Group sizing and separator and other locale-specific
  * configurations are based on the active locale.
  *
@@ -98,6 +96,7 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  *
  * {\@example common/pipes/ts/number_pipe.ts region='DeprecatedNumberPipe'}
  *
+ * \@ngModule CommonModule
  */
 var DeprecatedDecimalPipe = /** @class */ (function () {
     function DeprecatedDecimalPipe(_locale) {

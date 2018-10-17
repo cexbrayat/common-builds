@@ -23,7 +23,7 @@ import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
  *
  * <code-example path="common/pipes/ts/lowerupper_pipe.ts" region='LowerUpperPipe'></code-example>
  *
- *
+ * \@ngModule CommonModule
  */
 var LowerCasePipe = /** @class */ (function () {
     function LowerCasePipe() {
@@ -69,7 +69,7 @@ var unicodeWordMatch = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C
  *
  * <code-example path="common/pipes/ts/titlecase_pipe.ts" region='TitleCasePipe'></code-example>
  *
- *
+ * \@ngModule CommonModule
  */
 var TitleCasePipe = /** @class */ (function () {
     function TitleCasePipe() {
@@ -103,6 +103,8 @@ export { TitleCasePipe };
  * Transforms text to all upper case.
  * @see `LowerCasePipe`
  * @see `TitleCasePipe`
+ *
+ * \@ngModule CommonModule
  */
 var UpperCasePipe = /** @class */ (function () {
     function UpperCasePipe() {

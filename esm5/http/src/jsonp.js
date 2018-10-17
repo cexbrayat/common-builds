@@ -112,9 +112,6 @@ var JsonpClientBackend = /** @class */ (function () {
             // Set the response callback in this.callbackMap (which will be the window
             // object in the browser. The script being loaded via the <script> tag will
             // eventually call this callback.
-            // Set the response callback in this.callbackMap (which will be the window
-            // object in the browser. The script being loaded via the <script> tag will
-            // eventually call this callback.
             _this.callbackMap[callback] = function (data) {
                 // Data has been received from the JSONP script. Firstly, delete this callback.
                 delete _this.callbackMap[callback];

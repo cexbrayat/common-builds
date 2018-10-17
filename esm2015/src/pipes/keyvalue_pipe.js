@@ -40,7 +40,8 @@ KeyValue.prototype.value;
  * By default the comparator will be by Unicode point value.
  * You can optionally pass a compareFn if your keys are complex types.
  *
- * ## Examples
+ * \@usageNotes
+ * ### Examples
  *
  * This examples show how an Object or a Map and be iterated by ngFor with the use of this keyvalue
  * pipe.
